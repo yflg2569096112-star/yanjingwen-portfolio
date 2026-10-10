@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tally｜每日产品拆解训练台</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --ink: #172033;
+      --muted: #667085;
+      --panel: #ffffff;
+      --line: #d8e0ea;
+      --blue: #2563eb;
+      --blue-soft: #eaf1ff;
+      --green: #166534;
+      --green-soft: #e9f7ed;
+      --amber: #9a3412;
+      --amber-soft: #fff3df;
+      --rose: #be123c;
+      --rose-soft: #fff1f2;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+    }
+
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 34px 18px 56px;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 12px; font-size: clamp(28px, 4vw, 46px); line-height: 1.12; letter-spacing: 0; }
+    h2 { margin-bottom: 14px; font-size: 22px; letter-spacing: 0; }
+    h3 { margin-bottom: 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin-bottom: 10px; }
+    ul { margin: 0; padding-left: 20px; }
+    li { margin: 6px 0; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr);
+      gap: 18px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+
+    .hero-copy, .screenshot, .panel, .candidate, .metric, .slide-card, .reflection-box, .cover-prompt-skill, .prompt-variable {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .hero-copy { padding: 26px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .tag, .pill {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      min-height: 25px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: #eef2f7;
+      color: #344054;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .tag.blue { background: var(--blue-soft); color: #17408f; }
+    .tag.rose { background: var(--rose-soft); color: var(--rose); }
+    .subtitle { color: var(--muted); font-size: 15px; }
+    .verdict { margin: 18px 0 0; padding: 15px; border-left: 4px solid var(--blue); background: var(--blue-soft); font-weight: 800; color: #173a83; }
+
+    .screenshot {
+      min-height: 310px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        linear-gradient(135deg, rgba(37,99,235,.12), rgba(22,101,52,.1)),
+        #fff;
+    }
+
+    .browser-bar {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: #cbd5e1; }
+    .mock-screen { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+    .mock-block { min-height: 86px; padding: 12px; border: 1px dashed #aab7c8; border-radius: 8px; background: rgba(255,255,255,.72); }
+    .mock-block strong { display: block; margin-bottom: 8px; }
+
+    .section-nav {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .section-nav a {
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .panel { margin-top: 16px; padding: 22px; }
+    .candidate-grid, .metric-grid, .learn-grid, .slide-grid, .reflection-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .candidate { padding: 16px; }
+    .candidate-rank { margin-bottom: 10px; color: var(--blue); font-weight: 900; }
+    .candidate span { color: var(--muted); font-size: 13px; font-weight: 700; }
+
+    .metric { padding: 15px; }
+    .metric b { display: block; margin-bottom: 4px; color: var(--muted); font-size: 12px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow-wrap: anywhere;
+    }
+
+    th, td {
+      padding: 11px 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    th { background: #f8fafc; color: #475467; }
+    .ok { background: var(--green-soft); color: var(--green); }
+    .warn { background: var(--amber-soft); color: var(--amber); }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .flow-step {
+      position: relative;
+      min-height: 116px;
+      padding: 14px;
+      border: 1px solid #bad0ff;
+      border-radius: 8px;
+      background: var(--blue-soft);
+    }
+
+    .flow-step span {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .learn-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .xhs {
+      border-color: #fecdd3;
+      background: linear-gradient(180deg, #fff, #fff7f8);
+    }
+
+    .slide-card { min-height: 124px; padding: 16px; }
+    .slide-card span { color: var(--rose); font-size: 12px; font-weight: 900; }
+    .draft {
+      margin-top: 12px;
+      padding: 16px;
+      border: 1px solid #fecdd3;
+      border-radius: 8px;
+      background: #fff;
+      white-space: pre-wrap;
+    }
+
+    .cover-prompt-skill {
+      margin-top: 14px;
+      padding: 16px;
+      background: #fff;
+      border-color: #fecdd3;
+    }
+
+    .prompt-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .prompt-head h3,
+    .cover-prompt-skill h4 {
+      margin-bottom: 6px;
+      letter-spacing: 0;
+    }
+
+    .prompt-variable-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .prompt-variable {
+      padding: 11px;
+      background: #fff7f8;
+    }
+
+    .prompt-variable b {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--rose);
+      font-size: 12px;
+    }
+
+    .prompt-block {
+      margin: 0;
+      padding: 14px;
+      border: 1px solid #fecdd3;
+      border-radius: 8px;
+      background: #fff;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .reflection-box { padding: 15px; min-height: 118px; background: #fcfcfd; }
+    .reflection-box p { color: var(--muted); font-size: 13px; }
+    .write-line { height: 42px; border-bottom: 1px solid #cbd5e1; }
+
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .check-grid label {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      font-weight: 700;
+    }
+
+    .small { color: var(--muted); font-size: 13px; }
+
+    @media (max-width: 920px) {
+      .hero, .candidate-grid, .metric-grid, .learn-grid, .slide-grid, .reflection-grid, .check-grid, .prompt-variable-grid { grid-template-columns: 1fr; }
+      .section-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 560px) {
+      main { padding: 22px 12px 40px; }
+      .hero-copy, .panel { padding: 18px; }
+      .section-nav, .flow, .mock-screen { grid-template-columns: 1fr; }
+      th, td { padding: 9px 7px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="meta">
+          <span class="tag blue">2026-06-17</span>
+          <span class="tag">每天练，择优发</span>
+          <span class="tag rose">转型中的自己人</span>
+          <span class="tag">No-code form builder / PLG SaaS</span>
+        </div>
+        <h1>Tally｜每日产品拆解训练台</h1>
+        <p class="subtitle">The simplest way to create forms.</p>
+        <p><strong>官网：</strong><a href="https://tally.so/">https://tally.so/</a></p>
+        <div class="verdict">Tally 值得拆，不是因为表单工具本身新，而是因为它用“像写文档一样建表单 + 超慷慨免费层 + Made with Tally 自传播”把一个无聊、拥挤、价格敏感的品类重新做轻。</div>
+      </div>
+      <aside class="screenshot" aria-label="官网截图占位">
+        <div>
+          <div class="browser-bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span>https://tally.so/</span>
+          </div>
+          <div class="mock-screen">
+            <div class="mock-block"><strong>官网截图位</strong><span class="small">放首屏、定价页或核心功能截图。</span></div>
+            <div class="mock-block"><strong>今日结论</strong><span class="small">它对 Project B 和飞书原型很有启发：学生反馈、课后问卷、助教检查、报名/预约表单这些低代码入口，如果足够轻，可能比完整平台更容易先跑通真实流程。</span></div>
+          </div>
+        </div>
+        <p class="small">导出小红书配图时，优先截取本页的卡片和流程图区。</p>
+      </aside>
+    </section>
+
+    <nav class="section-nav">
+      <a href="#s1">1. 一句话判断</a><a href="#s2">2. 用户与场景</a><a href="#s3">3. PMF 证据</a><a href="#s4">4. 产品路径</a><a href="#s5">5. 商业模型</a><a href="#s6">6. 交互与功能取舍</a><a href="#s7">7. 我能偷学什么</a><a href="#s8">8. 我的小红书表达</a>
+    </nav>
+
+    <section class="panel" id="candidates">
+      <h2>候选池</h2>
+      <p class="small">每天先看 3 个候选，再选 1 个进入深拆。推荐顺序以 PMF 信号、可学习性、与你转型路线的相关性为准。</p>
+      <div class="candidate-grid">
+    <article class="candidate">
+      <div class="candidate-rank">#1</div>
+      <h3>Tally</h3>
+      <p>适合训练 freemium、PLG、自传播和 no-code 工作流判断。</p>
+      <span>产品运营 / 表单工作流 / AI 教育服务入口</span>
+    </article>
+  
+    <article class="candidate">
+      <div class="candidate-rank">#2</div>
+      <h3>superwhisper</h3>
+      <p>适合下次拆个人高频 AI 输入入口和隐私优先定位。</p>
+      <span>个人 AI 工作流</span>
+    </article>
+  
+    <article class="candidate">
+      <div class="candidate-rank">#3</div>
+      <h3>Cap</h3>
+      <p>适合拆开源、屏幕录制、异步协作和 creator-led distribution。</p>
+      <span>内容工作流 / 开源 PLG</span>
+    </article>
+  </div>
+    </section>
+
+    <section class="panel" id="s1">
+      <h2>1. 一句话判断</h2>
+      <p>Tally 值得拆，不是因为表单工具本身新，而是因为它用“像写文档一样建表单 + 超慷慨免费层 + Made with Tally 自传播”把一个无聊、拥挤、价格敏感的品类重新做轻。</p>
+      <p><strong>为什么值得拆：</strong>它对 Project B 和飞书原型很有启发：学生反馈、课后问卷、助教检查、报名/预约表单这些低代码入口，如果足够轻，可能比完整平台更容易先跑通真实流程。</p>
+    </section>
+
+    <section class="panel" id="s2">
+      <h2>2. 用户与场景</h2>
+      <div class="metric-grid">
+        <div class="metric"><b>用户</b>创作者、小团队、运营、课程顾问、教育服务团队、产品/市场/客户成功人员，以及任何需要快速收集信息但不想搭系统的人。</div>
+        <div class="metric"><b>痛点</b>表单是刚需，但传统表单工具要么太丑、太贵、限制提交数，要么编辑体验像在配置后台，不像在写内容。</div>
+        <div class="metric"><b>旧方法</b>Google Forms 够免费但不够好看，Typeform 好看但免费层限制明显，Jotform/Paperform 功能多但学习和价格负担更重。</div>
+      </div>
+      <p style="margin-top:12px"><strong>为什么现在可以做：</strong>no-code 心智已经成熟，小团队更愿意用轻工具串工作流；AI 搜索、模板 SEO 和用户自传播又让小众工具有机会被持续发现。</p>
+    </section>
+
+    <section class="panel" id="s3">
+      <h2>3. PMF 证据</h2>
+      <table>
+        <thead><tr><th>类型</th><th>信号</th><th>来源</th><th>强度</th></tr></thead>
+        <tbody>
+      <tr>
+        <td><span class="pill ok">证据</span></td>
+        <td>官网写明 Tally 提供 unlimited forms 和 unlimited submissions，并且不需要注册即可开始创建表单。</td>
+        <td>https://tally.so/</td>
+        <td>high</td>
+      </tr>
+    
+      <tr>
+        <td><span class="pill ok">证据</span></td>
+        <td>定价页显示免费层包含 unlimited forms、unlimited submissions、payments、signatures、file uploads、conditional logic、integrations 等；Pro $24/month，Business $74/month。</td>
+        <td>https://tally.so/pricing</td>
+        <td>high</td>
+      </tr>
+    
+      <tr>
+        <td><span class="pill ok">证据</span></td>
+        <td>官网展示 Powering 500,000+ teams，并强调 Made and hosted in the EU、GDPR、数据加密和隐私友好。</td>
+        <td>https://tally.so/</td>
+        <td>high</td>
+      </tr>
+    
+      <tr>
+        <td><span class="pill ok">证据</span></td>
+        <td>Tally 官方 2025 复盘称已达到 $3M ARR，超过 800,000 creators、marketers、product teams、startups 使用过 Tally，团队仍保持 8 人小团队。</td>
+        <td>https://blog.tally.so/from-2-to-3m-arr-how-we-bootstrapped-tally-with-a-tiny-team/</td>
+        <td>high</td>
+      </tr>
+    
+      <tr>
+        <td><span class="pill ok">证据</span></td>
+        <td>官方复盘解释增长引擎：免费表单带有 Made with Tally badge，用户成为传播者，约 2% 用户升级到 Pro。</td>
+        <td>https://blog.tally.so/from-2-to-3m-arr-how-we-bootstrapped-tally-with-a-tiny-team/</td>
+        <td>high</td>
+      </tr>
+    
+      <tr>
+        <td><span class="pill ok">证据</span></td>
+        <td>Tally 2.0 Product Hunt launch 后成为 #1 Product of the Day、Week、Month，并记录 launch week 两天新增 766 和 785 个免费用户。</td>
+        <td>https://blog.tally.so/product-hunt-launch-results/</td>
+        <td>medium</td>
+      </tr>
+    
+      <tr>
+        <td><span class="pill warn">推测</span></td>
+        <td>Tally 的核心留存可能不来自“建一次表单”，而来自模板复用、团队工作区、数据导出、集成和表单持续收集的业务流程。</td>
+        <td>基于产品路径和付费功能的推测</td>
+        <td>medium</td>
+      </tr>
+    
+      <tr>
+        <td><span class="pill warn">推测</span></td>
+        <td>AI 搜索会继续强化 Tally 的发现渠道，因为它的公开内容、UGC、Reddit/社区讨论和替代品定位非常适合被 LLM 推荐。</td>
+        <td>基于 Tally 2025 复盘中 AI search 成为最大 acquisition channel 的推测</td>
+        <td>medium</td>
+      </tr>
+    </tbody>
+      </table>
+      <p class="small">规则：没有真实公开来源就写成推测，不能把热度当作 PMF。</p>
+    </section>
+
+    <section class="panel" id="s4">
+      <h2>4. 产品路径</h2>
+      <div class="flow">
+    <div class="flow-step">
+      <span>01</span>
+      <strong>看到免费表单承诺</strong>
+    </div>
+  
+    <div class="flow-step">
+      <span>02</span>
+      <strong>无需注册先试建表单</strong>
+    </div>
+  
+    <div class="flow-step">
+      <span>03</span>
+      <strong>像写文档一样输入问题</strong>
+    </div>
+  
+    <div class="flow-step">
+      <span>04</span>
+      <strong>加入逻辑、支付、文件上传或集成</strong>
+    </div>
+  
+    <div class="flow-step">
+      <span>05</span>
+      <strong>分享链接或嵌入页面收集回复</strong>
+    </div>
+  
+    <div class="flow-step">
+      <span>06</span>
+      <strong>为了品牌、团队、分析、数据控制升级付费</strong>
+    </div>
+  </div>
+    </section>
+
+    <section class="panel" id="s5">
+      <h2>5. 商业模型</h2>
+      <div class="metric-grid">
+        <div class="metric"><b>定价</b>免费层极慷慨，Pro $24/month，Business $74/month。免费层卖习惯和传播，付费层卖品牌移除、自定义域名、团队协作、分析、数据控制和组织需求。</div>
+        <div class="metric"><b>目标客群</b>从个人创作者和小团队切入，再扩到营销、产品、HR、教育服务、客户成功和内部运营。</div>
+        <div class="metric"><b>获客渠道</b>免费表单自传播、Made with Tally badge、Product Hunt、SEO/模板页、比较页、社区口碑、AI 搜索推荐。</div>
+        <div class="metric"><b>付费触发</b>当表单进入真实业务流程，用户需要去品牌、自定义域名、团队协作、部分提交、分析、数据留存或更强品牌控制时付费。</div>
+        <div class="metric"><b>小团队适配</b>非常适合小团队，因为表单品类刚需广、产品入口极轻、支持自传播，且 Tally 官方复盘证明小团队可以靠清晰取舍做到 ARR 规模。</div>
+      </div>
+    </section>
+
+    <section class="panel" id="s6">
+      <h2>6. 交互与功能取舍</h2>
+      <div class="learn-grid">
+        <div class="learn-card"><h3>克制</h3><ul><li>把表单编辑器做成文档，不做复杂后台配置感。</li><li>首页只强调一个强承诺：free, intuitive, unlimited forms and submissions。</li><li>免费层给足核心能力，不用低配体验逼用户升级。</li></ul></div>
+        <div class="learn-card"><h3>增长/留存钩子</h3><ul><li>免费表单自带 Made with Tally badge，使用即传播。</li><li>不注册即可试用，降低首次体验门槛。</li><li>模板、比较页、集成和表单嵌入天然利于 SEO 与 AI 搜索被推荐。</li></ul></div>
+        <div class="learn-card"><h3>风险</h3><ul><li>免费层太慷慨会压缩短期变现，需要足够大的免费用户池和低支持成本。</li><li>表单工具替代品很多，长期差异化要靠体验、品牌、隐私、模板和生态。</li><li>Business 功能如果扩张过重，可能破坏“简单”这个核心心智。</li></ul></div>
+      </div>
+    </section>
+
+    <section class="panel" id="s7">
+      <h2>7. 我能偷学什么</h2>
+      <div class="learn-grid">
+        <div class="learn-card"><h3>产品判断</h3><ul><li>免费层不是慈善，而是增长设计：把核心体验免费给足，再让传播和习惯产生升级机会。</li><li>拥挤品类也能重做，关键是找到一个被用户长期忍受的摩擦点：贵、丑、难用、限制多。</li><li>Tally 的产品叙事非常单点：像写文档一样做表单，这比堆功能更容易被记住。</li></ul></div>
+        <div class="learn-card"><h3>AI / 工作流落地</h3><ul><li>表单不是孤立页面，而是工作流入口：收集信息、触发通知、进入表格/Notion/Airtable/Zapier/Make。</li><li>轻工具的价值不只在功能本身，而在它能不能自然嵌入已有流程。</li><li>Tally 的增长说明：一个足够轻的输入工具，可以靠每一次被填写和分享扩散。</li></ul></div>
+        <div class="learn-card"><h3>教育场景迁移</h3><ul><li>Project B 不一定一开始就做完整系统，可以先从“学生课后反馈表 / 助教检查表 / 老师确认表”这种低门槛入口跑起来。</li><li>教育服务里的很多数据不是缺 AI，而是缺一个愿意被老师、助教、学生持续填写的轻入口。</li><li>如果复习页、课后反馈和助教检查能像 Tally 一样轻，Project B 的数据回流会比重平台化更容易发生。</li></ul></div>
+      </div>
+    </section>
+
+    <section class="panel xhs" id="s8">
+      <h2>8. 我的小红书表达</h2>
+      <div class="metric-grid">
+        <div class="metric"><b>标题</b>我今天拆了 Tally：一个表单工具怎么做到 $3M ARR？</div>
+        <div class="metric"><b>封面</b>无聊表单，为什么也能做出 PMF？</div>
+        <div class="metric"><b>评论区问题</b>你觉得一个产品的免费层，应该给到多慷慨才算聪明？</div>
+      </div>
+      
+    <div class="cover-prompt-skill">
+      <div class="prompt-head">
+        <div>
+          <h3>小红书封面 prompt skill</h3>
+          <p class="small">基于 <a href="https://github.com/VigoZhao/AI-Visual-Prompt-Cookbook">VigoZhao/AI-Visual-Prompt-Cookbook</a> 的结构化视觉 prompt 工作流：选 style.json，替换变量，再生成封面图提示词。</p>
+        </div>
+        <span class="tag blue">school-grid-paper-cutout-poster</span>
+      </div>
+      <p><strong>为什么选这个风格：</strong>Tally 这篇适合做成“网格纸上写表单”的学习笔记感：不用科技感，而是强调简单、免费、像写文档一样搭流程。</p>
+      <div class="prompt-variable-grid">
+    <div class="prompt-variable">
+      <b>SUBJECT</b>
+      <span>a torn-paper form page turning into a simple workflow with three small response cards</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>SUBJECT_ACTION</b>
+      <span>showing a boring form becoming a lightweight business workflow</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>PRODUCT_OR_PROP</b>
+      <span>paper form blocks, response cards, Made with Tally badge, tiny integration arrows</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>LOCATION</b>
+      <span>warm classroom grid paper desk surface</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>BACKGROUND_ELEMENTS</b>
+      <span>empty ruled squares, small checklist marks, tiny arrows from form to sheet to follow-up</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>MAIN_TEXT</b>
+      <span>Tally 为什么能跑出来？</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>SECONDARY_TEXT</b>
+      <span>免费层 + 自传播 + 简单到极致</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>ACCENT_SYMBOL</b>
+      <span>tiny generic green check mark</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>ASPECT_RATIO</b>
+      <span>9:16</span>
+    </div>
+  </div>
+      <h4>final prompt</h4>
+      <pre class="prompt-block">Create a 9:16 Xiaohongshu cover in the school-grid-paper-cutout-poster visual style. Use warm classroom grid paper as the full background. The main subject is a torn-paper form page turning into a simple workflow with three small response cards, a small generic &#39;Made with Tally&#39; style badge, and tiny arrows from form to sheet to follow-up. Use imperfect handwritten Chinese notebook text. Main readable text: “Tally 为什么能跑出来？”. Secondary small text: “免费层 + 自传播 + 简单到极致”. Keep it sparse, handmade, warm, like a product teardown study note for someone transitioning into AI product work. Avoid real logos, QR codes, brand marks, glossy 3D renders, busy dashboards, and generic tech gradients.</pre>
+    </div>
+  
+      <h3 style="margin-top:16px">3-5 张配图脚本</h3>
+      <div class="slide-grid">
+    <article class="slide-card">
+      <span>图 1</span>
+      <p>我为什么选 Tally：它把最无聊的表单品类做成了小团队 PLG 样本</p>
+    </article>
+  
+    <article class="slide-card">
+      <span>图 2</span>
+      <p>它的强承诺：unlimited forms + unlimited submissions + no signup to try</p>
+    </article>
+  
+    <article class="slide-card">
+      <span>图 3</span>
+      <p>PMF 信号：500,000+ teams、$3M ARR、800,000+ 使用者、约 2% 升级 Pro</p>
+    </article>
+  
+    <article class="slide-card">
+      <span>图 4</span>
+      <p>我最想偷学：免费层不是低配体验，而是增长引擎</p>
+    </article>
+  
+    <article class="slide-card">
+      <span>图 5</span>
+      <p>对 Project B 的启发：先用轻表单跑学生反馈、助教检查和老师确认，不急着平台化</p>
+    </article>
+  </div>
+      <h3 style="margin-top:16px">正文草稿</h3>
+      <div class="draft">今天拆 Tally，我最强的感受是：不要小看“无聊品类”。
+
+表单听起来一点都不性感，但 Tally 把它做成了一个很值得学习的小团队 SaaS 样本。
+
+它的切口很简单：像写文档一样做表单，而且免费层给得非常狠。不是只能试用 14 天，也不是只能收几条回复，而是 unlimited forms + unlimited submissions。这个免费层不是慈善，而是增长设计：用户拿它做真实表单，表单被填写、被分享、被嵌入，Tally 就跟着被传播。
+
+这对我做 AI 教育转型也很有启发。Project B 不一定一上来就要做成完整平台，很多时候更应该先找到一个低门槛入口：学生课后反馈表、助教检查表、老师确认表。只要入口足够轻，真实数据才会回来。
+
+今天偷学到的一句话：小产品不是靠功能多赢，而是靠一个足够轻的入口，把真实流程先跑起来。</div>
+    </section>
+
+    <section class="panel" id="reflection">
+      <h2>20 分钟个人判断区</h2>
+      <p class="small">这一块必须由 Jack 自己补。它决定这篇内容是不是你的转型训练，而不是资料搬运。</p>
+      <div class="reflection-grid">
+        
+          <div class="reflection-box">
+            <p>Tally 最打动我的点，是免费层设计、文档式编辑器，还是用户自传播？为什么？</p>
+            <div class="write-line"></div>
+            <div class="write-line"></div>
+          </div>
+        
+          <div class="reflection-box">
+            <p>我觉得 Tally 的 PMF 证据强不强？哪些是长期业务证据，哪些只是 launch 热度？</p>
+            <div class="write-line"></div>
+            <div class="write-line"></div>
+          </div>
+        
+          <div class="reflection-box">
+            <p>如果迁移到 Project B，我最应该先做哪一个轻表单入口：学生反馈、助教检查，还是老师确认？</p>
+            <div class="write-line"></div>
+            <div class="write-line"></div>
+          </div>
+        
+      </div>
+    </section>
+
+    
+    <section class="panel checklist" id="quality-gate">
+      <h2>发布前检查</h2>
+      <div class="check-grid">
+        <label><input type="checkbox"> 30 秒看懂：为什么今天拆它</label>
+        <label><input type="checkbox"> 已区分证据和推测</label>
+        <label><input type="checkbox"> 有清楚产品路径图</label>
+        <label><input type="checkbox"> 有 Jack 自己的 3 条判断</label>
+        <label><input type="checkbox"> 能直接抽出 3-5 张小红书图文页</label>
+      </div>
+    </section>
+  
+  </main>
+</body>
+</html>

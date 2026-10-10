@@ -1,0 +1,2017 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>雅思写作试录课｜一句观点如何写成一段话</title>
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* ===========================================
+       THEME — BRIGHT WRITING LAB
+       =========================================== */
+    :root {
+      --stage-bg: #d9d6ca;
+      --slide-bg: #f6f3e8;
+      --paper: #fffdf6;
+      --ink: #111614;
+      --muted: #59615e;
+      --line: #c8cbc1;
+      --lime: #cfff38;
+      --lime-deep: #9ec900;
+      --orange: #ff6434;
+      --blue: #3156ff;
+      --shadow: 16px 18px 0 rgba(17,22,20,.13);
+      --display: "Fira Sans Condensed", sans-serif;
+      --body: "Noto Sans SC", sans-serif;
+      --ease: cubic-bezier(.16,1,.3,1);
+    }
+
+    * { box-sizing: border-box; }
+
+    /* ===========================================
+       FIXED 16:9 STAGE: MANDATORY BASE STYLES
+       Include this ENTIRE file in every presentation.
+       Slides are authored at 1920×1080 and scaled as a whole.
+       =========================================== */
+
+    /* 1. Lock the browser viewport */
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: var(--stage-bg, #000);
+    }
+
+    /* 2. Full-window deck viewport */
+    .deck-viewport {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        background: var(--stage-bg, #000);
+    }
+
+    /* 3. Fixed 16:9 design canvas.
+       JavaScript sets transform: translate(...) scale(...). */
+    .deck-stage {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        transform-origin: 0 0;
+        background: var(--slide-bg, #fff);
+    }
+
+    /* 4. Slides stack inside the fixed stage.
+       Content must be laid out at 1920×1080, not reflowed per device. */
+    .slide {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        display: block;
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        background: var(--slide-bg, #fff);
+    }
+
+    .slide.active,
+    .slide.visible {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+        z-index: 1;
+    }
+
+    /* 5. Keep media inside authored slide bounds */
+    img,
+    video,
+    canvas,
+    svg {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    /* 6. Presentation chrome stays outside the slide design system */
+    .deck-controls {
+        position: fixed;
+        left: 50%;
+        bottom: 22px;
+        transform: translateX(-50%);
+        z-index: 1000;
+    }
+
+    /* 7. Print one fixed-size slide per page */
+    @media print {
+        html,
+        body {
+            width: 1920px;
+            height: auto;
+            overflow: visible;
+            background: #fff;
+        }
+
+        .deck-viewport {
+            position: static;
+            overflow: visible;
+            background: #fff;
+        }
+
+        .deck-stage {
+            position: static;
+            width: auto;
+            height: auto;
+            transform: none !important;
+            background: none;
+        }
+
+        .slide {
+            position: relative;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            width: 1920px;
+            height: 1080px;
+            break-after: page;
+            page-break-after: always;
+        }
+
+        .slide:last-child {
+            break-after: auto;
+            page-break-after: auto;
+        }
+
+        .deck-controls {
+            display: none !important;
+        }
+    }
+
+    /* 8. Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            transition-duration: 0.2s !important;
+        }
+    }
+
+    /* ===========================================
+       GLOBAL SLIDE GRAMMAR
+       =========================================== */
+    .slide {
+      color: var(--ink);
+      font-family: var(--body);
+      background:
+        radial-gradient(circle at 88% 10%, rgba(207,255,56,.2), transparent 24%),
+        linear-gradient(rgba(17,22,20,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17,22,20,.035) 1px, transparent 1px),
+        var(--slide-bg);
+      background-size: auto, 80px 80px, 80px 80px, auto;
+    }
+
+    .slide::after {
+      content: "";
+      position: absolute;
+      inset: 52px;
+      border: 2px solid rgba(17,22,20,.22);
+      pointer-events: none;
+    }
+
+    .corner {
+      position: absolute;
+      z-index: 2;
+      width: 102px;
+      height: 102px;
+      pointer-events: none;
+    }
+
+    .corner.tl {
+      top: 52px;
+      left: 52px;
+      border-top: 12px solid var(--ink);
+      border-left: 12px solid var(--ink);
+    }
+
+    .corner.br {
+      right: 52px;
+      bottom: 52px;
+      border-right: 12px solid var(--orange);
+      border-bottom: 12px solid var(--orange);
+    }
+
+    .slide-inner {
+      position: absolute;
+      inset: 92px 104px 88px;
+      z-index: 3;
+    }
+
+    .chrome {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 34px;
+      margin-bottom: 46px;
+      font: 800 22px/1 var(--display);
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .chrome .section { color: var(--ink); }
+    .chrome .page { color: var(--orange); letter-spacing: .08em; }
+
+    .title-xl,
+    .title-lg,
+    .title-md {
+      margin: 0;
+      font-family: var(--body);
+      font-weight: 900;
+      letter-spacing: -.055em;
+    }
+
+    .title-xl { font-size: 116px; line-height: 1.04; }
+    .title-lg { font-size: 82px; line-height: 1.08; }
+    .title-md { font-size: 62px; line-height: 1.15; }
+
+    .display-en {
+      font-family: var(--display);
+      letter-spacing: -.025em;
+    }
+
+    .lime { color: #87a900; }
+    .orange { color: var(--orange); }
+    .blue { color: var(--blue); }
+
+    .highlight {
+      display: inline;
+      padding: 0 .1em;
+      background: linear-gradient(transparent 58%, var(--lime) 58%);
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      font: 800 23px/1 var(--display);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 46px;
+      height: 8px;
+      background: var(--lime);
+      border: 2px solid var(--ink);
+    }
+
+    .lead {
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: 34px;
+      line-height: 1.55;
+      font-weight: 600;
+    }
+
+    .paper {
+      background: var(--paper);
+      border: 3px solid var(--ink);
+      box-shadow: var(--shadow);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 8px 20px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: var(--paper);
+      font: 800 20px/1 var(--display);
+      letter-spacing: .04em;
+    }
+
+    .pill.lime-bg { background: var(--lime); }
+    .pill.orange-bg { background: var(--orange); color: #fff; }
+
+    .footnote {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      color: #7b817e;
+      font-size: 18px;
+      line-height: 1.4;
+    }
+
+    .camera-safe {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 460px;
+      height: 300px;
+      pointer-events: none;
+    }
+
+    /* ===========================================
+       ANIMATION SYSTEM
+       =========================================== */
+    .reveal,
+    .reveal-left,
+    .reveal-scale {
+      opacity: 0;
+      will-change: transform, opacity;
+      transition: opacity .62s var(--ease), transform .62s var(--ease);
+    }
+
+    .reveal { transform: translateY(28px); }
+    .reveal-left { transform: translateX(-42px); }
+    .reveal-scale { transform: scale(.94) rotate(-1deg); }
+
+    .slide.visible .reveal,
+    .slide.visible .reveal-left,
+    .slide.visible .reveal-scale {
+      opacity: 1;
+      transform: none;
+    }
+
+    .d1 { transition-delay: .08s; }
+    .d2 { transition-delay: .18s; }
+    .d3 { transition-delay: .30s; }
+    .d4 { transition-delay: .42s; }
+    .d5 { transition-delay: .56s; }
+
+    /* ===========================================
+       SLIDE 01 — TITLE
+       =========================================== */
+    .s1 .slide-inner { inset: 88px 104px 90px; }
+
+    .s1 .hero {
+      position: absolute;
+      left: 0;
+      top: 170px;
+      width: 1120px;
+    }
+
+    .s1 .title-xl { font-size: 122px; }
+
+    .s1 .method-note {
+      position: absolute;
+      right: 18px;
+      top: 118px;
+      width: 520px;
+      min-height: 575px;
+      padding: 48px 46px;
+      transform: rotate(1.3deg);
+      background: var(--paper);
+      border: 3px solid var(--ink);
+      box-shadow: 18px 20px 0 var(--orange);
+    }
+
+    .method-note h2 {
+      margin: 0 0 34px;
+      font: 800 33px/1 var(--display);
+      letter-spacing: .07em;
+    }
+
+    .method-line {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin: 24px 0;
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .method-line .num {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--lime);
+      font: 800 24px var(--display);
+      flex: 0 0 auto;
+    }
+
+    .s1 .prompt-mini {
+      position: absolute;
+      left: 0;
+      bottom: 34px;
+      width: 1080px;
+      padding-left: 24px;
+      border-left: 10px solid var(--lime);
+      color: var(--muted);
+      font: 600 25px/1.55 var(--display);
+    }
+
+    .s1 .identity {
+      position: absolute;
+      right: 20px;
+      bottom: 30px;
+      text-align: right;
+      font-size: 22px;
+      line-height: 1.55;
+      font-weight: 700;
+    }
+
+    /* ===========================================
+       SLIDE 02 — HOOK
+       =========================================== */
+    .s2 .statement {
+      width: 1040px;
+      margin-top: 105px;
+      font-size: 108px;
+      line-height: 1.08;
+      font-weight: 900;
+      letter-spacing: -.06em;
+    }
+
+    .s2 .bad-sentence {
+      position: absolute;
+      right: 24px;
+      top: 180px;
+      width: 540px;
+      padding: 46px 44px;
+      transform: rotate(1.5deg);
+      font-size: 36px;
+      line-height: 1.55;
+      font-weight: 700;
+    }
+
+    .s2 .bad-sentence::after {
+      content: "停在这里 = 论证没开始";
+      display: block;
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 3px dashed var(--ink);
+      color: var(--orange);
+      font-size: 26px;
+      font-weight: 900;
+    }
+
+    .s2 .takeaway {
+      position: absolute;
+      left: 0;
+      bottom: 96px;
+      width: 1100px;
+      padding: 22px 28px;
+      background: var(--lime);
+      border: 3px solid var(--ink);
+      font-size: 32px;
+      line-height: 1.5;
+      font-weight: 800;
+    }
+
+    /* ===========================================
+       SLIDE 03 — SCORING
+       =========================================== */
+    .score-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px;
+      margin-top: 42px;
+      width: 1400px;
+    }
+
+    .score-card {
+      min-height: 440px;
+      padding: 38px 40px;
+      background: var(--paper);
+      border: 3px solid var(--ink);
+    }
+
+    .score-card.tr { box-shadow: 14px 16px 0 var(--lime); }
+    .score-card.cc { box-shadow: 14px 16px 0 var(--orange); }
+
+    .score-label {
+      font: 800 58px/1 var(--display);
+      margin-bottom: 28px;
+    }
+
+    .score-card p {
+      margin: 0 0 24px;
+      font-size: 31px;
+      line-height: 1.52;
+      font-weight: 600;
+    }
+
+    .not-today {
+      position: absolute;
+      right: 6px;
+      bottom: 26px;
+      width: 390px;
+      padding: 22px 24px;
+      border: 3px dashed var(--ink);
+      background: rgba(255,255,255,.72);
+      font-size: 23px;
+      line-height: 1.55;
+      transform: rotate(-1deg);
+    }
+
+    /* ===========================================
+       SLIDE 04 — FOUR QUESTIONS
+       =========================================== */
+    .four-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 52px;
+      width: 1680px;
+    }
+
+    .q-card {
+      position: relative;
+      min-height: 470px;
+      padding: 38px 30px 30px;
+      background: var(--paper);
+      border: 3px solid var(--ink);
+      box-shadow: 12px 14px 0 rgba(17,22,20,.12);
+    }
+
+    .q-card:nth-child(2) { transform: translateY(24px); }
+    .q-card:nth-child(3) { transform: translateY(-12px); }
+    .q-card:nth-child(4) { transform: translateY(16px); }
+
+    .q-card .big-num {
+      font: 800 82px/1 var(--display);
+      color: var(--orange);
+    }
+
+    .q-card h3 {
+      margin: 32px 0 20px;
+      font-size: 42px;
+      line-height: 1.2;
+    }
+
+    .q-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 25px;
+      line-height: 1.55;
+      font-weight: 600;
+    }
+
+    .q-card.active-q { background: var(--lime); }
+
+    .rule-note {
+      margin-top: 54px;
+      width: 1330px;
+      font-size: 28px;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+
+    /* ===========================================
+       SLIDE 05 — PROMPT LOCK
+       =========================================== */
+    .prompt-paper {
+      width: 1450px;
+      padding: 44px 52px;
+      font: 700 39px/1.55 var(--display);
+    }
+
+    .prompt-paper strong {
+      display: block;
+      margin-top: 16px;
+      color: var(--orange);
+      font-size: 44px;
+    }
+
+    .lock-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+      width: 1450px;
+    }
+
+    .lock-card {
+      min-height: 230px;
+      padding: 28px 30px;
+      background: var(--paper);
+      border: 3px solid var(--ink);
+    }
+
+    .lock-card .label {
+      display: block;
+      margin-bottom: 22px;
+      color: var(--orange);
+      font: 800 22px/1 var(--display);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .lock-card p {
+      margin: 0;
+      font-size: 31px;
+      line-height: 1.45;
+      font-weight: 800;
+    }
+
+    .scope-note {
+      position: absolute;
+      right: 4px;
+      bottom: 12px;
+      width: 360px;
+      padding: 22px 24px;
+      background: var(--lime);
+      border: 3px solid var(--ink);
+      font-size: 22px;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+
+    /* ===========================================
+       SLIDE 06 — ONE SENTENCE
+       =========================================== */
+    .idea-paper {
+      position: relative;
+      width: 1420px;
+      margin-top: 70px;
+      padding: 54px 58px;
+      font: 800 52px/1.5 var(--display);
+    }
+
+    .idea-paper .underline {
+      border-bottom: 9px solid var(--lime);
+    }
+
+    .fork {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px;
+      width: 1420px;
+      margin-top: 50px;
+    }
+
+    .fork-card {
+      min-height: 210px;
+      padding: 30px 34px;
+      border: 3px solid var(--ink);
+      background: var(--paper);
+    }
+
+    .fork-card.stop { box-shadow: 12px 14px 0 #bfc4bf; }
+    .fork-card.go { box-shadow: 12px 14px 0 var(--lime); }
+
+    .fork-card .fork-label {
+      display: block;
+      margin-bottom: 18px;
+      font: 800 22px/1 var(--display);
+      letter-spacing: .08em;
+    }
+
+    .fork-card p {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    /* ===========================================
+       SLIDE 07 — ARGUMENT CHAIN
+       =========================================== */
+    .chain {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      width: 1680px;
+      margin-top: 46px;
+    }
+
+    .chain-step {
+      position: relative;
+      min-height: 530px;
+      padding: 28px 28px 30px;
+      border: 3px solid var(--ink);
+      background: var(--paper);
+    }
+
+    .chain-step::after {
+      content: "→";
+      position: absolute;
+      right: -32px;
+      top: 46%;
+      z-index: 4;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 3px solid var(--ink);
+      border-radius: 50%;
+      background: var(--lime);
+      font: 800 26px/1 var(--display);
+    }
+
+    .chain-step:last-child::after { display: none; }
+
+    .chain-step .chain-q {
+      display: inline-block;
+      margin-bottom: 30px;
+      padding: 9px 14px;
+      background: var(--ink);
+      color: var(--lime);
+      font: 800 23px/1 var(--display);
+    }
+
+    .chain-step h3 {
+      margin: 0 0 22px;
+      font-size: 32px;
+      line-height: 1.3;
+    }
+
+    .chain-step p {
+      margin: 0;
+      color: var(--muted);
+      font: 600 25px/1.52 var(--display);
+    }
+
+    .chain-result {
+      width: 1400px;
+      margin-top: 36px;
+      padding: 18px 24px;
+      border-left: 10px solid var(--orange);
+      font-size: 27px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    /* ===========================================
+       SLIDE 08 — STUDENT SAMPLE
+       =========================================== */
+    .sample-paper {
+      width: 1440px;
+      margin-top: 38px;
+      padding: 42px 48px;
+      font: 700 36px/1.68 var(--display);
+    }
+
+    .sample-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+      border-bottom: 3px dashed var(--line);
+      color: var(--muted);
+      font: 800 21px/1 var(--display);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .poll {
+      display: flex;
+      gap: 24px;
+      margin-top: 40px;
+      width: 1440px;
+    }
+
+    .poll-choice {
+      flex: 1;
+      padding: 24px 28px;
+      border: 3px solid var(--ink);
+      background: var(--paper);
+      font-size: 30px;
+      font-weight: 800;
+    }
+
+    .poll-choice span {
+      display: inline-grid;
+      width: 46px;
+      height: 46px;
+      margin-right: 14px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--lime);
+      font: 800 23px/1 var(--display);
+    }
+
+    .pause-tag {
+      position: absolute;
+      right: 18px;
+      bottom: 10px;
+      padding: 14px 22px;
+      transform: rotate(-2deg);
+      background: var(--lime);
+      border: 3px solid var(--ink);
+      font: 800 24px/1 var(--display);
+    }
+
+    /* ===========================================
+       SLIDE 09 — DIAGNOSIS
+       =========================================== */
+    .diagnosis-layout {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 34px;
+      width: 1620px;
+      margin-top: 38px;
+    }
+
+    .marked-paper {
+      padding: 38px 42px;
+      font: 700 32px/1.68 var(--display);
+    }
+
+    mark {
+      padding: 0 .08em;
+      background: var(--lime);
+      color: inherit;
+    }
+
+    .strike {
+      text-decoration: line-through 5px var(--orange);
+      text-decoration-skip-ink: none;
+    }
+
+    .rubric-stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .rubric-row {
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      gap: 18px;
+      align-items: start;
+      padding: 20px 22px;
+      border: 3px solid var(--ink);
+      background: var(--paper);
+    }
+
+    .rubric-row.primary { box-shadow: 10px 11px 0 var(--lime); }
+
+    .rubric-code {
+      font: 800 30px/1 var(--display);
+      color: var(--orange);
+    }
+
+    .rubric-row p {
+      margin: 0;
+      font-size: 23px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .diagnosis-order {
+      margin-top: 28px;
+      font-size: 26px;
+      line-height: 1.5;
+      font-weight: 800;
+    }
+
+    /* ===========================================
+       SLIDE 10 — REWRITE
+       =========================================== */
+    .rewrite-grid {
+      display: grid;
+      grid-template-columns: .82fr 1.18fr;
+      gap: 30px;
+      width: 1650px;
+      margin-top: 34px;
+      align-items: stretch;
+    }
+
+    .rewrite-card {
+      padding: 32px 34px;
+      border: 3px solid var(--ink);
+      background: var(--paper);
+    }
+
+    .rewrite-card.before { box-shadow: 12px 14px 0 #bfc4bf; }
+    .rewrite-card.after { box-shadow: 12px 14px 0 var(--lime); }
+
+    .rewrite-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 3px dashed var(--line);
+      font: 800 23px/1 var(--display);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .rewrite-card p {
+      margin: 0;
+      font: 700 30px/1.62 var(--display);
+    }
+
+    .sentence-map {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .sentence-map span {
+      padding: 8px 13px;
+      border: 2px solid var(--ink);
+      background: var(--paper);
+      font: 800 18px/1 var(--display);
+    }
+
+    .rewrite-result {
+      margin-top: 36px;
+      width: 1450px;
+      padding: 18px 24px;
+      background: var(--lime);
+      border: 3px solid var(--ink);
+      font-size: 27px;
+      line-height: 1.45;
+      font-weight: 800;
+    }
+
+    /* ===========================================
+       SLIDE 11 — TRANSFER POLL
+       =========================================== */
+    .transfer-idea {
+      width: 1450px;
+      margin-top: 44px;
+      padding: 34px 40px;
+      font: 800 41px/1.45 var(--display);
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      width: 1450px;
+      margin-top: 42px;
+    }
+
+    .option {
+      min-height: 265px;
+      padding: 32px 34px;
+      border: 3px solid var(--ink);
+      background: var(--paper);
+    }
+
+    .option .option-head {
+      display: inline-grid;
+      width: 50px;
+      height: 50px;
+      margin-bottom: 24px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--lime);
+      font: 800 25px/1 var(--display);
+    }
+
+    .option p {
+      margin: 0;
+      font: 700 29px/1.55 var(--display);
+    }
+
+    /* ===========================================
+       SLIDE 12 — TRANSFER ANSWER
+       =========================================== */
+    .answer-card {
+      width: 1430px;
+      margin-top: 46px;
+      padding: 38px 42px;
+      background: var(--paper);
+      border: 3px solid var(--ink);
+      box-shadow: 14px 16px 0 var(--lime);
+    }
+
+    .answer-card .answer-tag {
+      display: inline-block;
+      margin-bottom: 22px;
+      padding: 10px 17px;
+      background: var(--ink);
+      color: var(--lime);
+      font: 800 23px/1 var(--display);
+    }
+
+    .answer-card p {
+      margin: 0;
+      font: 800 34px/1.58 var(--display);
+    }
+
+    .logic-down {
+      margin: 34px 0 0 52px;
+      width: 1220px;
+      padding-left: 32px;
+      border-left: 10px solid var(--orange);
+    }
+
+    .logic-down p {
+      margin: 0 0 16px;
+      font-size: 30px;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+
+    .logic-down .final-line {
+      color: var(--orange);
+      font-weight: 900;
+    }
+
+    .flexible-note {
+      position: absolute;
+      right: 18px;
+      bottom: 30px;
+      width: 380px;
+      padding: 22px 24px;
+      transform: rotate(-1deg);
+      background: var(--lime);
+      border: 3px solid var(--ink);
+      font-size: 22px;
+      line-height: 1.5;
+      font-weight: 800;
+    }
+
+    /* ===========================================
+       SLIDE 13 — SUMMARY & CTA
+       =========================================== */
+    .s13 .summary-line {
+      margin-top: 86px;
+      width: 1280px;
+      font-size: 92px;
+      line-height: 1.12;
+      font-weight: 900;
+      letter-spacing: -.055em;
+    }
+
+    .summary-flow {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 54px;
+      width: 1380px;
+    }
+
+    .summary-flow .node {
+      padding: 20px 24px;
+      border: 3px solid var(--ink);
+      background: var(--paper);
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .summary-flow .node.key { background: var(--lime); }
+    .summary-flow .arrow { font: 800 34px/1 var(--display); }
+
+    .cta-card {
+      position: absolute;
+      left: 0;
+      bottom: 34px;
+      width: 1260px;
+      padding: 30px 34px;
+      border: 3px solid var(--ink);
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .cta-card h3 {
+      margin: 0 0 12px;
+      color: var(--lime);
+      font-size: 30px;
+    }
+
+    .cta-card p {
+      margin: 0;
+      font-size: 25px;
+      line-height: 1.55;
+      font-weight: 600;
+    }
+
+    .closing-badge {
+      position: absolute;
+      right: 12px;
+      bottom: 60px;
+      width: 360px;
+      height: 240px;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      transform: rotate(2deg);
+      background: var(--lime);
+      border: 3px solid var(--ink);
+      box-shadow: 13px 14px 0 var(--orange);
+      text-align: center;
+      font: 900 31px/1.35 var(--body);
+    }
+
+    /* ===========================================
+       LOWER-LEFT CAMERA SAFE ZONE
+       Reserve 460 × 300 inside .slide-inner for the
+       presenter window used in the one-take recording.
+       =========================================== */
+    .footnote { left: 500px; }
+    .s1 .prompt-mini { left: 500px; width: 610px; }
+    .s2 .takeaway { left: 500px; width: 820px; }
+
+    .s3 .score-grid {
+      width: 1210px;
+      margin-left: 470px;
+    }
+
+    .s4 .q-card { min-height: 360px; }
+    .s4 .rule-note {
+      width: 1180px;
+      margin-left: 500px;
+      margin-top: 44px;
+    }
+
+    .s5 .lock-card { min-height: 195px; }
+    .s5 .lock-grid {
+      width: 1180px;
+      margin-left: 500px;
+    }
+
+    .s6 .fork {
+      width: 920px;
+      margin-left: 500px;
+    }
+
+    .s7 .chain {
+      width: 1240px;
+      margin-left: 440px;
+    }
+    .s7 .chain-step {
+      min-height: 440px;
+      padding: 26px 22px 28px;
+    }
+    .s7 .chain-step h3 { font-size: 29px; }
+    .s7 .chain-step p { font-size: 22px; }
+    .s7 .chain-result {
+      width: 1180px;
+      margin-left: 500px;
+      margin-top: 28px;
+    }
+
+    .s8 .poll {
+      width: 1180px;
+      margin-left: 500px;
+    }
+    .s8 .sample-paper {
+      width: 1180px;
+      margin-left: 500px;
+      font-size: 34px;
+      line-height: 1.58;
+    }
+
+    .s9 .diagnosis-order { margin-left: 500px; }
+
+    .s10 .rewrite-result {
+      width: 1150px;
+      margin-left: 500px;
+    }
+
+    .s11 .option-grid {
+      width: 950px;
+      margin-left: 500px;
+    }
+
+    .s12 .logic-down {
+      width: 820px;
+      margin-left: 500px;
+    }
+
+    .s13 .cta-card {
+      left: 500px;
+      width: 760px;
+    }
+
+    /* ===========================================
+       PRESENTATION CONTROLS
+       =========================================== */
+    .deck-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 999px;
+      background: rgba(17,22,20,.82);
+      color: #fff;
+      box-shadow: 0 10px 28px rgba(0,0,0,.2);
+      backdrop-filter: blur(12px);
+      font-family: var(--display);
+      transition: opacity .25s ease;
+    }
+
+    .deck-controls.hidden { opacity: 0; pointer-events: none; }
+
+    .deck-controls button {
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: #fff;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .deck-controls button:hover { background: rgba(255,255,255,.12); }
+    .counter { min-width: 64px; text-align: center; font-size: 14px; letter-spacing: .08em; }
+
+    .progress-track {
+      width: 130px;
+      height: 4px;
+      overflow: hidden;
+      border-radius: 9px;
+      background: rgba(255,255,255,.2);
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      background: var(--lime);
+      transition: width .3s ease;
+    }
+
+    /* ===========================================
+       NOTES PANEL
+       =========================================== */
+    .notes-panel {
+      position: fixed;
+      right: 24px;
+      top: 24px;
+      z-index: 3000;
+      width: min(520px, calc(100vw - 48px));
+      max-height: calc(100vh - 48px);
+      overflow: auto;
+      padding: 24px 26px;
+      border: 2px solid var(--lime);
+      border-radius: 14px;
+      background: rgba(17,22,20,.96);
+      color: #fff;
+      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+      font-family: var(--body);
+      opacity: 0;
+      transform: translateY(-12px);
+      pointer-events: none;
+      transition: .25s ease;
+    }
+
+    .notes-panel.open {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+
+    .notes-panel h3 {
+      margin: 0 0 12px;
+      color: var(--lime);
+      font-size: 20px;
+    }
+
+    .notes-panel p {
+      margin: 0;
+      white-space: pre-wrap;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .speaker-notes { display: none; }
+
+    /* ===========================================
+       INLINE EDITING
+       =========================================== */
+    .edit-hotzone {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10000;
+      width: 80px;
+      height: 80px;
+      cursor: pointer;
+    }
+
+    .edit-toggle {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 10001;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--lime);
+      box-shadow: 0 8px 20px rgba(0,0,0,.25);
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s ease;
+    }
+
+    .edit-toggle.show,
+    .edit-toggle.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    body.editing .editable {
+      outline: 2px dashed var(--orange);
+      outline-offset: 4px;
+      cursor: text;
+    }
+
+    .edit-status {
+      position: fixed;
+      left: 72px;
+      top: 24px;
+      z-index: 10002;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--orange);
+      color: #fff;
+      font: 700 13px var(--body);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    body.editing .edit-status { opacity: 1; }
+  </style>
+</head>
+<body>
+  <!-- ===========================================
+       FIXED PRESENTATION STAGE
+       =========================================== -->
+  <div class="deck-viewport">
+    <main class="deck-stage" id="deckStage">
+
+      <!-- === SLIDE 01: TITLE === -->
+      <section class="slide s1 active visible" aria-label="标题页">
+        <div class="corner tl"></div><div class="corner br"></div>
+        <div class="slide-inner">
+          <div class="chrome reveal d1">
+            <span class="section editable">IELTS WRITING LAB / BODY PARAGRAPH</span>
+            <span class="page">01 / 13</span>
+          </div>
+          <div class="hero">
+            <div class="eyebrow reveal-left d1 editable">15 MIN LIVE CLASS</div>
+            <h1 class="title-xl reveal-left d2 editable">一句观点，<br><span class="highlight">如何写成一段话？</span></h1>
+            <p class="lead reveal d3 editable">Body 追问四连 × 5.5 分习作现场诊断</p>
+          </div>
+          <aside class="method-note reveal-scale d3">
+            <h2 class="editable">BODY 追问四连</h2>
+            <div class="method-line editable"><span class="num">1</span>为什么？</div>
+            <div class="method-line editable"><span class="num">2</span>举例呢？</div>
+            <div class="method-line editable"><span class="num">3</span>和谁比？</div>
+            <div class="method-line editable"><span class="num">4</span>结果是什么？</div>
+          </aside>
+          <div class="prompt-mini reveal d4 editable">GAP YEAR · WORK OR TRAVEL BEFORE UNIVERSITY<br><strong class="orange">Do the advantages outweigh the disadvantages?</strong></div>
+          <div class="identity reveal d5 editable">闫敬文<br>IELTS Writing 8.0 · 1400+ teaching hours</div>
+        </div>
+        <template class="speaker-notes">建议时段：00:00–00:45。
+
+【逐字稿】
+大家好，我是闫敬文。今天这 15 分钟左右，我们只解决雅思大作文里一个特别常见的问题：明明已经有观点了，为什么主体段还是只能写两三句，而且越写越空？
+
+这节课结束以后，你会带走一套可以马上使用的方法，叫作“Body 追问四连”：为什么、举例呢、和谁比、结果是什么。我们会先用这套方法把一句话观点展开，再现场诊断一段典型的 5.5 分习作，最后把它改成一段逻辑更接近 6.5 要求的文字。
+
+好，我们直接开始。
+
+【动作】看镜头完成前两句；说到“四连”时，依次指向右侧四个关键词。</template>
+      </section>
+
+      <!-- === SLIDE 02: HOOK === -->
+      <section class="slide s2" aria-label="课堂钩子">
+        <div class="corner tl"></div><div class="corner br"></div>
+        <div class="slide-inner">
+          <div class="chrome reveal d1"><span class="section editable">01 · WHY PARAGRAPHS STOP</span><span class="page">02 / 13</span></div>
+          <div class="statement reveal-left d2 editable">5.5 分常见问题：<br><span class="highlight">观点有了，论证停了。</span></div>
+          <aside class="bad-sentence paper reveal-scale d3 editable">A gap year is beneficial because young people can gain useful experience.</aside>
+          <div class="takeaway reveal d4 editable">今天先不追求“高级词汇”，只解决一个问题：下一句到底写什么？</div>
+        </div>
+        <template class="speaker-notes">建议时段：00:45–01:40。
+
+【逐字稿】
+先看一个非常熟悉的句子：
+
+“A gap year is beneficial because young people can gain useful experience.”
+
+如果你现在觉得，这句话意思正确、也没有明显语法错误，那么你的判断没有问题。但它还有一个更重要的问题：论证其实停在这里了。
+
+“beneficial”只是说它有好处，“useful experience”也只是把“好处”换了一种说法。考官看完以后仍然会问：到底是什么经验？这个经验为什么有用？它怎样影响学生进入大学之后的选择？
+
+【虚拟互动】大家可以在心里判断一下：这句话后面最应该先补的是一个更高级的形容词，还是解释这个好处怎么产生？停一秒。
+
+答案是第二个。今天我们不靠换词把句子“装高级”，而是把逻辑往前推。</template>
+      </section>
+
+      <!-- === SLIDE 03: TR & CC === -->
+      <section class="slide s3" aria-label="评分标准">
+        <div class="corner tl"></div><div class="corner br"></div>
+        <div class="slide-inner">
+          <div class="chrome reveal d1"><span class="section editable">02 · WHAT EXAMINERS SEE</span><span class="page">03 / 13</span></div>
+          <div class="eyebrow reveal-left d1 editable">今天扣住两项评分标准</div>
+          <h2 class="title-lg reveal-left d2 editable">不是“写长”，而是<span class="highlight">展开并推进</span>。</h2>
+          <div class="score-grid">
+            <article class="score-card tr reveal d3">
+              <div class="score-label editable">TR · Task Response</div>
+              <p class="editable">主观点是否得到充分展开和支持？</p>
+              <p class="editable">内容是否始终相关，而不是重复题目或空泛表态？</p>
+            </article>
+            <article class="score-card cc reveal d4">
+              <div class="score-label editable">CC · Coherence & Cohesion</div>
+              <p class="editable">句子是否按照清楚的逻辑顺序向前推进？</p>
+              <p class="editable">连接词是否表达真实关系，而不是只负责“粘句子”？</p>
+            </article>
+          </div>
+          <aside class="not-today reveal-scale d5 editable"><strong>LR / GRA 不是不重要。</strong><br>但今天这段最先要修的，不是词汇和语法。</aside>
+          <div class="footnote editable">Source: IELTS.org · Writing test preparation resources（TR / CC 公开评分说明）</div>
+        </div>
+        <template class="speaker-notes">建议时段：01:40–02:55。
+
+【逐字稿】
+为什么主体段展开不够会影响分数？我们先把它扣回评分标准。
+
+第一个是 TR，也就是 Task Response。这里不是只看你有没有回答题目，还会看你的主要观点有没有得到充分展开和支持。所以，观点相关只是第一步。如果后面一直是“有好处、很重要、对未来有帮助”这样的宽泛表达，观点并没有真正发展起来。
+
+第二个是 CC，也就是 Coherence and Cohesion。很多同学一提 CC，只想到 because、therefore、moreover 这些连接词。但真正重要的是信息有没有按逻辑向前推进。你写了 therefore，不代表前后就自动形成因果关系。
+
+所以今天这节课主要修两个地方：TR 的“展开和支持”，以及 CC 的“逻辑推进”。LR 和 GRA 当然重要，但如果段落的核心逻辑是空的，只替换词汇、修几个语法点，提分效果会很有限。
+
+【动作】先指 TR，再指 CC；最后一句回看镜头。</template>
+      </section>
+
+      <!-- === SLIDE 04: METHOD === -->
+      <section class="slide s4" aria-label="Body追问四连">
+        <div class="corner tl"></div><div class="corner br"></div>
+        <div class="slide-inner">
+          <div class="chrome reveal d1"><span class="section editable">03 · THE FOUR QUESTIONS</span><span class="page">04 / 13</span></div>
+          <div class="eyebrow reveal-left d1 editable">BODY 追问四连</div>
+          <h2 class="title-lg reveal-left d2 editable">观点写完，先别急着换词。</h2>
+          <div class="four-grid">
+            <article class="q-card active-q reveal d2"><div class="big-num">01</div><h3 class="editable">为什么？</h3><p class="editable">解释背后的原因或机制。</p></article>
+            <article class="q-card reveal d3"><div class="big-num">02</div><h3 class="editable">举例呢？</h3><p class="editable">把抽象观点放进具体人物或场景。</p></article>
+            <article class="q-card reveal d4"><div class="big-num">03</div><h3 class="editable">和谁比？</h3><p class="editable">通过对比让变化更清楚。</p></article>
+            <article class="q-card reveal d5"><div class="big-num">04</div><h3 class="editable">结果是什么？</h3><p class="editable">说明最终影响，不重复观点。</p></article>
+          </div>
+          <p class="rule-note reveal d5 editable">四个问题是<strong>诊断清单</strong>，不是要求每一段机械写四句；根据观点选择最能推动逻辑的 2–4 个。</p>
+        </div>
+        <template class="speaker-notes">建议时段：02:55–04:25。
+
+【逐字稿】
+观点写完以后，先不要急着换词，也不要急着写下一条观点。你可以按顺序问四个问题。
+
+第一个，为什么？它要求你解释原因或者机制。比如，为什么 gap year 能帮助学生做出更好的大学选择？
+
+第二个，举例呢？这里不是让你编一个名人故事，而是把抽象观点放进一个具体场景。比如在公司工作，或者独立安排旅行预算和行程。
+
+第三个，和谁比？对比可以让变化更明显。比如，把参加 gap year 的学生和高中毕业后立刻进入大学的学生进行比较。
+
+第四个，结果是什么？结果必须落到一个清楚的影响，而不是重复“所以它很好”。比如，他们更可能选择适合自己的专业，也更不容易入学以后再转专业。
+
+这里提醒一下：这四个问题是一张诊断清单，不是四句固定模板。并不是每个主体段都必须机械地写四句。你只需要选择能够让这一段逻辑继续向前的两到四个问题。
+
+【虚拟互动】如果你的观点后面只能接一句 “This is very beneficial”，你最应该先问哪一个？弹幕可以打“为什么”。停一秒。</template>
+      </section>
+
+      <!-- === SLIDE 05: PROMPT === -->
+      <section class="slide s5" aria-label="题目与段落任务">
+        <div class="corner tl"></div><div class="corner br"></div>
+        <div class="slide-inner">
+          <div class="chrome reveal d1"><span class="section editable">04 · LOCK THE PARAGRAPH JOB</span><span class="page">05 / 13</span></div>
+          <div class="eyebrow reveal-left d1 editable">先锁定：这一段负责什么？</div>
+          <div class="prompt-paper paper reveal d2 editable">In some countries young people are encouraged to work or travel for a year between finishing high school and starting university studies.<strong>Do you think the advantages outweigh the disadvantages?</strong></div>
+          <div class="lock-grid">
+            <article class="lock-card reveal d3"><span class="label">Question Type</span><p class="editable">Advantages outweigh disadvantages</p></article>
+            <article class="lock-card reveal d4"><span class="label">Position</span><p class="editable">Yes — the advantages are greater.</p></article>
+            <article class="lock-card reveal d5"><span class="label">Body Job</span><p class="editable">完整解释一个主要优势。</p></article>
+          </div>
+          <aside class="scope-note reveal-scale d5 editable">本节只练一个主体段。完整文章仍需处理另一侧，不能只写优势。</aside>
+        </div>
+        <template class="speaker-notes">建议时段：04:25–05:30。
+
+【逐字稿】
+现在把方法放进今天这道题。
+
+题目说，在一些国家，年轻人在高中毕业和进入大学之间，会被鼓励用一年时间工作或者旅行。问题是：你认为这样做的优势是否大于劣势？
+
+这是 advantages outweigh disadvantages 题型。假设我的立场是：优势更大。
+
+但请注意，一个主体段不能承担整篇文章的所有任务。今天我们只练其中一个段落，所以先给它一个非常明确的工作：完整解释一个主要优势。
+
+我选择的优势是，gap year 可以帮助年轻人做出更合适的大学专业选择。完整作文里仍然需要处理劣势，再解释为什么优势更重要；今天只是把其中一个主体段练扎实。
+
+【动作】说到题型、立场、段落任务时，依次指向下方三张卡。</template>
+      </section>
+
+      <!-- === SLIDE 06: ONE-SENTENCE IDEA === -->
+      <section class="slide s6" aria-label="一句话观点">
+        <div class="corner tl"></div><div class="corner br"></div>
+        <div class="slide-inner">
+          <div class="chrome reveal d1"><span class="section editable">05 · START WITH ONE CLEAR IDEA</span><span class="page">06 / 13</span></div>
+          <div class="eyebrow reveal-left d1 editable">一句话观点</div>
+          <h2 class="title-lg reveal-left d2 editable">先写清楚，再往下追问。</h2>
+          <div class="idea-paper paper reveal d3 editable">A gap year can help young people <span class="underline">make better university choices</span>.</div>
+          <div class="fork">
+            <article class="fork-card stop reveal d4"><span class="fork-label orange">5.5 常见停法</span><p class="editable">This is beneficial and can help them in the future.</p></article>
+            <article class="fork-card go reveal d5"><span class="fork-label">继续追问</span><p class="editable">为什么它能改善大学选择？具体经历如何产生作用？</p></article>
+          </div>
+        </div>
+        <template class="speaker-notes">建议时段：05:30–06:35。
+
+【逐字稿】
+我们的观点句是：
+
+“A gap year can help young people make better university choices.”
+
+这句话的优点是方向清楚，没有一上来塞很多理由。但它目前仍然只是一个结论。“better university choices”到底为什么会发生，还没有解释。
+
+5.5 分常见的写法，是接一句：
+
+“This is beneficial and can help them in the future.”
+
+这句话不一定有严重语法错误，但它只是重复了前面的“有帮助”。所以我们下一步不写另一个形容词，而是追问：为什么工作或旅行的经历能改善大学选择？具体经历通过什么方式产生这个结果？
+
+记住，观点句负责告诉考官“我这一段要证明什么”，后面的句子才负责“把它证明出来”。</template>
+      </section>
+
+      <!-- === SLIDE 07: BUILD THE CHAIN === -->
+      <section class="slide s7" aria-label="论证链">
+        <div class="corner tl"></div><div class="corner br"></div>
+        <div class="slide-inner">
+          <div class="chrome reveal d1"><span class="section editable">06 · BUILD THE ARGUMENT CHAIN</span><span class="page">07 / 13</span></div>
+          <div class="eyebrow reveal-left d1 editable">一句观点 → 一条论证链</div>
+          <h2 class="title-md reveal-left d2 editable">每一句，都回答前一句留下的问题。</h2>
+          <div class="chain">
+            <article class="chain-step reveal d2"><span class="chain-q editable">WHY?</span><h3 class="editable">为什么选择更好？</h3><p class="editable">工作或独立旅行让学生接触真实责任与不同生活方式。</p></article>
+            <article class="chain-step reveal d3"><span class="chain-q editable">EXAMPLE</span><h3 class="editable">什么场景？</h3><p class="editable">例如在公司工作，或独立安排旅行预算与行程。</p></article>
+            <article class="chain-step reveal d4"><span class="chain-q editable">COMPARE</span><h3 class="editable">和谁比？</h3><p class="editable">相比高中毕业后立即入学，他们更了解自己的兴趣与能力。</p></article>
+            <article class="chain-step reveal d5"><span class="chain-q editable">RESULT</span><h3 class="editable">结果是什么？</h3><p class="editable">更可能选到合适专业，也更少中途转专业。</p></article>
+          </div>
+          <div class="chain-result reveal d5 editable">TR：观点得到具体支持｜CC：原因 → 场景 → 对比 → 结果，逻辑持续向前。</div>
+        </div>
+        <template class="speaker-notes">建议时段：06:35–08:20。
+
+【逐字稿】
+我们用四个问题，把刚才的一句话向下展开。
+
+第一，为什么 gap year 能帮助学生选择专业？因为工作或者独立旅行，会让他们接触真实的责任和不同的生活方式。这里我们已经从“有经验”推进到了“经验的内容是什么”。
+
+第二，举例呢？比如，一个学生在公司里工作，需要完成实际任务；或者他独立旅行，需要安排预算、路线和时间。这些场景会让他发现，自己真正喜欢什么，也擅长什么。
+
+第三，和谁比？和高中毕业后马上进入大学的学生相比，经历过这些真实场景的学生，对自己的兴趣和能力可能有更具体的认识。
+
+第四，结果是什么？他们更可能选择一个适合自己的专业，也更不容易入学以后才发现方向不合适，然后中途转专业。
+
+大家注意这条线：真实经历，带来自我了解；更充分的自我了解，带来更合适的专业选择。每一句都在回答前一句留下的问题。
+
+这就是 TR 和 CC 同时改善的地方：TR 上，观点得到了具体支持；CC 上，原因、场景、对比和结果形成了连续的逻辑。
+
+【动作】沿四张卡从左到右移动手势；最后用手画出一条向前的线。</template>
+      </section>
+
+      <!-- === SLIDE 08: STUDENT SAMPLE & POLL === -->
+      <section class="slide s8" aria-label="学生习作互动">
+        <div class="corner tl"></div><div class="corner br"></div>
+        <div class="slide-inner">
+          <div class="chrome reveal d1"><span class="section editable">07 · LIVE DIAGNOSIS</span><span class="page">08 / 13</span></div>
+          <div class="eyebrow reveal-left d1 editable">学生习作现场诊断</div>
+          <h2 class="title-md reveal-left d2 editable">这段最影响分数的问题是什么？</h2>
+          <article class="sample-paper paper reveal d3">
+            <div class="sample-meta"><span class="editable">Typical 5.5-level paragraph</span><span class="editable">58 words</span></div>
+            <div class="editable">Taking a gap year is very beneficial for young people because they can learn many useful things outside school. They may work or travel and gain more experience before university. This can help them in the future, make them more independent and prepare them for university. Therefore, the advantages of a gap year are greater than its disadvantages.</div>
+          </article>
+          <div class="poll">
+            <div class="poll-choice reveal d4 editable"><span>1</span>语法错误太多</div>
+            <div class="poll-choice reveal d5 editable"><span>2</span>观点相关，但论证太空</div>
+          </div>
+          <div class="pause-tag reveal-scale d5 editable">弹幕打 1 或 2 · 停 3 秒</div>
+        </div>
+        <template class="speaker-notes">建议时段：08:20–09:30。
+
+【逐字稿】
+下面进入现场诊断。屏幕上是一段 58 词的学生习作，水平大约在 5.5 分常见区间。大家先跟我一起看一遍。
+
+【慢速朗读屏幕中的英文段落】
+
+“Taking a gap year is very beneficial for young people because they can learn many useful things outside school. They may work or travel and gain more experience before university. This can help them in the future, make them more independent and prepare them for university. Therefore, the advantages of a gap year are greater than its disadvantages.”
+
+现在请你判断，这一段最影响分数的问题是什么？
+
+选项 1，语法错误太多；选项 2，观点相关，但是论证太空。
+
+【虚拟互动】弹幕打 1 或 2。我给大家三秒钟。三、二、一。
+
+答案是 2。它大体能够读懂，观点也没有明显离题；真正的问题是，里面的关键词听起来都正确，却没有具体内容。</template>
+      </section>
+
+      <!-- === SLIDE 09: DIAGNOSIS DETAILS === -->
+      <section class="slide s9" aria-label="诊断过程">
+        <div class="corner tl"></div><div class="corner br"></div>
+        <div class="slide-inner">
+          <div class="chrome reveal d1"><span class="section editable">08 · FIND → EXPLAIN → PRIORITISE</span><span class="page">09 / 13</span></div>
+          <div class="eyebrow reveal-left d1 editable">完整诊断：先抓最影响分数的问题</div>
+          <div class="diagnosis-layout">
+            <article class="marked-paper paper reveal d2 editable">Taking a gap year is <mark>very beneficial</mark> because young people can learn <mark>many useful things</mark>. They may work or travel and gain <mark>more experience</mark>. This can <mark>help them in the future</mark>. <span class="strike">Therefore, the advantages are greater than the disadvantages.</span></article>
+            <div class="rubric-stack">
+              <article class="rubric-row primary reveal d2"><span class="rubric-code">TR</span><p class="editable">相关，但理由没有充分展开或支持。</p></article>
+              <article class="rubric-row primary reveal d3"><span class="rubric-code">CC</span><p class="editable">有 because / therefore，但逻辑没有真正推进。</p></article>
+              <article class="rubric-row reveal d4"><span class="rubric-code">LR</span><p class="editable">beneficial / useful / experience / future 过于宽泛。</p></article>
+              <article class="rubric-row reveal d5"><span class="rubric-code">GRA</span><p class="editable">基本能理解，不是本段最优先的问题。</p></article>
+            </div>
+          </div>
+          <p class="diagnosis-order reveal d5 editable">诊断顺序：<span class="highlight">问题位置 → 为什么扣分 → 最小修改 → 学生复写</span></p>
+        </div>
+        <template class="speaker-notes">建议时段：09:30–11:20。
+
+【逐字稿】
+我们按照“发现问题、解释扣分、确定优先级、给出修改方向”四步来诊断。
+
+第一步，发现问题。请看我标出来的词：very beneficial、many useful things、more experience、help them in the future。这些表达不是完全错误，但它们的范围太大。读者不知道 useful things 具体是什么，也不知道 experience 怎样影响大学学习。
+
+第二步，解释为什么扣分。TR 方面，这一段虽然相关，但主要理由没有得到充分展开和支持。CC 方面，作者使用了 because 和 therefore，可是中间缺少真正的因果链。连接词把句子接在了一起，信息却没有向前走。
+
+第三步，确定修改优先级。LR 可以更具体，比如把 useful things 改成 real responsibilities，或者 interests and abilities。但我不会先要求学生堆高级词。GRA 也有可以优化的地方，不过这不是本段最优先的问题。先修 TR 和 CC，收益最大。
+
+第四步，给出最小修改方向。我们不需要整段推翻重写，只要选定一个具体优势，然后补上场景、对比和结果。另外，最后一句 “the advantages are greater than the disadvantages” 只是重复立场，并没有继续证明这个优势，可以先删除。
+
+所以我的批改顺序不是“看到一个错改一个错”，而是：先找到最影响分数的问题，再解释原因，给出最小可执行修改，最后让学生自己复写。</template>
+      </section>
+
+      <!-- === SLIDE 10: BEFORE & AFTER === -->
+      <section class="slide s10" aria-label="改前改后">
+        <div class="corner tl"></div><div class="corner br"></div>
+        <div class="slide-inner">
+          <div class="chrome reveal d1"><span class="section editable">09 · REWRITE LIVE</span><span class="page">10 / 13</span></div>
+          <div class="eyebrow reveal-left d1 editable">现场改写：不是堆句子，而是补逻辑</div>
+          <div class="rewrite-grid">
+            <article class="rewrite-card before reveal d2">
+              <div class="rewrite-label"><span class="editable">Before</span><span class="editable">空泛概括</span></div>
+              <p class="editable">A gap year is beneficial because young people can gain useful experience and prepare for university.</p>
+            </article>
+            <article class="rewrite-card after reveal d3">
+              <div class="rewrite-label"><span class="editable">After</span><span class="editable">56 words</span></div>
+              <p class="editable">Taking a gap year can help school-leavers choose a more suitable university course. By working in a company or travelling independently, they encounter real responsibilities and discover which subjects and careers genuinely interest them. Compared with students who enter university immediately, they may therefore make a better-informed choice and be less likely to change majors later.</p>
+              <div class="sentence-map"><span class="editable">观点</span><span class="editable">场景 / 原因</span><span class="editable">对比</span><span class="editable">结果</span></div>
+            </article>
+          </div>
+          <div class="rewrite-result reveal d4 editable">更接近 6.5 对观点展开与逻辑推进的要求；不能仅凭一个段落承诺整篇作文达到 6.5。</div>
+        </div>
+        <template class="speaker-notes">建议时段：11:20–13:30。
+
+【逐字稿】
+现在看改前改后。
+
+改前是：
+
+“A gap year is beneficial because young people can gain useful experience and prepare for university.”
+
+它的问题不是完全错误，而是 beneficial、useful experience 和 prepare for university 都没有被解释。
+
+改后我们这样写：
+
+【稍慢朗读】
+
+“Taking a gap year can help school-leavers choose a more suitable university course. By working in a company or travelling independently, they encounter real responsibilities and discover which subjects and careers genuinely interest them. Compared with students who enter university immediately, they may therefore make a better-informed choice and be less likely to change majors later.”
+
+现在我们逐句看。
+
+第一句保留一个清楚的观点：选择更合适的大学课程。
+
+第二句回答“为什么”和“举例呢”：在公司工作或者独立旅行，让学生接触真实责任，并发现自己真正感兴趣的学科和职业。
+
+第三句加入“和谁比”，再落到“结果是什么”：和立即入学的学生相比，他们可以做出信息更充分的选择，也更不容易以后转专业。
+
+注意，这一版没有刻意堆非常生僻的词，真正的提升来自逻辑更具体。它更接近 6.5 对主体段展开和连贯的要求。
+
+但我也要说明评分边界：我们不能只看一个段落，就承诺整篇作文一定达到 6.5。完整分数还取决于整篇任务回应、段落组织、词汇和语法表现。
+
+【动作】先指 Before，再完整指读 After；最后一句回看镜头。</template>
+      </section>
+
+      <!-- === SLIDE 11: TRANSFER POLL === -->
+      <section class="slide s11" aria-label="迁移练习互动">
+        <div class="corner tl"></div><div class="corner br"></div>
+        <div class="slide-inner">
+          <div class="chrome reveal d1"><span class="section editable">10 · YOUR TURN</span><span class="page">11 / 13</span></div>
+          <div class="eyebrow reveal-left d1 editable">虚拟互动 2 · 换到劣势也能用</div>
+          <h2 class="title-md reveal-left d2 editable">下一句，哪一个真正回答了“为什么”？</h2>
+          <div class="transfer-idea paper reveal d3 editable">A gap year may place financial pressure on some families.</div>
+          <div class="option-grid">
+            <article class="option reveal d4"><div class="option-head">A</div><p class="editable">This is a serious disadvantage and can be very bad for young people.</p></article>
+            <article class="option reveal d5"><div class="option-head">B</div><p class="editable">If young people cannot find paid work, their parents may have to cover a full year of living and travel costs.</p></article>
+          </div>
+          <div class="pause-tag reveal-scale d5 editable">选 A 或 B · 停 3 秒</div>
+        </div>
+        <template class="speaker-notes">建议时段：13:30–14:40。
+
+【逐字稿】
+方法能不能真正掌握，要看换一个观点以后还能不能使用。现在我们换到劣势。
+
+观点是：
+
+“A gap year may place financial pressure on some families.”
+
+下一句有两个选择。
+
+A：“This is a serious disadvantage and can be very bad for young people.”
+
+B：“If young people cannot find paid work, their parents may have to cover a full year of living and travel costs.”
+
+哪一句真正回答了“为什么会产生经济压力”？
+
+【虚拟互动】弹幕打 A 或 B。我再给大家三秒钟。三、二、一。
+
+先不要只看哪一句更长，也不要只数高级词。你要看哪一句让逻辑真正向前走。答案我们下一页揭晓。</template>
+      </section>
+
+      <!-- === SLIDE 12: TRANSFER ANSWER === -->
+      <section class="slide s12" aria-label="迁移练习答案">
+        <div class="corner tl"></div><div class="corner br"></div>
+        <div class="slide-inner">
+          <div class="chrome reveal d1"><span class="section editable">11 · MAKE THE LOGIC VISIBLE</span><span class="page">12 / 13</span></div>
+          <div class="eyebrow reveal-left d1 editable">答案：B</div>
+          <h2 class="title-md reveal-left d2 editable">不是“更严重”，而是说清楚<span class="highlight">压力怎么产生</span>。</h2>
+          <article class="answer-card reveal d3">
+            <span class="answer-tag editable">WHY / MECHANISM</span>
+            <p class="editable">If young people cannot find paid work, their parents may have to cover a full year of living and travel costs.</p>
+          </article>
+          <div class="logic-down reveal d4">
+            <p class="editable"><strong>结果：</strong>This extra expense may make a gap year inaccessible to students from lower-income families.</p>
+            <p class="final-line editable">观点 → 为什么 → 具体对象 → 结果</p>
+          </div>
+          <aside class="flexible-note reveal-scale d5 editable">不必每段机械回答四个问题；能让逻辑继续推进，就是有效展开。</aside>
+        </div>
+        <template class="speaker-notes">建议时段：14:40–15:45。
+
+【逐字稿】
+答案是 B。
+
+为什么？因为 A 只是把 financial pressure 换成了 serious disadvantage 和 very bad，本质上仍然是在重复“这很严重”。
+
+B 解释了压力怎么产生：如果年轻人找不到有收入的工作，父母可能需要承担整整一年的生活和旅行费用。现在读者能看见一个具体的因果机制。
+
+接下来还可以补结果：
+
+“This extra expense may make a gap year inaccessible to students from lower-income families.”
+
+这样，逻辑就从“经济压力”推进到“谁承担费用”，再落到“低收入家庭的学生可能无法参加 gap year”。
+
+这里我们用了为什么、具体对象和结果，没有强行加入对比。这再次说明，Body 追问四连不是固定模板。只要后一句回答前一句留下的问题，逻辑就在有效推进。</template>
+      </section>
+
+      <!-- === SLIDE 13: SUMMARY & CTA === -->
+      <section class="slide s13" aria-label="总结与课程引流">
+        <div class="corner tl"></div><div class="corner br"></div>
+        <div class="slide-inner">
+          <div class="chrome reveal d1"><span class="section editable">12 · TAKE IT WITH YOU</span><span class="page">13 / 13</span></div>
+          <div class="summary-line reveal-left d2 editable">别急着换词。<br><span class="highlight">先把逻辑写完整。</span></div>
+          <div class="summary-flow reveal d3">
+            <span class="node editable">一句观点</span><span class="arrow">→</span>
+            <span class="node key editable">四个追问</span><span class="arrow">→</span>
+            <span class="node editable">一条论证链</span><span class="arrow">→</span>
+            <span class="node editable">TR + CC</span>
+          </div>
+          <article class="cta-card reveal d4">
+            <h3 class="editable">系统直播课会继续练什么？</h3>
+            <p class="editable">审题 → 观点生成 → 主体段展开 → 现场批改 → 课后复写。不是只听范文，而是当场写、当场改。</p>
+          </article>
+          <div class="closing-badge reveal-scale d5 editable">把“有观点但说不清”<br>逐步写得更接近<br>6.5 要求</div>
+        </div>
+        <template class="speaker-notes">建议时段：15:45–17:20，其中最后约 30 秒为引流。
+
+【逐字稿】
+最后总结一下。今天你不需要记一整篇范文，只需要带走一句话：观点写完以后，先别急着换词，先把逻辑写完整。
+
+你可以用四个问题检查自己的主体段：为什么？举例呢？和谁比？结果是什么？不要求每一段机械回答四个问题，但至少要让读者看见，观点是怎样一步一步得到解释和支持的。
+
+回到今天的例子，我们不是从 beneficial 换到一个更难的形容词，而是完成了这条链：真实经历，让学生更了解自己的兴趣和能力；更充分的自我了解，让他们做出更合适的大学专业选择。
+
+【停顿半秒，开始约 30 秒引流】
+
+如果你刚才可以看出学生段落的问题，但换一道新题以后，还是不知道怎样追问、怎样把答案写出来，那么在后续系统直播课里，我们会继续完整训练审题、观点生成、主体段展开和现场批改。课堂不是只让你听一篇范文，而是当场写、当场诊断、当场修改，再通过课后复写把方法真正固定下来。
+
+如果你希望把 5 到 5.5 分常见的“有观点但说不清”，逐步写得更接近 6.5 的要求，欢迎报名后续直播课。
+
+谢谢大家，我们下节课见。
+
+【收尾】看镜头，微笑，停一秒后再停止录制。</template>
+      </section>
+    </main>
+  </div>
+
+  <!-- ===========================================
+       OUTSIDE-STAGE CONTROLS
+       =========================================== -->
+  <nav class="deck-controls" id="deckControls" aria-label="幻灯片控制">
+    <button id="prevBtn" aria-label="上一页">←</button>
+    <span class="counter" id="counter">01 / 13</span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <button id="nextBtn" aria-label="下一页">→</button>
+  </nav>
+
+  <aside class="notes-panel" id="notesPanel" aria-live="polite">
+    <h3 id="notesTitle">讲稿提示</h3>
+    <p id="notesText"></p>
+  </aside>
+
+  <div class="edit-hotzone" title="编辑模式"></div>
+  <button class="edit-toggle" id="editToggle" title="编辑模式（E）">✎</button>
+  <div class="edit-status">编辑模式 · Ctrl/⌘ + S 下载修改版</div>
+
+  <script>
+    /* ===========================================
+       PRESENTATION CONTROLLER
+       =========================================== */
+    class SlidePresentation {
+      constructor() {
+        this.slides = [...document.querySelectorAll(".slide")];
+        this.currentSlide = 0;
+        this.stage = document.getElementById("deckStage");
+        this.counter = document.getElementById("counter");
+        this.progress = document.getElementById("progressFill");
+        this.controls = document.getElementById("deckControls");
+        this.notesPanel = document.getElementById("notesPanel");
+        this.notesText = document.getElementById("notesText");
+        this.wheelLocked = false;
+        this.touchStartX = 0;
+        this.editing = false;
+        this.setupStageScale();
+        this.setupControls();
+        this.setupKeyboardNav();
+        this.setupTouchNav();
+        this.setupWheelNav();
+        this.setupEditing();
+        this.restoreEdits();
+        this.showSlide(0);
+      }
+
+      setupStageScale() {
+        const scale = () => {
+          const factor = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+          const x = (window.innerWidth - 1920 * factor) / 2;
+          const y = (window.innerHeight - 1080 * factor) / 2;
+          this.stage.style.transform = `translate(${x}px, ${y}px) scale(${factor})`;
+        };
+        scale();
+        window.addEventListener("resize", scale);
+      }
+
+      setupControls() {
+        document.getElementById("prevBtn").addEventListener("click", () => this.prev());
+        document.getElementById("nextBtn").addEventListener("click", () => this.next());
+      }
+
+      setupKeyboardNav() {
+        document.addEventListener("keydown", (event) => {
+          const targetEditing = event.target?.getAttribute?.("contenteditable") === "true";
+          if (targetEditing) {
+            if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s") {
+              event.preventDefault();
+              this.downloadEdited();
+            }
+            return;
+          }
+
+          if (["ArrowRight", "PageDown", " "].includes(event.key)) {
+            event.preventDefault();
+            this.next();
+          } else if (["ArrowLeft", "PageUp"].includes(event.key)) {
+            event.preventDefault();
+            this.prev();
+          } else if (event.key === "Home") {
+            this.showSlide(0);
+          } else if (event.key === "End") {
+            this.showSlide(this.slides.length - 1);
+          } else if (event.key.toLowerCase() === "n") {
+            this.notesPanel.classList.toggle("open");
+          } else if (event.key.toLowerCase() === "h") {
+            this.controls.classList.toggle("hidden");
+          } else if (event.key.toLowerCase() === "f") {
+            if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+            else document.exitFullscreen?.();
+          } else if (event.key.toLowerCase() === "e") {
+            this.toggleEditMode();
+          } else if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s") {
+            event.preventDefault();
+            this.downloadEdited();
+          }
+        });
+      }
+
+      setupTouchNav() {
+        document.addEventListener("touchstart", (event) => {
+          this.touchStartX = event.changedTouches[0].screenX;
+        }, { passive: true });
+        document.addEventListener("touchend", (event) => {
+          if (this.editing) return;
+          const delta = event.changedTouches[0].screenX - this.touchStartX;
+          if (Math.abs(delta) < 60) return;
+          delta < 0 ? this.next() : this.prev();
+        }, { passive: true });
+      }
+
+      setupWheelNav() {
+        document.addEventListener("wheel", (event) => {
+          if (event.target?.closest?.("#notesPanel")) return;
+          if (this.editing || this.wheelLocked || Math.abs(event.deltaY) < 22) return;
+          this.wheelLocked = true;
+          event.deltaY > 0 ? this.next() : this.prev();
+          setTimeout(() => { this.wheelLocked = false; }, 650);
+        }, { passive: true });
+      }
+
+      showSlide(index) {
+        this.currentSlide = Math.max(0, Math.min(index, this.slides.length - 1));
+        this.slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === this.currentSlide);
+          slide.classList.toggle("visible", i === this.currentSlide);
+        });
+        const current = String(this.currentSlide + 1).padStart(2, "0");
+        const total = String(this.slides.length).padStart(2, "0");
+        this.counter.textContent = `${current} / ${total}`;
+        this.progress.style.width = `${((this.currentSlide + 1) / this.slides.length) * 100}%`;
+        const notes = this.slides[this.currentSlide].querySelector(".speaker-notes");
+        this.notesText.textContent = notes ? notes.content.textContent.trim() : "本页没有讲稿提示。";
+      }
+
+      next() { this.showSlide(this.currentSlide + 1); }
+      prev() { this.showSlide(this.currentSlide - 1); }
+
+      setupEditing() {
+        const editable = [...document.querySelectorAll(".editable")];
+        editable.forEach((element, index) => {
+          element.dataset.editId = element.dataset.editId || `edit-${index}`;
+          element.addEventListener("input", () => {
+            localStorage.setItem(`ielts-trial-${element.dataset.editId}`, element.innerHTML);
+          });
+        });
+
+        const hotzone = document.querySelector(".edit-hotzone");
+        const toggle = document.getElementById("editToggle");
+        let hideTimeout = null;
+
+        hotzone.addEventListener("mouseenter", () => {
+          clearTimeout(hideTimeout);
+          toggle.classList.add("show");
+        });
+        hotzone.addEventListener("mouseleave", () => {
+          hideTimeout = setTimeout(() => {
+            if (!this.editing) toggle.classList.remove("show");
+          }, 400);
+        });
+        toggle.addEventListener("mouseenter", () => clearTimeout(hideTimeout));
+        toggle.addEventListener("mouseleave", () => {
+          hideTimeout = setTimeout(() => {
+            if (!this.editing) toggle.classList.remove("show");
+          }, 400);
+        });
+        hotzone.addEventListener("click", () => this.toggleEditMode());
+        toggle.addEventListener("click", () => this.toggleEditMode());
+      }
+
+      toggleEditMode() {
+        this.editing = !this.editing;
+        document.body.classList.toggle("editing", this.editing);
+        document.getElementById("editToggle").classList.toggle("active", this.editing);
+        document.querySelectorAll(".editable").forEach((element) => {
+          element.setAttribute("contenteditable", this.editing ? "true" : "false");
+        });
+      }
+
+      restoreEdits() {
+        document.querySelectorAll(".editable").forEach((element) => {
+          const saved = localStorage.getItem(`ielts-trial-${element.dataset.editId}`);
+          if (saved !== null) element.innerHTML = saved;
+        });
+      }
+
+      downloadEdited() {
+        const clone = document.documentElement.cloneNode(true);
+        clone.querySelectorAll("[contenteditable]").forEach((element) => element.setAttribute("contenteditable", "false"));
+        const blob = new Blob(["<!doctype html>\n" + clone.outerHTML], { type: "text/html;charset=utf-8" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "闫敬文_雅思写作试录课_Body论证展开_修改版.html";
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+      }
+    }
+
+    new SlidePresentation();
+  </script>
+</body>
+</html>

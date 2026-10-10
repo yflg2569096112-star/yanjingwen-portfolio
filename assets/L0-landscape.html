@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L0 · AI + 语言学习/写作教育 — 全景与机会扫描（雅思写作老师视角）</title>
+<style>
+  * { box-sizing: border-box; }
+  :root{
+    --ink:#1f2937; --mut:#6b7280; --line:#e5e7eb; --bg:#f6f7f9;
+    --indigo:#3730A3; --indigo2:#4338CA; --teal:#0E7490; --teal2:#0D9488;
+    --amber:#B45309; --amberbg:#fffbeb; --red:#b91c1c; --redbg:#fef2f2;
+    --green:#047857; --greenbg:#ecfdf5;
+  }
+  html{ scroll-behavior:smooth; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    max-width: 1080px; margin: 0 auto; padding: 32px 22px 90px;
+    color: var(--ink); line-height: 1.75; background: var(--bg);
+  }
+  h1 { font-size: 27px; margin: 0 0 6px; letter-spacing: -0.4px; line-height: 1.35; }
+  .subtitle { color: var(--mut); font-size: 14px; margin-bottom: 18px; }
+  .meta-bar {
+    display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--mut);
+    margin-bottom: 22px; padding: 11px 15px; background: #fff;
+    border-radius: 8px; border: 1px solid var(--line);
+  }
+  .meta-bar strong { color: var(--ink); }
+
+  /* sticky nav */
+  nav.toc{
+    position: sticky; top: 0; z-index: 50; background: rgba(246,247,249,.92);
+    backdrop-filter: blur(6px); border-bottom:1px solid var(--line);
+    margin: 0 -22px 20px; padding: 9px 22px; display:flex; gap:6px; flex-wrap:wrap;
+  }
+  nav.toc a{
+    font-size:12px; color:var(--teal); text-decoration:none; padding:4px 9px;
+    border-radius:999px; border:1px solid #d8e3e6; background:#fff; white-space:nowrap;
+  }
+  nav.toc a:hover{ background:var(--teal); color:#fff; border-color:var(--teal); }
+
+  /* hero */
+  .hero {
+    background: linear-gradient(135deg, #312E81 0%, #0E7490 100%);
+    color: #fff; padding: 30px 32px; border-radius: 14px; margin-bottom: 18px;
+    box-shadow: 0 6px 20px rgba(49,46,129,0.28);
+  }
+  .hero h2 { color:#fff; border:0; padding:0; font-size: 21px; margin: 0 0 6px; }
+  .hero .lead { font-size: 15px; opacity:.95; margin: 0 0 16px; }
+  .hero .tldr-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .tldr-card { background: rgba(255,255,255,0.12); padding: 15px 16px; border-radius: 10px; border-left: 3px solid #fbbf24; }
+  .tldr-card .num { font-size: 11px; font-weight: 700; color: #fde68a; letter-spacing: .5px; margin-bottom: 6px; }
+  .tldr-card .text { font-size: 13px; line-height: 1.6; }
+  .tldr-card b{ color:#fff; }
+
+  .section { background: #fff; border-radius: 14px; padding: 26px 28px; margin-bottom: 18px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+  h2 { font-size: 20px; margin: 0 0 6px; border-left: 4px solid var(--indigo2); padding-left: 12px; }
+  h2 .em{ color:var(--teal); }
+  .sec-lead{ color:var(--mut); font-size:13px; margin:0 0 16px; padding-left:13px; }
+  h3 { font-size: 15.5px; margin: 20px 0 8px; color: var(--ink); }
+  h3 .tag{ font-size:11px; font-weight:600; color:#fff; background:var(--indigo2); padding:2px 8px; border-radius:999px; vertical-align:middle; margin-left:6px;}
+  p { margin: 8px 0; } ul, ol { padding-left: 20px; margin: 8px 0; } li { margin: 5px 0; }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+  th, td { border: 1px solid var(--line); padding: 9px 11px; text-align: left; vertical-align: top; }
+  th { background: #eef2f7; font-weight: 600; }
+  td.cat{ background:#f8fafc; font-weight:700; color:var(--indigo); white-space:nowrap; }
+  tr:hover td{ background:#fafbfc; }
+  td.cat:hover{ background:#f8fafc; }
+  .src{ color:#9ca3af; font-size:11px; white-space:nowrap; }
+  .flag{ display:inline-block; font-size:10.5px; font-weight:700; color:var(--amber); background:var(--amberbg); border:1px solid #fde68a; border-radius:4px; padding:0 5px; }
+  .ok{ color:var(--green); font-weight:700; } .bad{ color:var(--red); font-weight:700; }
+
+  .num-wall { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 16px 0; }
+  .dnum { background: linear-gradient(180deg, #eef2ff 0%, #e0e7ff 100%); border: 1px solid #c7d2fe; border-radius: 10px; padding: 13px 8px; text-align: center; }
+  .dnum .big { font-size: 20px; font-weight: 800; color: var(--indigo); line-height: 1.05; }
+  .dnum .lab { font-size: 10.5px; color: var(--mut); margin-top: 6px; line-height: 1.35; }
+
+  .callout { padding: 13px 17px; border-radius: 10px; margin: 14px 0; font-size: 13.5px; }
+  .c-amber{ background:var(--amberbg); border-left:4px solid #f59e0b; }
+  .c-teal{ background:#ecfeff; border-left:4px solid var(--teal); }
+  .c-red{ background:var(--redbg); border-left:4px solid #ef4444; }
+  .c-green{ background:var(--greenbg); border-left:4px solid #10b981; }
+  .callout b{ color:var(--ink); }
+
+  /* before -> after shift */
+  .shift{ display:grid; grid-template-columns: 1fr auto 1fr; gap:10px; align-items:center; margin:8px 0; font-size:13px; }
+  .shift .old{ background:#f3f4f6; border:1px solid var(--line); border-radius:8px; padding:9px 12px; color:var(--mut); }
+  .shift .new{ background:#ecfeff; border:1px solid #a5f3fc; border-radius:8px; padding:9px 12px; }
+  .shift .arr{ color:var(--teal); font-weight:800; font-size:16px; }
+  .shift .new b{ color:var(--teal); }
+
+  /* sin cards */
+  .sins{ display:grid; grid-template-columns: repeat(2,1fr); gap:12px; margin:14px 0; }
+  .sin{ border:1px solid var(--line); border-radius:11px; padding:14px 16px; background:#fff; }
+  .sin .t{ font-weight:700; font-size:14px; color:var(--red); margin-bottom:5px; }
+  .sin .ev{ font-size:12.5px; color:#374151; }
+  .sin .ev b{ color:var(--ink); }
+
+  /* opportunity cards */
+  .opp{ border:1px solid var(--line); border-radius:12px; padding:0; margin:14px 0; overflow:hidden; }
+  .opp .hd{ display:flex; align-items:center; gap:10px; padding:12px 16px; background:linear-gradient(90deg,#eef2ff,#ffffff); border-bottom:1px solid var(--line); }
+  .opp .hd .no{ font-size:13px; font-weight:800; color:#fff; background:var(--indigo2); width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
+  .opp .hd .ti{ font-weight:700; font-size:15px; }
+  .opp .hd .star{ margin-left:auto; font-size:11px; font-weight:700; color:#fff; background:var(--green); padding:2px 9px; border-radius:999px; }
+  .opp .bd{ padding:13px 16px; display:grid; grid-template-columns: 1fr 1fr; gap:13px; }
+  .opp .bd .col h4{ margin:0 0 5px; font-size:11.5px; letter-spacing:.4px; text-transform:uppercase; color:var(--mut); }
+  .opp .bd .col p{ margin:0; font-size:13px; }
+  .opp .bd .evid{ border-left:3px solid var(--teal); padding-left:10px; }
+  .opp .bd .youdo{ border-left:3px solid #f59e0b; padding-left:10px; }
+
+  /* matrix */
+  .matrix{ position:relative; height:430px; border:1px solid var(--line); border-radius:12px; margin:18px 0 8px; background:
+     linear-gradient(0deg, rgba(16,185,129,.05), rgba(16,185,129,0) 55%),
+     linear-gradient(90deg, rgba(67,56,202,.04), rgba(67,56,202,0) 55%); }
+  .matrix .axis-y{ position:absolute; left:-6px; top:50%; transform:rotate(-90deg) translateX(50%); transform-origin:left; font-size:11px; color:var(--mut); }
+  .matrix .axis-x{ position:absolute; bottom:6px; left:50%; transform:translateX(-50%); font-size:11px; color:var(--mut); }
+  .matrix .ylab-hi{ position:absolute; left:8px; top:6px; font-size:10.5px; color:#9ca3af;}
+  .matrix .ylab-lo{ position:absolute; left:8px; bottom:22px; font-size:10.5px; color:#9ca3af;}
+  .matrix .xlab-hi{ position:absolute; right:10px; bottom:22px; font-size:10.5px; color:#9ca3af;}
+  .matrix .quad{ position:absolute; font-size:11px; font-weight:700; color:#cbd5e1; }
+  .dot{ position:absolute; transform:translate(-50%,50%); display:flex; flex-direction:column; align-items:center; gap:3px; width:120px; text-align:center; }
+  .dot .b{ width:30px; height:30px; border-radius:50%; background:var(--indigo2); color:#fff; font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center; box-shadow:0 3px 8px rgba(67,56,202,.3); }
+  .dot.win .b{ background:var(--green); box-shadow:0 3px 10px rgba(4,120,87,.4); }
+  .dot .l{ font-size:10.5px; color:#475569; line-height:1.25; background:rgba(255,255,255,.85); border-radius:5px; padding:1px 4px; }
+
+  .footer{ text-align:center; color:#9ca3af; font-size:12px; margin-top:24px; }
+  a.ref{ color:var(--teal); }
+  .srcgrid{ columns:2; column-gap:22px; font-size:12px; }
+  .srcgrid p{ break-inside:avoid; margin:0 0 9px; color:#4b5563; }
+  .srcgrid b{ color:var(--ink); }
+  @media (max-width:760px){
+    .hero .tldr-grid,.num-wall,.sins,.opp .bd{ grid-template-columns:1fr; }
+    .srcgrid{ columns:1; }
+    .shift{ grid-template-columns:1fr; } .shift .arr{ transform:rotate(90deg); }
+  }
+  @media print{ nav.toc{ display:none; } body{ background:#fff; } .section{ box-shadow:none; border:1px solid var(--line); } }
+</style>
+</head>
+<body>
+
+<h1>AI + 语言学习 / 写作教育 · 全景与机会扫描</h1>
+<div class="subtitle">L0 · 行业地基报告 — 从「资深雅思写作老师」视角，找到能切入的产品空白（喂给后续 PRD）</div>
+<div class="meta-bar">
+  <span>📅 调研日期 <strong>2026-06-08</strong></span>
+  <span>🔭 方法 <strong>5 路并行联网调研 + 对抗式核验</strong></span>
+  <span>🎯 聚焦 <strong>语言学习 / 写作批改(AES) / 雅思托福赛道</strong></span>
+  <span>🌍 范围 <strong>国内 × 海外对比</strong></span>
+  <span>🧩 定位 <strong>所有单品拆解(P 系列)与 PRD 的上层地图</strong></span>
+</div>
+
+<nav class="toc">
+  <a href="#tldr">核心判断</a>
+  <a href="#size">市场与资本</a>
+  <a href="#map-o">海外全景</a>
+  <a href="#map-c">国内全景</a>
+  <a href="#cmp">国内×海外打法</a>
+  <a href="#shift">大模型变迁</a>
+  <a href="#aes">✍️ 写作批改专题</a>
+  <a href="#exam">考试评分现状</a>
+  <a href="#pain">中国考生痛点</a>
+  <a href="#opp">🎯 机会清单</a>
+  <a href="#method">方法/存疑</a>
+  <a href="#src">来源</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="tldr">
+  <h2>三条核心判断（先看这个）</h2>
+  <p class="lead">语言学习是 AI 教育里最大的吸金子赛道，但行业有一个集体病灶——而这个病灶，恰好长在你最懂的地方。</p>
+  <div class="tldr-grid">
+    <div class="tldr-card">
+      <div class="num">01 · 钱在涌入，但极度挑剔</div>
+      <div class="text">AI 占 EdTech 融资约 <b>62%</b>，语言学习是单一最大子赛道；Speak 成 <b>$1B 独角兽</b>。但资本「向头部集中」——2025 年 Top 3 笔交易占了 <b>50%</b> 融资。VC 只买「<b>可验证提分闭环 + 非套壳护城河</b>」。<span class="src">HolonIQ / New Market Pitch, 2025–26</span></div>
+    </div>
+    <div class="tldr-card">
+      <div class="num">02 · 行业集体病灶：测的是参与度，不是学习</div>
+      <div class="text">几乎所有产品严格测量的是 DAU/时长/满意度，<b>而非真实学习产出</b>。Duolingo「AI-first」翻车、套壳 GPT 产品 90 天高流失，都是这个病的并发症。<span class="src">Fortune / 多源, 2025</span></div>
+    </div>
+    <div class="tldr-card">
+      <div class="num">03 · 写作教育真空 = 你的主场</div>
+      <div class="text">研究反复证明 AI 短板正好在：<b>高分段判别、论证/结构、中式英语、过程性、人机协同</b>——全是资深雅思老师的隐性知识，且 teacher-in-the-loop 已有 <b>RCT 级证据</b>支撑。</div>
+    </div>
+  </div>
+</div>
+
+<!-- MARKET SIZE -->
+<section class="section" id="size">
+  <h2>一、市场盘子 & 资本流向</h2>
+  <p class="sec-lead">先把钱的版图看清——盘子多大、钱往哪流、雅思这块具体值多少。所有数字标注机构与年份，多为<b>预测</b>而非实绩，只当方向。</p>
+
+  <div class="num-wall">
+    <div class="dnum"><div class="big">$83–85B</div><div class="lab">2025 全球语言学习市场<br><span class="src">Mordor / GMI</span></div></div>
+    <div class="dnum"><div class="big">62%</div><div class="lab">AI 占 2025 EdTech 融资<br><span class="src">New Market Pitch</span></div></div>
+    <div class="dnum"><div class="big">~85万</div><div class="lab">中国每年雅思考量(人次)<br><span class="src">Morgan Stanley 估</span></div></div>
+    <div class="dnum"><div class="big">~40%</div><div class="lab">中国占全球雅思价值<br><span class="src">行业报道</span></div></div>
+    <div class="dnum"><div class="big">−15~20%</div><div class="lab">雅思考量同比软化(2024)<br><span class="src">IDP</span></div></div>
+  </div>
+
+  <table>
+    <tr><th>盘子</th><th>规模 / 预测</th><th>机构 · 年份</th><th>读法</th></tr>
+    <tr><td>全球语言学习(总)</td><td>2025 ≈ <b>$83–85B</b> → 2030 $120–189B（CAGR 10–23%）</td><td>Mordor / GMI / R&amp;M · 2025</td><td>口径越宽数越大；两大机构在 2025 高度一致</td></tr>
+    <tr><td>全球 AI 教育</td><td>2030 预测从 <b>$5.8B 到 $49B</b> 不等（差 8 倍）</td><td>4 家机构 · 2024–25</td><td><span class="flag">口径混乱</span> 引用必带机构名，别单引一个</td></tr>
+    <tr><td>中国 AI 教育</td><td>$509M(2024) → $2.85B(2030)，CAGR 31.6%</td><td>Grand View · 2025</td><td>中国占全球约 8.7%；政策强驱动(2025-04 教育部「AI+教育」指引)</td></tr>
+    <tr><td>中国雅思</td><td>市场价值 ≈ <b>$380M</b>，约占全球雅思 40%</td><td>Morgan Stanley</td><td>中国考生均分 <b>5.9</b>（全球第35）<span class="src">British Council 2025</span></td></tr>
+  </table>
+
+  <h3>资本流向：钱去哪了</h3>
+  <ul>
+    <li><b>语言学习 = 最大吸金子赛道</b>：Preply、Speak、ELSA、Praktika 等合计融资 <b>$400M+</b>。<span class="src">New Market Pitch, 2026</span></li>
+    <li><b>口语对话 AI 领跑</b>：Speak C 轮 $78M@$1B(2024-12，OpenAI 投)、Praktika A 轮 $35.5M(2024-05)、Sana 被 Workday 以 <b>$1.1B 收购</b>(2025-09)。</li>
+    <li><b>向头部集中(flight to quality)</b>：Top 3 交易占融资比从 2022 的 25% → 2025 的 <b>50%</b>。VC 停止广撒网，只投能证明「AI 干预→学生提分」闭环的公司。<span class="src">FE International, 2025–26</span></li>
+  </ul>
+  <div class="callout c-teal"><b>对你的含义：</b>资本明确想要「可验证提分 + 非套壳护城河」。一个懂评分标准、能把「提分」做成可量化闭环的老师，正好踩在 VC 的偏好上——这是套壳团队拿不出的东西。</div>
+</section>
+
+<!-- OVERSEAS MAP -->
+<section class="section" id="map-o">
+  <h2>二、全景地图 · <span class="em">海外玩家</span></h2>
+  <p class="sec-lead">按品类切。注意「大模型后核心 AI 形态」一列——这是判断「真用 LLM vs 旧功能套壳」的关键。</p>
+  <table>
+    <tr><th>品类</th><th>代表产品</th><th>大模型后核心 AI 形态</th><th>商业模式</th><th>最新关键数字 <span class="src">(标时间)</span></th></tr>
+
+    <tr><td class="cat" rowspan="4">口语<br>对话陪练</td>
+      <td><b>Duolingo Max</b></td><td>GPT-4：Video Call with Lily 实时陪练 / Roleplay / Explain My Answer</td><td>ToC 订阅</td><td>见下「综合」行（同公司）</td></tr>
+    <tr><td><b>Speak</b></td><td>OpenAI Realtime API：沉浸式 Live Roleplays，零真人老师</td><td>ToC + ToB 企业版</td><td>C 轮 $78M@<b>$1B</b>独角兽；下载 1000万+；200+ 企业客户 <span class="src">2024-12</span></td></tr>
+    <tr><td><b>ELSA Speak</b></td><td>从「逐音素打分器」→ 生成式 AI Tutor 对话纠音</td><td>ToC + ToB(学校/企业)</td><td>累计融资 ~$60M；C 轮 $23M <span class="src">2023-09</span>；25M+ 用户<span class="flag">口径模糊</span></td></tr>
+    <tr><td><b>Praktika</b></td><td>AI 虚拟人头像(avatar)私教，用语气/情绪驱动对话</td><td>ToC</td><td>A 轮 $35.5M；月活 120万；近 $20M 营收 <span class="src">2024-05</span></td></tr>
+
+    <tr><td class="cat" rowspan="3">综合<br>学习</td>
+      <td><b>Duolingo</b> 🏆</td><td>游戏化课程为主 + GPT-4 对话外延；2025 Hearts→Energy 改版</td><td>ToC 订阅(Super~$13/mo, Max $168/yr)</td><td><b>收入 $1.04B(+38.7%)</b>、付费 12.2M、DAU 52.7M <span class="src">FY2025, 2026-02</span></td></tr>
+    <tr><td><b>Babbel</b></td><td>Babbel AI / Speak：语音识别 + 真实对话模拟，150+ 语言学家监督</td><td>订阅 + <b>重 B2B</b></td><td>营收 <b>€352M</b>(2024)；B2B 5000+ 企业；Babbel Live 已停个人版 <span class="src">2025-07</span></td></tr>
+    <tr><td><b>Memrise</b></td><td>MemBot(GPT 语言伙伴) + AI Buddies(语法/角色扮演)</td><td>ToC freemium</td><td>~8000万注册(2026)；营收 £7.66M(2023)</td></tr>
+
+    <tr><td class="cat" rowspan="4">写作批改<br>/ AES</td>
+      <td><b>Grammarly → Superhuman</b></td><td>GrammarlyGO(GPT)起草/改写；2025-10 改名推 Superhuman Go(agent 助手)</td><td>ToC/B 订阅 + 并购扩张</td><td>40M+ DAU；GC 注资 <b>$10亿</b>(非稀释,2025-05)；估值 $13B(2021旧值) </td></tr>
+    <tr><td><b>QuillBot</b>(Learneo)</td><td>改写 paraphrase + 语法 + AI 检测(2024-07上线)</td><td>ToC freemium</td><td>7500万注册 / 2500万 MAU<span class="flag">含 LanguageTool 口径</span></td></tr>
+    <tr><td><b>Cambridge Write &amp; Improve</b></td><td>剑桥官方 AWE：秒级反馈 + CEFR；与 Linguaskill 同源评分引擎</td><td>免费(付费解锁 IELTS 估分)</td><td>免费版只给 CEFR；付费 Test Zone 才给「估算 IELTS 分」</td></tr>
+    <tr><td><b>Khanmigo Writing Coach</b></td><td><b>过程&gt;成品：刻意不替学生写</b>，分阶段引导思路/大纲/草稿/修改</td><td>非营利(2025-02 起教师免费)</td><td>2024-07 上线；明确对标并区隔于「Grammarly 那类一键改写」</td></tr>
+
+    <tr><td class="cat" rowspan="3">考试<br>评分引擎</td>
+      <td><b>ETS e-rater</b></td><td>表面/结构特征评分(错误/篇章元素/文体)，<b>必配 1 名人工</b>取均值</td><td>ToB(托福/GRE)</td><td>独立任务差异阈值 1.5、综合 1.0，超阈值触发人工复核</td></tr>
+    <tr><td><b>Pearson PTE / Versant</b></td><td>全自动 AI 评分(IEA 写作 + ASR 口语)，<b>专门反模板</b></td><td>ToB(考试)</td><td>「AI 主评 + 人工兜底边缘案例」，非 100% 无人 <span class="src">Pearson 官网</span></td></tr>
+    <tr><td><b>Duolingo English Test</b></td><td>端到端 AI 自动评分(10–160 分)，自适应出题</td><td>ToC(考试 $65)</td><td>被 <b>5,400+ 院校</b>接受(2025)，含全部藤校；DET 增长引擎</td></tr>
+  </table>
+  <div class="callout c-amber"><b>一句话主线：</b>大模型把整个海外赛道从「打分器 / 选择题」推向「实时对话陪练」——Duolingo、Speak、ELSA、Memrise、Praktika 五家全在做对话化，差异只在 avatar 形态、口音、ToB 深度。<b>写作侧反而最慢</b>：Grammarly 仍以「挑错」为主，真正「教写作」的只有非营利的 Khanmigo。</div>
+</section>
+
+<!-- CHINA MAP -->
+<section class="section" id="map-c">
+  <h2>三、全景地图 · <span class="em">国内玩家</span></h2>
+  <p class="sec-lead">国内的钱在两个池子：① <b>硬件学习机</b>(千亿市场、2024 约 600 万台、已入国补目录)；② <b>AI 订阅/广告</b>。纯软件 AI 口语/批改普遍难独立盈利。技术底座几乎都是「自研教育垂类大模型 + DeepSeek 双模型」。</p>
+  <table>
+    <tr><th>公司</th><th>AI 底座(真用大模型?)</th><th>商业重心</th><th>最新关键数字 <span class="src">(标时间)</span></th><th>盈利</th></tr>
+    <tr><td><b>网易有道</b> <span class="src">NYSE:DAO</span></td><td>子曰教育大模型 3.0 ✅(+DeepSeek)</td><td>广告 + AI 订阅 + 硬件</td><td>2025 全年营收 <b>¥59.1亿</b>(+5%)；Q3 广告 ¥7.4亿(+51%)首成最大板块；AI 订阅近 ¥1亿(+40%) <span class="src">2026-02 / 2025Q3</span></td><td class="ok">经营利润 ¥2.2亿</td></tr>
+    <tr><td><b>字节 · 豆包</b></td><td>豆包大模型 ✅</td><td>流量/订阅(教育=场景)</td><td>豆包 <b>DAU 破 1 亿</b>(2025末)、MAU 3.45亿(2026-03)；豆包爱学(原河马爱学)；Gauth 海外 3亿用户</td><td class="src">教育非独立 P&amp;L</td></tr>
+    <tr><td><b>科大讯飞</b> <span class="src">A股</span></td><td>星火教育大模型 ✅</td><td><b>硬件</b> + 订阅 + G/B 端</td><td>2025H1 智慧教育 <b>¥35.3亿</b>(+23%)；学习机收入 H1 <b>+104%</b>、Q2 销售额行业第一；T20 Pro ¥7299</td><td class="ok">Q3 净利 +202% 拐点</td></tr>
+    <tr><td><b>作业帮</b></td><td>银河大模型 ✅(+DeepSeek)</td><td>学习机 + App</td><td>学习机销量份额 <b>32.6% 第一</b>(2025Q3)；App 矩阵 1.8亿 MAU</td><td class="src">未上市/未披露</td></tr>
+    <tr><td><b>好未来 / 学而思</b> <span class="src">NYSE:TAL</span></td><td>九章 MathGPT ✅(+DeepSeek)</td><td>学习机 + 素养课</td><td>FY2025 营收 <b>$22.5亿</b>(+51%)；学习机 35.6万台(+88%)、硬件占比升至 29.4%</td><td class="bad">FY25Q4 单季转亏 $731万</td></tr>
+    <tr><td><b>新东方</b> <span class="src">NYSE:EDU</span></td><td>慧学系统 / 开源大模型 ✅</td><td>培训 + 智能学习设备</td><td>FY2025 营收 <b>$49亿</b>(+13.6%)；智能设备付费 114.8万人(+55.6%)；慧学作文批改 10→2 分钟</td><td class="ok">设备业务利润率 23%</td></tr>
+    <tr><td><b>英语流利说</b> <span class="src">已退市</span></td><td>早期套壳口语评测→后接大模型</td><td>Freemium + AI 课</td><td><b>反面教材</b>：5 年累计亏 ¥19亿，2022 以 $680万估值私有化退市</td><td class="bad">长期亏损退市</td></tr>
+    <tr><td><b>批改网</b> pigai.org</td><td>❌ <b>语料库 AES(非大模型)</b>，192 维度，类 e-rater</td><td>面向学校 SaaS</td><td>超 <b>5000 校 / 2000万用户</b>；2025-10 App Store 排名已掉到 30 名外(老化)</td><td class="src">未披露</td></tr>
+    <tr><td><b>百词斩</b></td><td>工具为主、AI 较弱</td><td>背单词工具 + 单词机</td><td>App 累计 2.3亿用户；单词机售 30万台</td><td class="src">未披露</td></tr>
+  </table>
+  <div class="callout c-red"><b>两个必须记住的案例：</b><br>① <b>流利说 = 「纯软件 AI 口语难独立盈利」的最强警示</b>——烧营销获客、AI 深度不足→留存差→退市转私域卖课。直接对标你做纯软件产品的风险。<br>② <b>批改网 = 「传统统计式 AES」代表</b>——5000 校在用，但基于语料库统计(非大模型)、老化明显。它和有道/讯飞/新东方的「大模型作文批改」形成代际对比，是你评估「统计打分 vs 大模型评语」差异的最佳参照。</div>
+</section>
+
+<!-- COMPARE -->
+<section class="section" id="cmp">
+  <h2>四、国内 × 海外：打法对比</h2>
+  <p class="sec-lead">同样是 AI 语言学习，两个市场的钱、护城河、产品形态完全不同。这张表是你做「市场选择」决策的底图。</p>
+  <table>
+    <tr><th>维度</th><th>🌍 海外</th><th>🇨🇳 国内</th></tr>
+    <tr><td><b>钱在哪</b></td><td>ToC 订阅(Duolingo $1B 收入) + 企业 B2B(Babbel/Sana)</td><td><b>硬件学习机</b>(千亿、国补)为主 + AI 订阅/广告</td></tr>
+    <tr><td><b>护城河</b></td><td>数据/网络效应/品牌(Duolingo)、与 OpenAI 的模型卡位(Speak)</td><td>硬件渠道 + 教研内容 + G/B 端关系(讯飞校内 1.3亿师生)</td></tr>
+    <tr><td><b>主流产品形态</b></td><td>对话陪练 App、AI tutor、avatar 私教</td><td>学习平板(大屏) + 拍照搜题 + 大模型答疑</td></tr>
+    <tr><td><b>口语 vs 写作</b></td><td>口语对话是最热风口(资本扎堆)</td><td>口语评测有国家级考试技术沉淀(讯飞)；写作多为附属功能</td></tr>
+    <tr><td><b>技术路线</b></td><td>直接接 OpenAI(GPT-4 / Realtime)</td><td>自研垂类大模型 + DeepSeek 双模型(成本/合规)</td></tr>
+    <tr><td><b>监管/合规</b></td><td>相对宽松；隐私(GDPR)、AI 检测伦理争议</td><td>双减后遗症、教育大模型需牌照、内容审核重</td></tr>
+    <tr><td><b>典型盈利状态</b></td><td>Duolingo 已盈利；多数创业公司烧钱换增长</td><td>硬件玩家靠规模摊薄；纯软件普遍难盈利(流利说退市)</td></tr>
+  </table>
+  <div class="callout c-teal"><b>对雅思写作产品的启示：</b>雅思是<b>国际考试</b>，考生在国内、标准在海外——你天然要做「<b>海外标准 × 中国考生</b>」的夹层产品。海外工具(Grammarly/Write &amp; Improve)不懂中式英语，国内工具(批改网/有道)不够对齐雅思官方四维。这条夹缝就是你的位置。</div>
+</section>
+
+<!-- SHIFT -->
+<section class="section" id="shift">
+  <h2>五、大模型把产品形态改成了什么样</h2>
+  <p class="sec-lead">判断一个产品「是真 AI 升级还是套壳」，看它有没有完成下面这些迁移。</p>
+  <div class="shift"><div class="old">选择题 / 划卡片 / 逐音素打分</div><div class="arr">→</div><div class="new"><b>实时对话陪练</b>(GPT-4o Realtime、avatar 私教)</div></div>
+  <div class="shift"><div class="old">作文上传 → 一次性给个分数</div><div class="arr">→</div><div class="new"><b>对话式、可追问</b>的反馈(Explain My Answer)</div></div>
+  <div class="shift"><div class="old">只挑语法/拼写表面错误</div><div class="arr">→</div><div class="new"><b>过程性辅导</b>思路/论证/结构(Khanmigo)</div></div>
+  <div class="shift"><div class="old">固定课程路径</div><div class="arr">→</div><div class="new"><b>agentic 个性化</b>学习路径</div></div>
+  <div class="callout c-amber"><b>但要警惕「套壳陷阱」：</b>技术用户把你的 prompt 粘进 ChatGPT 就能拿到 80% 输出 = 没护城河 = 近乎零迁移成本 = 极高早期流失(行业称很多产品 90 天内流失多数用户<span class="flag">行业说法非严格统计</span>)。2026 已有多家薄壳公司因毛利压到 20% 以下倒闭。<b>裸 GPT 打分 ≠ 产品。</b></div>
+</section>
+
+<!-- AES DEEP DIVE -->
+<section class="section" id="aes">
+  <h2>六、✍️ 写作批改 (AES) 专题 —— <span class="em">它们普遍没做好什么</span></h2>
+  <p class="sec-lead">这是全报告的核心，也是你最能出独到判断的地方。下面 7 条「短板」每条都配了硬证据(学术/官方/实测)，加粗的是雅思老师最该用的弹药。</p>
+
+  <div class="sins">
+    <div class="sin"><div class="t">1 · 能被「乱写但结构对」的作文骗过</div><div class="ev"><b>BABEL 生成器</b>(MIT 前写作主任 Perelman)：输入几个词即生成语法正确、辞藻华丽但<b>完全不知所云</b>的胡话，在 e-rater 等稳拿高分，演示当场拿 <b>5.4/6</b>。直接促成 College Board <b>取消 SAT 写作</b>。<span class="src">Chronicle, 2014</span></div></div>
+    <div class="sin"><div class="t">2 · 长度偏置(最强效度威胁)</div><div class="ev">作文长度与分数相关 <b>≈ 0.8</b>，在建模中长度权重常超总分 50%。「Stumping e-rater」实测：<b>把同一段重复 37 次</b>就能拿高分。<span class="src">ETS RR-01-03 / RR-07-21</span></div></div>
+    <div class="sin"><div class="t">3 · 评分黑箱，不可解释</div><div class="ev">Turnitin 等不公开判定原理；AES 本质是「学人评样本里<b>什么特征对应高分</b>」的相关性——<b>偏见也是一种模式，机器一并学走</b>。Vanderbilt 等高校已停用 AI 检测。<span class="src">Vice, 2019 / Vanderbilt, 2023</span></div></div>
+    <div class="sin"><div class="t">4 · 对非母语者系统性偏差</div><div class="ev"><b>斯坦福</b>(Liang et al., 2023)：GPT 检测器把 <b>61.3% 的 TOEFL(非母语)作文</b>误判为 AI，对母语者近乎零误判——机制是二语者用词更可预测→被读成「机器味」。<b>等于在惩罚真实的非母语嗓音</b>。<span class="src">Patterns/Cell, 2023</span></div></div>
+    <div class="sin"><div class="t">5 · 只看表面，不懂内容/逻辑</div><div class="ev">ETS 自承：「当前系统<b>无法评估内容</b>，只能浅层评修辞」。系统综述：多数 AES 做的是文体评估、<b>本质未按内容相关性和连贯性评分</b>。连贯(coherence)是机器最弱项。<span class="src">ETS RD-21 / Springer, 2021</span></div></div>
+    <div class="sin"><div class="t">6 · Grammarly 类：纠正 ≠ 教学</div><div class="ev">UW 写作中心：Grammarly <b>只适合最后校对，不是写作老师</b>——学生一键接受改写「永远学不会规则」；用 AI 分当反馈反而让学生<b>降句法复杂度、减创造力</b>去迎合机器。<span class="src">UW-Madison Writing Center</span></div></div>
+    <div class="sin" style="grid-column:1/-1"><div class="t">7 · 与雅思官方四维对不齐 —— <b>最关键的一条</b></div><div class="ev">ChatGPT 评 IELTS Writing Task 2 研究：<b>重测一致性很高(QWK 0.811)，但与人类考官的效度有限</b>——<b>四维全部系统性偏离，连贯衔接(CC)差距最大</b>，其次总分、语法、词汇。结论：「看似可靠，尚非有效的人评替身，高利害场景慎用」。且新规下<b>背诵/套模板会被判 TR 封顶 Band 4</b>，而只看语言质量的 AI 工具会严重<b>高估</b>这类作文。<span class="src">EJ1457168, 2024 / 行业解读, 2026</span></div></div>
+  </div>
+
+  <h3>市面「AI 雅思写作批改」工具的真实表现 <span class="tag">实测</span></h3>
+  <table>
+    <tr><th>工具</th><th>宣传</th><th>真实表现 / 争议</th></tr>
+    <tr><td>新东方实测 ChatGPT</td><td>—</td><td>把雅思<b>官方满分小作文</b>丢给 ChatGPT，仅给 <b>6.5 分</b>；结论「仍停留在机械化流程，未真正融合评分细则」<span class="src">新东方, 2023</span></td></tr>
+    <tr><td>微软爱写作</td><td>含切题度/展开度指标</td><td>实测<b>评分虚高</b>(真人 6.5→给 8 分)；「展开度」多篇恒定一星=该维度近乎失灵<span class="src">知乎六款测评, 2024</span></td></tr>
+    <tr><td>UpScore.ai / Engnovate</td><td>用 2023 官方标准 / 「准确度 75–95%」</td><td>Engnovate 坦诚「应作辅助而非替代」；UpScore 自测数据<b>属厂商宣传</b>未经第三方验证</td></tr>
+    <tr><td>各类 GPT 套壳小程序</td><td>「接近考官分」</td><td>质量参差，测评者直言「滥竽充数欺骗考鸭」；跑题/切题判断是 AI 最弱环节</td></tr>
+  </table>
+  <div class="callout c-green"><b>行业共识定位(记牢)：</b>AI 适合当「<b>智能助教</b>」(语法纠错/词句润色/快速反馈/拓思路)，<b>不适合当「考官」</b>。「是否跑题 / 论证是否充分 / 模板会否被扣分」这类高阶判断，仍需真人专业教师把关。——这句话本身，就是你产品定位的地基。</div>
+</section>
+
+<!-- EXAM SCORING -->
+<section class="section" id="exam">
+  <h2>七、四大考试的 AI 评分现状（速查）</h2>
+  <p class="sec-lead">做雅思写作产品，必须先知道「官方到底用不用 AI 评分」——答案会直接决定你的产品是「替代官方」还是「备考训练」。</p>
+  <table>
+    <tr><th>考试</th><th>写作评分方式</th><th>AI 程度</th><th>对你的含义</th></tr>
+    <tr><td><b>雅思 IELTS</b></td><td><b>纯人工考官</b>(写作/口语)，听/读机评</td><td class="bad">官方未上 AI 评分</td><td>「雅思用 AI 改写作」是被反复辟谣的误解。你的产品只能做<b>备考训练侧</b>，不能号称「等于官方分」</td></tr>
+    <tr><td><b>托福 TOEFL</b></td><td>e-rater + <b>1 名人工</b>取均值</td><td class="src">AI 辅助 + 人工</td><td>差异超阈值触发人工复核——「人机协同」是高利害考试的既定范式</td></tr>
+    <tr><td><b>多邻国 DET</b></td><td><b>端到端 AI</b> 自动评分(+ 人工监考复核)</td><td class="ok">高度 AI</td><td>被 5400+ 院校接受、增长最快——证明「AI 评分 + 院校认可」的路是通的，但需长期信效度背书</td></tr>
+    <tr><td><b>PTE (Pearson)</b></td><td><b>全自动 AI</b>(IEA 写作)，人工兜底边缘</td><td class="ok">高度 AI</td><td>专门<b>反模板</b>——用模板可能比有小错的原创得分更低。模板化在自动评分时代风险更高</td></tr>
+  </table>
+</section>
+
+<!-- PAIN -->
+<section class="section" id="pain">
+  <h2>八、中国考生写作痛点（有研究依据）</h2>
+  <p class="sec-lead">这是「为谁做」的核心。每条都有研究支撑，也都是通用 AI 工具识别不了、而你天然懂的。</p>
+  <table>
+    <tr><th>痛点</th><th>研究依据</th><th>通用 AI 工具为何搞不定</th></tr>
+    <tr><td><b>中式英语(L1 负迁移)</b></td><td>中国学习者约 <b>51% 的错误源自母语负迁移</b>(词汇直译/搭配/语序/冠词/篇章逻辑)<span class="src">Academy Publication</span></td><td>按「通用英语错误」反馈，不识别「中文母语者特有错误模式」(如 open our horizon)</td></tr>
+    <tr><td><b>论证与篇章组织</b></td><td>英语直接 vs 中文迂回的文化错配；中文按「预设顺序」思考、英语「逆向思维」→语序与组织问题<span class="src">IJSELL, 2024</span></td><td>AES 在逻辑流/论证结构/内容组织等高阶要素上本就是短板</td></tr>
+    <tr><td><b>模板化 / 套路化</b></td><td>IELTS 官方研究(Wray &amp; Pegg, 233 份中国考生卷)：<b>考官能识别背诵内容</b>，套话不实质帮分；PTE 已专门反模板</td><td>只看语言质量的 AI 会给模板作文虚高分，与考官判断背离</td></tr>
+    <tr><td><b>缺过程性反馈 + 迭代练习成本高</b></td><td>雅思写作极依赖好老师及时批改；人工批改贵(外教单次约 ¥99)<span class="src">appinn, 2024</span></td><td>市面工具多是「上传→一次性打分→给范文」，无多轮过程闭环</td></tr>
+  </table>
+</section>
+
+<!-- OPPORTUNITY -->
+<section class="section" id="opp">
+  <h2>九、🎯 机会清单 —— <span class="em">懂写作教学的人能切入的真实空白</span></h2>
+  <p class="sec-lead">把前面所有证据收口成 6 个机会。每个都配「缺口证据 + 你能做什么」，不是空想。结尾有一张定位矩阵帮你排优先级。</p>
+
+  <div class="opp">
+    <div class="hd"><div class="no">1</div><div class="ti">对齐雅思官方四维、且「高分段也准」的批改</div></div>
+    <div class="bd"><div class="col evid"><h4>缺口证据</h4><p>现有 AI(含 ChatGPT)对高分段(Band 7+)系统性失准——中段聚集、低估高分卷；CC/TR 最弱。结果高度依赖 prompt、校准样例、是否微调，而套壳产品恰在这些上偷工。</p></div><div class="col youdo"><h4>你能做什么</h4><p>把<b>官方各 band 标杆作文(校准样例)+ 四维分别打分的教学逻辑</b>固化进产品，专攻高分段判别——这是套壳做不出的。</p></div></div>
+  </div>
+
+  <div class="opp">
+    <div class="hd"><div class="no">2</div><div class="ti">教「思路 / 论证 / 结构」，而非只挑语法</div></div>
+    <div class="bd"><div class="col evid"><h4>缺口证据</h4><p>系统综述明确：AI 在逻辑流、论证结构、内容组织上是短板；学界在呼吁把 AI 从「output 优化」推向高阶反馈。但市面工具高度收敛于「四维打分 + 语法标注 + 范文」。</p></div><div class="col youdo"><h4>你能做什么</h4><p>把雅思写作的<b>论证框架、思路展开、段落结构教学法</b>产品化(不是改句子，是教怎么搭论点/反驳/拓展)——资深老师的隐性知识。</p></div></div>
+  </div>
+
+  <div class="opp">
+    <div class="hd"><div class="no">3</div><div class="ti">针对「中式英语」(L1 负迁移)的针对性反馈</div></div>
+    <div class="bd"><div class="col evid"><h4>缺口证据</h4><p>中国学习者 51% 错误源自母语负迁移，覆盖词汇/搭配/语序/篇章逻辑。但通用/套壳产品按通用英语反馈，不识别也不针对中文母语者特有错误。</p></div><div class="col youdo"><h4>你能做什么</h4><p>建<b>中国考生高频负迁移错误库 + 针对性纠正</b>，把「中→英 + 为什么」讲清楚——与你已有的 {en, cn, why} 翻译方法论天然契合。</p></div></div>
+  </div>
+
+  <div class="opp">
+    <div class="hd"><div class="no">4</div><div class="ti">过程性(formative)而非一次性打分</div></div>
+    <div class="bd"><div class="col evid"><h4>缺口证据</h4><p>2025 文献核心趋势是「AI 从控制工具→形成性对话」；研究显示提升修改频次→提升写作质量。但多数工具是「上传→一次性打分→给范文」，无多轮闭环。</p></div><div class="col youdo"><h4>你能做什么</h4><p>做「<b>初稿→反馈→重写→再反馈</b>」的多轮过程闭环，并显式培养学生「反馈素养」(看懂并应用反馈)。</p></div></div>
+  </div>
+
+  <div class="opp">
+    <div class="hd"><div class="no">5</div><div class="ti">把「范文 / 句型 / 评分标准」教学法产品化</div></div>
+    <div class="bd"><div class="col evid"><h4>缺口证据</h4><p>市场是「GPT 套壳同质化」红海——功能全收敛、零迁移成本、高 churn。真差异化来自「对齐最新官方 rubric + 可验证提分 + 练习闭环」而非裸 GPT 打分。</p></div><div class="col youdo"><h4>你能做什么</h4><p>你已有的资产正是壁垒——<b>公式册/答案册式教学法、句型骨架(空格版可练)、各 band 范文 + 评分标准的结构化教学</b>。产品化「老师怎么教」，而非「GPT 怎么改」。</p></div></div>
+  </div>
+
+  <div class="opp">
+    <div class="hd"><div class="no">6</div><div class="ti">老师可介入的人机协同批改(teacher-in-the-loop)</div><div class="star">★ 证据最硬</div></div>
+    <div class="bd"><div class="col evid"><h4>缺口证据</h4><p><b>全报告证据最扎实</b>：密歇根 FeedbackWriter <b>RCT</b>(354 学生)证明「AI 当幕后助手、人类终审」<b>在所有指标都优于纯人工</b>，助教同意 88% AI 判断；文心一言 1035 条对比同样显示<b>人机协同 &gt; 各自单干</b>；学生更信任有人参与的反馈。而市面产品几乎都是「纯 AI、无老师在环」。</p></div><div class="col youdo"><h4>你能做什么</h4><p>做「<b>AI 起草建议 + 老师终审/批注</b>」的工具——AI 提覆盖 rubric 的建议、老师有最终决定权。既绕开「纯 AI 高分段不准/不被信任」的坑，又比纯人工可规模化，<b>把「资深雅思老师」从被替代者变成产品核心节点</b>。</p></div></div>
+  </div>
+
+  <h3>机会定位矩阵 <span class="tag">排优先级</span></h3>
+  <div class="matrix">
+    <div class="axis-y">证据强度（弱 → 强）</div>
+    <div class="axis-x">与你个人优势的契合度（低 → 高）</div>
+    <div class="ylab-hi">▲ 证据强</div><div class="ylab-lo">▼ 证据弱</div><div class="xlab-hi">优势契合 ▶</div>
+    <div class="quad" style="right:14px; top:10px;">★ 优先做</div>
+    <div class="quad" style="left:14px; bottom:30px;">谨慎/观望</div>
+    <!-- positioned: left% = 优势契合, bottom% = 证据强度 -->
+    <div class="dot win" style="left:86%; bottom:88%;"><div class="b">6</div><div class="l">人机协同(RCT级)</div></div>
+    <div class="dot" style="left:80%; bottom:62%;"><div class="b">3</div><div class="l">中式英语反馈</div></div>
+    <div class="dot" style="left:72%; bottom:55%;"><div class="b">1</div><div class="l">四维+高分段</div></div>
+    <div class="dot" style="left:66%; bottom:70%;"><div class="b">2</div><div class="l">教论证/结构</div></div>
+    <div class="dot" style="left:58%; bottom:50%;"><div class="b">4</div><div class="l">过程性多轮</div></div>
+    <div class="dot" style="left:78%; bottom:36%;"><div class="b">5</div><div class="l">教学法产品化</div></div>
+  </div>
+  <div class="callout c-green"><b>读法：</b>右上角(证据强 × 你优势高)是首选。<b>机会 6(人机协同)落在最右上——既有 RCT 级硬证据，又把你的「资深老师」身份变成不可替代的产品节点</b>，应作为 PRD 的主轴；机会 1/3(高分段判别 + 中式英语)作为差异化内核；机会 2/4/5 作为教学法填充与护城河。</div>
+</section>
+
+<!-- METHOD -->
+<section class="section" id="method">
+  <h2>十、方法论 & 数据可靠性</h2>
+  <ul>
+    <li><b>方法</b>：5 路并行联网调研(海外语言 App / 海外写作批改与 AES / 雅思托福 AI 评分与考生痛点 / 国内市场 / 趋势融资与机会)，每路独立取证、交叉验证，关键数字均带来源与时间点。</li>
+    <li><b>口径提醒</b>：① 市场规模数字机构间差异极大(AI 教育 2030 预测差 8 倍)，只当方向，引用必带机构名；② Duolingo 对外爱用 bookings($1.16B)，确认收入实为 $1.04B，净利含一次性税收益，别混用；③ Grammarly「3000万日活」是 2020 起的陈旧营销数，2025 已改口 40M+；④ PTE/Versant 严格说是「AI 主评 + 人工兜底」，非 100% 无人。</li>
+    <li><b>已标注「存疑」项</b>(未编造)：Speak Series D(无)/ARR $100M(单源)、ELSA &amp; Praktika 用户量(年份口径模糊)、PTE「678,000 训练数」、「专用工具 0.5 / ChatGPT 0.9 band MAE」(博客二手)、IDP/BC「2025 评分 AI 试点」(非官方一手)。</li>
+    <li><b>来源可靠性分级</b>：官方财报 / 学术论文(BABEL、Stumping e-rater、Stanford 偏差、Wray&amp;Pegg 官方报告)= 可放心引用；知乎/新东方/搜狐横评含商业推广倾向，产品排名仅供参考。</li>
+  </ul>
+  <div class="callout c-amber"><b>下一步建议(给 PRD)：</b>本报告已锁定主轴 = <b>teacher-in-the-loop 的雅思写作批改</b>(机会 6)+ 差异化内核(机会 1/3)。建议下一步：① 用 <code>/funnel</code> 把这个点子走一遍 MVP 漏斗；② 选 1 个竞品(如 Write &amp; Improve 或有道作文批改)做 P 系列深度拆解，验证「夹缝」假设；③ 设计「可验证提分」的度量方式(对齐 VC 偏好)。</div>
+</section>
+
+<!-- SOURCES -->
+<section class="section" id="src">
+  <h2>十一、关键来源（精选）</h2>
+  <p class="sec-lead">下列为最具权威性的一手/学术来源(完整 150+ 来源见调研原始记录)。</p>
+  <div class="srcgrid">
+    <p><b>财报/官方</b> · Duolingo FY2025(class central / AInvest, 2026-02) · Grammarly→Superhuman 改名(TechCrunch, 2025-10-29) · Grammarly $1B GC 注资(TechCrunch, 2025-05) · Speak C 轮(speak.com/blog/series-c + TechCrunch, 2024-12) · Praktika A 轮(TechCrunch, 2024-05) · Babbel 统计(businessofapps, 2024) · 网易有道 2025 财报(新浪财经, 2026-02) · 科大讯飞 2025H1(华尔街见闻/慧聪, 2025-08) · 好未来 FY25(36氪, 2025-04) · 新东方 FY25(南方财经, 2025-07)</p>
+    <p><b>AES 短板(学术/官方)</b> · Perelman BABEL Generator(Chronicle, 2014 / lesperelman.com, 2020) · Stumping E-rater(ETS RR-01-03, 2002) · Attali 长度效度(ETS RR-07-21, 2007) · Stanford 非母语偏差(Patterns/Cell, 2023) · ChatGPT 评 IELTS Task2 信效度(ERIC EJ1457168, 2024) · AES 系统综述(Springer, 2021) · ETS《Contrasting Automated &amp; Human Scoring》(RD-21)</p>
+    <p><b>考试 AI 评分</b> · IELTS 官方(ielts.org / ieltsliz) · TOEFL e-rater(ETS Ramineni, 2012) · DET 接受院校(Duolingo 官方博客, 2025) · PTE 评分说明(pearsonpte.com)</p>
+    <p><b>趋势/有效性</b> · 人机协同 RCT(U-Michigan FeedbackWriter, 2026) · 文心一言人机协同(PMC, 2025) · AI 对话降口语焦虑(Nature HSSC, 2025) · AI in L2 Writing 综述(De Gruyter, 2025) · Duolingo AI-first 翻车(Fortune, 2025–26)</p>
+    <p><b>市场/融资</b> · 语言学习市场(Mordor / GMI, 2025) · AI 教育市场(Grand View, 2025) · 中国雅思(Morgan Stanley / British Council) · EdTech 融资(HolonIQ / New Market Pitch, 2025–26) · Sana 被 Workday 收购(Bersin, 2025-09)</p>
+    <p><b>中国考生痛点</b> · L1 负迁移 51%(Academy Publication) · 词汇迁移(ERIC EJ1247836) · IELTS 官方背诵研究(Wray &amp; Pegg, 2009) · 中式英语句法迁移(Atlantis Press / Bergersci)</p>
+  </div>
+</section>
+
+<div class="footer">L0 · AI 教育全景与机会扫描 · ai-pm-portfolio/analysis · 2026-06-08 · 雅思写作老师 → AI 教育 PM</div>
+
+</body>
+</html>

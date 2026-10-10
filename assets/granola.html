@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Granola｜每日产品拆解训练台</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --ink: #172033;
+      --muted: #667085;
+      --panel: #ffffff;
+      --line: #d8e0ea;
+      --blue: #2563eb;
+      --blue-soft: #eaf1ff;
+      --green: #166534;
+      --green-soft: #e9f7ed;
+      --amber: #9a3412;
+      --amber-soft: #fff3df;
+      --rose: #be123c;
+      --rose-soft: #fff1f2;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+    }
+
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 34px 18px 56px;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 12px; font-size: clamp(28px, 4vw, 46px); line-height: 1.12; letter-spacing: 0; }
+    h2 { margin-bottom: 14px; font-size: 22px; letter-spacing: 0; }
+    h3 { margin-bottom: 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin-bottom: 10px; }
+    ul { margin: 0; padding-left: 20px; }
+    li { margin: 6px 0; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr);
+      gap: 18px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+
+    .hero-copy, .screenshot, .panel, .candidate, .metric, .slide-card, .reflection-box, .cover-prompt-skill, .prompt-variable {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .hero-copy { padding: 26px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .tag, .pill {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      min-height: 25px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: #eef2f7;
+      color: #344054;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .tag.blue { background: var(--blue-soft); color: #17408f; }
+    .tag.rose { background: var(--rose-soft); color: var(--rose); }
+    .subtitle { color: var(--muted); font-size: 15px; }
+    .verdict { margin: 18px 0 0; padding: 15px; border-left: 4px solid var(--blue); background: var(--blue-soft); font-weight: 800; color: #173a83; }
+
+    .screenshot {
+      min-height: 310px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        linear-gradient(135deg, rgba(37,99,235,.12), rgba(22,101,52,.1)),
+        #fff;
+    }
+
+    .browser-bar {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: #cbd5e1; }
+    .mock-screen { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+    .mock-block { min-height: 86px; padding: 12px; border: 1px dashed #aab7c8; border-radius: 8px; background: rgba(255,255,255,.72); }
+    .mock-block strong { display: block; margin-bottom: 8px; }
+
+    .section-nav {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .section-nav a {
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .panel { margin-top: 16px; padding: 22px; }
+    .candidate-grid, .metric-grid, .learn-grid, .slide-grid, .reflection-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .candidate { padding: 16px; }
+    .candidate-rank { margin-bottom: 10px; color: var(--blue); font-weight: 900; }
+    .candidate span { color: var(--muted); font-size: 13px; font-weight: 700; }
+
+    .metric { padding: 15px; }
+    .metric b { display: block; margin-bottom: 4px; color: var(--muted); font-size: 12px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow-wrap: anywhere;
+    }
+
+    th, td {
+      padding: 11px 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    th { background: #f8fafc; color: #475467; }
+    .ok { background: var(--green-soft); color: var(--green); }
+    .warn { background: var(--amber-soft); color: var(--amber); }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .flow-step {
+      position: relative;
+      min-height: 116px;
+      padding: 14px;
+      border: 1px solid #bad0ff;
+      border-radius: 8px;
+      background: var(--blue-soft);
+    }
+
+    .flow-step span {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .learn-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .xhs {
+      border-color: #fecdd3;
+      background: linear-gradient(180deg, #fff, #fff7f8);
+    }
+
+    .slide-card { min-height: 124px; padding: 16px; }
+    .slide-card span { color: var(--rose); font-size: 12px; font-weight: 900; }
+    .draft {
+      margin-top: 12px;
+      padding: 16px;
+      border: 1px solid #fecdd3;
+      border-radius: 8px;
+      background: #fff;
+      white-space: pre-wrap;
+    }
+
+    .cover-prompt-skill {
+      margin-top: 14px;
+      padding: 16px;
+      background: #fff;
+      border-color: #fecdd3;
+    }
+
+    .prompt-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .prompt-head h3,
+    .cover-prompt-skill h4 {
+      margin-bottom: 6px;
+      letter-spacing: 0;
+    }
+
+    .prompt-variable-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .prompt-variable {
+      padding: 11px;
+      background: #fff7f8;
+    }
+
+    .prompt-variable b {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--rose);
+      font-size: 12px;
+    }
+
+    .prompt-block {
+      margin: 0;
+      padding: 14px;
+      border: 1px solid #fecdd3;
+      border-radius: 8px;
+      background: #fff;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .reflection-box { padding: 15px; min-height: 118px; background: #fcfcfd; }
+    .reflection-box p { color: var(--muted); font-size: 13px; }
+    .write-line { height: 42px; border-bottom: 1px solid #cbd5e1; }
+
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .check-grid label {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      font-weight: 700;
+    }
+
+    .small { color: var(--muted); font-size: 13px; }
+
+    @media (max-width: 920px) {
+      .hero, .candidate-grid, .metric-grid, .learn-grid, .slide-grid, .reflection-grid, .check-grid, .prompt-variable-grid { grid-template-columns: 1fr; }
+      .section-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 560px) {
+      main { padding: 22px 12px 40px; }
+      .hero-copy, .panel { padding: 18px; }
+      .section-nav, .flow, .mock-screen { grid-template-columns: 1fr; }
+      th, td { padding: 9px 7px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="meta">
+          <span class="tag blue">2026-06-15</span>
+          <span class="tag">每天练，择优发</span>
+          <span class="tag rose">转型中的自己人</span>
+          <span class="tag">AI meeting notes / AI workflow</span>
+        </div>
+        <h1>Granola｜每日产品拆解训练台</h1>
+        <p class="subtitle">The AI notepad for people in back-to-back meetings.</p>
+        <p><strong>官网：</strong><a href="https://www.granola.ai/">https://www.granola.ai/</a></p>
+        <div class="verdict">Granola 值得拆，不是因为它又做了一个 AI 会议纪要，而是因为它把“人先记录 + AI 补全 + 会后继续追问/行动”做成了一个很清楚的人机协作笔记流。</div>
+      </div>
+      <aside class="screenshot" aria-label="官网截图占位">
+        <div>
+          <div class="browser-bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span>https://www.granola.ai/</span>
+          </div>
+          <div class="mock-screen">
+            <div class="mock-block"><strong>官网截图位</strong><span class="small">放首屏、定价页或核心功能截图。</span></div>
+            <div class="mock-block"><strong>今日结论</strong><span class="small">它最贴近 Project B：原始课堂或会议内容进入系统后，AI 不是直接替代人，而是把内容结构化，再让老师、学生、助教或团队成员继续行动。</span></div>
+          </div>
+        </div>
+        <p class="small">导出小红书配图时，优先截取本页的卡片和流程图区。</p>
+      </aside>
+    </section>
+
+    <nav class="section-nav">
+      <a href="#s1">1. 一句话判断</a><a href="#s2">2. 用户与场景</a><a href="#s3">3. PMF 证据</a><a href="#s4">4. 产品路径</a><a href="#s5">5. 商业模型</a><a href="#s6">6. 交互与功能取舍</a><a href="#s7">7. 我能偷学什么</a><a href="#s8">8. 我的小红书表达</a>
+    </nav>
+
+    <section class="panel" id="candidates">
+      <h2>候选池</h2>
+      <p class="small">每天先看 3 个候选，再选 1 个进入深拆。推荐顺序以 PMF 信号、可学习性、与你转型路线的相关性为准。</p>
+      <div class="candidate-grid">
+    <article class="candidate">
+      <div class="candidate-rank">#1</div>
+      <h3>Granola</h3>
+      <p>和 Project B 链路最像：语音/笔记输入 -&gt; AI 整理 -&gt; 人确认 -&gt; 后续行动。</p>
+      <span>AI 教育解决方案 / AI 工作流运营</span>
+    </article>
+  
+    <article class="candidate">
+      <div class="candidate-rank">#2</div>
+      <h3>Tally</h3>
+      <p>适合下次拆 freemium、product-led growth 和 no-code 表单获客。</p>
+      <span>产品运营 / 表单工作流</span>
+    </article>
+  
+    <article class="candidate">
+      <div class="candidate-rank">#3</div>
+      <h3>superwhisper</h3>
+      <p>适合拆个人高频 AI 输入入口和隐私优先定位。</p>
+      <span>个人 AI 工作流</span>
+    </article>
+  </div>
+    </section>
+
+    <section class="panel" id="s1">
+      <h2>1. 一句话判断</h2>
+      <p>Granola 值得拆，不是因为它又做了一个 AI 会议纪要，而是因为它把“人先记录 + AI 补全 + 会后继续追问/行动”做成了一个很清楚的人机协作笔记流。</p>
+      <p><strong>为什么值得拆：</strong>它最贴近 Project B：原始课堂或会议内容进入系统后，AI 不是直接替代人，而是把内容结构化，再让老师、学生、助教或团队成员继续行动。</p>
+    </section>
+
+    <section class="panel" id="s2">
+      <h2>2. 用户与场景</h2>
+      <div class="metric-grid">
+        <div class="metric"><b>用户</b>会议密集的人，尤其是创始人、投资人、销售、产品经理、客户成功和需要频繁复盘对话的团队成员。</div>
+        <div class="metric"><b>痛点</b>开会时既要参与对话，又要记关键点；普通录音或转写太原始，传统 AI 会议机器人又有侵入感、隐私顾虑和平台限制。</div>
+        <div class="metric"><b>旧方法</b>自己手写笔记、会后补纪要、让机器人进会议、用通用转写工具再人工整理。</div>
+      </div>
+      <p style="margin-top:12px"><strong>为什么现在可以做：</strong>大模型让会议内容的结构化、模板化和追问成本下降；远程协作和高会议密度让“会后行动”比单纯转写更有付费价值。</p>
+    </section>
+
+    <section class="panel" id="s3">
+      <h2>3. PMF 证据</h2>
+      <table>
+        <thead><tr><th>类型</th><th>信号</th><th>来源</th><th>强度</th></tr></thead>
+        <tbody>
+      <tr>
+        <td><span class="pill ok">证据</span></td>
+        <td>Product Hunt 显示 Granola 4.8 分、48 reviews、1.5K followers，并描述它融合用户自己的笔记和智能转写。</td>
+        <td>https://www.producthunt.com/products/granola</td>
+        <td>medium</td>
+      </tr>
+    
+      <tr>
+        <td><span class="pill ok">证据</span></td>
+        <td>官网主张“使用电脑音频、不邀请 bot、适配所有会议平台”，直接打在会议机器人侵入感和平台兼容痛点上。</td>
+        <td>https://www.granola.ai/</td>
+        <td>high</td>
+      </tr>
+    
+      <tr>
+        <td><span class="pill ok">证据</span></td>
+        <td>官网定价页显示 Basic $0，Business $14/user/month，Enterprise $35/user/month；Business 包含无限会议历史、高级集成、MCP 和 API。</td>
+        <td>https://www.granola.ai/pricing</td>
+        <td>high</td>
+      </tr>
+    
+      <tr>
+        <td><span class="pill ok">证据</span></td>
+        <td>Granola 官方博客宣布 $125M Series C、$1.5B valuation，说明它已经不只是小工具，而在往企业上下文层扩张。</td>
+        <td>https://www.granola.ai/blog/series-c</td>
+        <td>medium</td>
+      </tr>
+    
+      <tr>
+        <td><span class="pill warn">推测</span></td>
+        <td>真正留存可能来自“会后继续追问、生成 follow-up、同步 CRM/Slack/Notion”等行动出口，而不是会议转写本身。</td>
+        <td>基于官网功能路径的产品推测</td>
+        <td>medium</td>
+      </tr>
+    
+      <tr>
+        <td><span class="pill warn">推测</span></td>
+        <td>隐私和分享权限会是增长后的主要风险点；越接近企业知识库，越需要权限、审计和默认分享策略。</td>
+        <td>基于 AI 会议笔记品类和公开隐私争议的风险推测</td>
+        <td>medium</td>
+      </tr>
+    </tbody>
+      </table>
+      <p class="small">规则：没有真实公开来源就写成推测，不能把热度当作 PMF。</p>
+    </section>
+
+    <section class="panel" id="s4">
+      <h2>4. 产品路径</h2>
+      <div class="flow">
+    <div class="flow-step">
+      <span>01</span>
+      <strong>下载并连接日历</strong>
+    </div>
+  
+    <div class="flow-step">
+      <span>02</span>
+      <strong>开会时打开 Granola</strong>
+    </div>
+  
+    <div class="flow-step">
+      <span>03</span>
+      <strong>自己写少量关键笔记</strong>
+    </div>
+  
+    <div class="flow-step">
+      <span>04</span>
+      <strong>Granola 捕获电脑音频并增强笔记</strong>
+    </div>
+  
+    <div class="flow-step">
+      <span>05</span>
+      <strong>按会议类型生成结构化纪要</strong>
+    </div>
+  
+    <div class="flow-step">
+      <span>06</span>
+      <strong>会后追问、分享、同步或生成行动</strong>
+    </div>
+  </div>
+    </section>
+
+    <section class="panel" id="s5">
+      <h2>5. 商业模型</h2>
+      <div class="metric-grid">
+        <div class="metric"><b>定价</b>Basic 免费，Business $14/user/month，Enterprise $35/user/month。免费层降低试用门槛，付费层把价值放在历史、团队、集成、API 和管理控制上。</div>
+        <div class="metric"><b>目标客群</b>高会议密度的个人和小团队先用起来；销售、产品、投资、客户成功、招聘、管理层会更容易形成刚需。</div>
+        <div class="metric"><b>获客渠道</b>Product Hunt、创始人/科技圈口碑、官网案例、投资人和产品人推荐、会议工具品类搜索。</div>
+        <div class="metric"><b>付费触发</b>用户发现它不只是生成纪要，而是能帮自己回忆对话、提取行动项、写 follow-up、沉淀团队上下文。</div>
+        <div class="metric"><b>小团队适配</b>早期切入点适合小团队，因为单人价值闭环清楚；但企业化后会进入权限、合规、集成和数据治理复杂度。</div>
+      </div>
+    </section>
+
+    <section class="panel" id="s6">
+      <h2>6. 交互与功能取舍</h2>
+      <div class="learn-grid">
+        <div class="learn-card"><h3>克制</h3><ul><li>不先做一个大而全的会议平台，而是从“notepad”这个低阻力入口切入。</li><li>不让 bot 进入会议，减少社交尴尬和权限摩擦。</li><li>让用户保留自己写笔记的动作，AI 负责增强，而不是完全替代。</li></ul></div>
+        <div class="learn-card"><h3>增长/留存钩子</h3><ul><li>会后纪要天然可分享，分享对象可能变成新用户。</li><li>模板支持 customer discovery、user interview、1 on 1 等高频场景，利于垂直人群传播。</li><li>集成 Slack、Notion、HubSpot、Zapier、API 和 MCP 后，产品从笔记工具升级成工作流节点。</li></ul></div>
+        <div class="learn-card"><h3>风险</h3><ul><li>会议内容高度敏感，默认分享、模型训练和权限边界会直接影响信任。</li><li>AI 会议纪要赛道拥挤，Fathom、Otter、Fireflies、Read 等替代品会持续挤压差异化。</li><li>如果用户只把它当转写工具，付费理由会弱；必须让用户感到它在推动行动。</li></ul></div>
+      </div>
+    </section>
+
+    <section class="panel" id="s7">
+      <h2>7. 我能偷学什么</h2>
+      <div class="learn-grid">
+        <div class="learn-card"><h3>产品判断</h3><ul><li>一个拥挤赛道仍然能切出差异：Granola 的切口是“AI notepad”，不是“AI meeting bot”。</li><li>PMF 不是功能更多，而是把用户最尴尬的摩擦点拿掉：不开 bot、不打断会议、保留手写笔记。</li><li>免费层负责形成习惯，付费层卖历史、团队协作、集成和组织级控制。</li></ul></div>
+        <div class="learn-card"><h3>AI / 工作流落地</h3><ul><li>AI 工作流的核心不是生成内容，而是把原始对话变成可追问、可分享、可同步、可行动的结构化记忆。</li><li>真正强的 AI 工具通常有两个入口：低摩擦捕获入口 + 高价值行动出口。</li><li>MCP/API/集成说明 Granola 想把会议内容变成其他应用可调用的上下文，而不只是文档。</li></ul></div>
+        <div class="learn-card"><h3>教育场景迁移</h3><ul><li>Project B 可以学习 Granola 的“人先参与，AI 后增强”：老师课堂笔记不必被 AI 替代，而是被 AI 补全和结构化。</li><li>学生复习页也不能只停在“生成复习卡”，要有后续行动出口：背词、复盘、助教检查、下次课提醒。</li><li>教育场景的权限风险更高：学生、老师、家长、助教看到什么，必须比普通会议笔记更早设计清楚。</li></ul></div>
+      </div>
+    </section>
+
+    <section class="panel xhs" id="s8">
+      <h2>8. 我的小红书表达</h2>
+      <div class="metric-grid">
+        <div class="metric"><b>标题</b>我今天拆了 Granola：它厉害的地方不是 AI 会议纪要</div>
+        <div class="metric"><b>封面</b>不是机器人进会议，而是人机协作笔记流</div>
+        <div class="metric"><b>评论区问题</b>你觉得 AI 工具最该替代人，还是最该增强人的关键动作？</div>
+      </div>
+      
+    <div class="cover-prompt-skill">
+      <div class="prompt-head">
+        <div>
+          <h3>小红书封面 prompt skill</h3>
+          <p class="small">基于 <a href="https://github.com/VigoZhao/AI-Visual-Prompt-Cookbook">VigoZhao/AI-Visual-Prompt-Cookbook</a> 的结构化视觉 prompt 工作流：选 style.json，替换变量，再生成封面图提示词。</p>
+        </div>
+        <span class="tag blue">school-grid-paper-cutout-poster</span>
+      </div>
+      <p><strong>为什么选这个风格：</strong>Granola 这篇适合做成“会议笔记被 AI 补全”的学习笔记隐喻：网格纸、手写笔记、剪纸窗口和小行动卡，比科技感大字报更贴近转型记录。</p>
+      <div class="prompt-variable-grid">
+    <div class="prompt-variable">
+      <b>SUBJECT</b>
+      <span>a torn-paper notebook page connected to a tiny meeting window and three action cards</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>SUBJECT_ACTION</b>
+      <span>turning rough handwritten notes into clear follow-up actions</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>PRODUCT_OR_PROP</b>
+      <span>paper laptop window, notebook page, audio wave strip, action-item cards</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>LOCATION</b>
+      <span>warm classroom grid paper desk surface</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>BACKGROUND_ELEMENTS</b>
+      <span>empty ruled squares, tiny arrows from meeting to notes to actions, one small checklist mark</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>MAIN_TEXT</b>
+      <span>Granola 不只是会议纪要</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>SECONDARY_TEXT</b>
+      <span>人机协作笔记流</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>ACCENT_SYMBOL</b>
+      <span>tiny generic blue check mark</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>ASPECT_RATIO</b>
+      <span>9:16</span>
+    </div>
+  </div>
+      <h4>final prompt</h4>
+      <pre class="prompt-block">Create a 9:16 Xiaohongshu cover in the school-grid-paper-cutout-poster visual style. Use warm classroom grid paper as the full background. The main subject is a torn-paper notebook page connected to a tiny meeting window and three action-item cards, showing rough handwritten notes becoming clear follow-up actions. Add a small audio wave strip and tiny arrows from meeting to notes to actions. Use imperfect handwritten Chinese notebook text. Main readable text: “Granola 不只是会议纪要”. Secondary small text: “人机协作笔记流”. Keep it sparse, handmade, warm, like a product teardown study note for someone transitioning into AI product work. Avoid real logos, QR codes, brand marks, glossy 3D renders, busy dashboards, and generic tech gradients.</pre>
+    </div>
+  
+      <h3 style="margin-top:16px">3-5 张配图脚本</h3>
+      <div class="slide-grid">
+    <article class="slide-card">
+      <span>图 1</span>
+      <p>我为什么选 Granola：它不是让机器人进会议，而是从个人笔记切入</p>
+    </article>
+  
+    <article class="slide-card">
+      <span>图 2</span>
+      <p>它的路径很清楚：会议音频 + 手写笔记 -&gt; AI 增强 -&gt; 结构化纪要 -&gt; 后续行动</p>
+    </article>
+  
+    <article class="slide-card">
+      <span>图 3</span>
+      <p>PMF 信号：Product Hunt 评价、免费层、$14/team 付费层、融资和团队场景扩张</p>
+    </article>
+  
+    <article class="slide-card">
+      <span>图 4</span>
+      <p>我最想偷学：AI 产品要保留人的参与感，不能只做自动化</p>
+    </article>
+  
+    <article class="slide-card">
+      <span>图 5</span>
+      <p>对 Project B 的启发：课堂笔记也应该走向复习、跟进和下次行动</p>
+    </article>
+  </div>
+      <h3 style="margin-top:16px">正文草稿</h3>
+      <div class="draft">今天拆 Granola，我最大的感受是：它厉害的地方不是“又能生成会议纪要了”。
+
+真正值得学的是它的切口。
+
+很多 AI 会议工具像是在说：你不用管，我派一个机器人进去帮你记。但 Granola 更像是说：你继续参与会议、继续写自己的关键笔记，我来把它补全、结构化，并在会后帮你继续追问和行动。
+
+这对我做 AI 教育转型很有启发。Project B 也是类似问题：课堂记录不是终点，AI 生成复习卡也不是终点。真正的产品价值应该发生在后面：学生有没有复习，助教能不能跟进，老师能不能确认质量，下次课能不能继续用。
+
+所以我今天偷学到的一句话是：AI 产品别急着替代人，先把人的关键动作放大。</div>
+    </section>
+
+    <section class="panel" id="reflection">
+      <h2>20 分钟个人判断区</h2>
+      <p class="small">这一块必须由 Jack 自己补。它决定这篇内容是不是你的转型训练，而不是资料搬运。</p>
+      <div class="reflection-grid">
+        
+          <div class="reflection-box">
+            <p>Granola 最打动我的点，是“不开 bot”还是“人先写、AI 后增强”？为什么？</p>
+            <div class="write-line"></div>
+            <div class="write-line"></div>
+          </div>
+        
+          <div class="reflection-box">
+            <p>我觉得 Granola 的 PMF 证据强不强？哪些是证据，哪些只是热度？</p>
+            <div class="write-line"></div>
+            <div class="write-line"></div>
+          </div>
+        
+          <div class="reflection-box">
+            <p>如果把 Granola 的逻辑迁移到 Project B，学生复习页下一步最该补哪个行动出口？</p>
+            <div class="write-line"></div>
+            <div class="write-line"></div>
+          </div>
+        
+      </div>
+    </section>
+
+    
+    <section class="panel checklist" id="quality-gate">
+      <h2>发布前检查</h2>
+      <div class="check-grid">
+        <label><input type="checkbox"> 30 秒看懂：为什么今天拆它</label>
+        <label><input type="checkbox"> 已区分证据和推测</label>
+        <label><input type="checkbox"> 有清楚产品路径图</label>
+        <label><input type="checkbox"> 有 Jack 自己的 3 条判断</label>
+        <label><input type="checkbox"> 能直接抽出 3-5 张小红书图文页</label>
+      </div>
+    </section>
+  
+  </main>
+</body>
+</html>

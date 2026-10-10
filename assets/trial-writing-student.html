@@ -1,0 +1,1244 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#cfff38">
+  <title>雅思写作学生讲义｜一句观点如何写成一段话</title>
+  <link rel="icon" href="data:,">
+  <style>
+    /* === OFFLINE STUDENT HANDOUT THEME === */
+    :root {
+      --bg: #eeecdf;
+      --paper: #fffdf6;
+      --paper-2: #f7f4e8;
+      --ink: #111614;
+      --muted: #59615e;
+      --line: #c9ccc2;
+      --lime: #cfff38;
+      --lime-deep: #8caf00;
+      --orange: #ff6434;
+      --blue: #3156ff;
+      --red: #c93a2b;
+      --shadow: 10px 12px 0 rgba(17, 22, 20, .12);
+      --radius: 18px;
+      --max: 1120px;
+      --display: "Avenir Next Condensed", "Arial Narrow", "PingFang SC", "Microsoft YaHei", sans-serif;
+      --body: "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--body);
+      background:
+        radial-gradient(circle at 88% 3%, rgba(207, 255, 56, .32), transparent 24rem),
+        linear-gradient(rgba(17, 22, 20, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17, 22, 20, .035) 1px, transparent 1px),
+        var(--bg);
+      background-size: auto, 64px 64px, 64px 64px, auto;
+      line-height: 1.75;
+    }
+
+    button, textarea, input { font: inherit; }
+    button { color: inherit; }
+    a { color: inherit; }
+
+    .skip-link {
+      position: fixed;
+      left: 12px;
+      top: -80px;
+      z-index: 1000;
+      padding: 10px 16px;
+      background: var(--ink);
+      color: #fff;
+      border-radius: 8px;
+    }
+    .skip-link:focus { top: 12px; }
+
+    /* === READING PROGRESS === */
+    .progress {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 1000;
+      height: 5px;
+      background: rgba(17, 22, 20, .08);
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--lime-deep), var(--orange));
+    }
+
+    /* === TOP NAVIGATION === */
+    .topbar {
+      position: sticky;
+      top: 5px;
+      z-index: 900;
+      border-bottom: 2px solid rgba(17, 22, 20, .14);
+      background: rgba(238, 236, 223, .92);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar-inner {
+      width: min(var(--max), calc(100% - 32px));
+      min-height: 66px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      white-space: nowrap;
+      font-family: var(--display);
+      font-weight: 900;
+      letter-spacing: .05em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-links::-webkit-scrollbar { display: none; }
+
+    .nav-links a {
+      flex: 0 0 auto;
+      padding: 8px 12px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      border-color: var(--ink);
+      background: var(--paper);
+    }
+
+    .print-btn {
+      flex: 0 0 auto;
+      padding: 9px 14px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: var(--lime);
+      cursor: pointer;
+      font-weight: 900;
+      box-shadow: 3px 4px 0 var(--ink);
+    }
+    .print-btn:active { transform: translate(2px, 2px); box-shadow: 1px 2px 0 var(--ink); }
+
+    /* === GLOBAL CONTENT === */
+    main { overflow: hidden; }
+
+    .section {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+      padding: 82px 0;
+      scroll-margin-top: 76px;
+    }
+
+    .section + .section { border-top: 2px solid rgba(17, 22, 20, .14); }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-family: var(--display);
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .section-kicker::before {
+      content: "";
+      width: 34px;
+      height: 8px;
+      border: 2px solid var(--ink);
+      background: var(--lime);
+    }
+
+    h1, h2, h3 {
+      font-family: var(--display);
+      line-height: 1.12;
+      letter-spacing: -.035em;
+    }
+    h1 { margin: 0; font-size: clamp(54px, 8vw, 106px); }
+    h2 { margin: 0 0 22px; font-size: clamp(38px, 5vw, 66px); }
+    h3 { margin: 0 0 12px; font-size: 28px; }
+    p { margin: 0 0 16px; }
+
+    .lead {
+      max-width: 800px;
+      color: var(--muted);
+      font-size: clamp(20px, 2.3vw, 30px);
+      font-weight: 700;
+    }
+
+    .highlight {
+      padding: 0 .08em;
+      background: linear-gradient(transparent 56%, var(--lime) 56%);
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+
+    .card {
+      border: 3px solid var(--ink);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 12px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: var(--paper);
+      font-family: var(--display);
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .04em;
+    }
+    .tag.lime { background: var(--lime); }
+    .tag.orange { background: var(--orange); color: #fff; }
+
+    .offline-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 26px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: rgba(17, 22, 20, .08);
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .offline-note::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--lime-deep);
+      box-shadow: 0 0 0 4px rgba(140, 175, 0, .14);
+    }
+
+    /* === HERO === */
+    .hero {
+      width: min(1240px, calc(100% - 32px));
+      min-height: 700px;
+      margin: 0 auto;
+      padding: 108px 0 72px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(320px, .65fr);
+      align-items: center;
+      gap: 72px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 span { display: inline-block; }
+
+    .hero-side {
+      position: relative;
+      padding: 34px;
+      transform: rotate(1deg);
+    }
+    .hero-side::after {
+      content: "";
+      position: absolute;
+      inset: 15px -15px -15px 15px;
+      z-index: -1;
+      border-radius: var(--radius);
+      background: var(--orange);
+    }
+
+    .hero-side ol {
+      margin: 22px 0 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: steps;
+    }
+
+    .hero-side li {
+      counter-increment: steps;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 0;
+      border-bottom: 1px dashed var(--line);
+      font-size: 20px;
+      font-weight: 900;
+    }
+    .hero-side li:last-child { border-bottom: 0; }
+    .hero-side li::before {
+      content: counter(steps);
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--lime);
+      font-family: var(--display);
+    }
+
+    /* === PROMPT === */
+    .prompt {
+      padding: 36px;
+      font-family: var(--display);
+      font-size: clamp(24px, 3vw, 37px);
+      font-weight: 800;
+      line-height: 1.52;
+    }
+    .prompt strong {
+      display: block;
+      margin-top: 18px;
+      color: var(--orange);
+    }
+
+    .lesson-goals {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 32px;
+    }
+
+    .goal {
+      min-height: 180px;
+      padding: 24px;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      background: var(--paper);
+    }
+    .goal b {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--orange);
+      font-family: var(--display);
+      font-size: 14px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    /* === FOUR QUESTIONS === */
+    .questions {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 36px;
+    }
+
+    .question-card {
+      position: relative;
+      min-height: 270px;
+      padding: 28px 24px;
+      border: 3px solid var(--ink);
+      border-radius: 16px;
+      background: var(--paper);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .question-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 9px 10px 0 rgba(17, 22, 20, .13);
+    }
+    .question-card:first-child { background: var(--lime); }
+
+    .question-num {
+      display: block;
+      margin-bottom: 26px;
+      color: var(--orange);
+      font-family: var(--display);
+      font-size: 52px;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .question-card p { color: var(--muted); font-weight: 650; }
+
+    .rule-box {
+      margin-top: 28px;
+      padding: 22px 26px;
+      border-left: 9px solid var(--orange);
+      background: rgba(255, 253, 246, .72);
+      font-weight: 750;
+    }
+
+    /* === ARGUMENT CHAIN === */
+    .idea {
+      margin-top: 30px;
+      padding: 28px 30px;
+      border: 3px solid var(--ink);
+      border-radius: 14px;
+      background: var(--paper);
+      font-family: var(--display);
+      font-size: clamp(25px, 3vw, 40px);
+      font-weight: 900;
+      box-shadow: 9px 10px 0 var(--lime);
+    }
+
+    .chain {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 34px;
+      margin-top: 42px;
+    }
+
+    .chain-step {
+      position: relative;
+      padding: 24px;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      background: var(--paper);
+    }
+    .chain-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -30px;
+      top: 42%;
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--ink);
+      border-radius: 50%;
+      background: var(--lime);
+      font-family: var(--display);
+      font-weight: 900;
+    }
+    .chain-step b {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 5px 9px;
+      background: var(--ink);
+      color: var(--lime);
+      font-family: var(--display);
+      font-size: 13px;
+      letter-spacing: .06em;
+    }
+    .chain-step p { margin: 0; color: var(--muted); font-weight: 650; }
+
+    /* === QUIZ / DIAGNOSIS === */
+    .sample {
+      padding: 30px;
+      font-family: var(--display);
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 1.68;
+    }
+
+    .sample-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 2px dashed var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .quiz-option {
+      position: relative;
+      display: block;
+      padding: 20px 22px 20px 58px;
+      border: 3px solid var(--ink);
+      border-radius: 14px;
+      background: var(--paper);
+      cursor: pointer;
+      font-weight: 850;
+    }
+    .quiz-option:hover { background: #fff; }
+    .quiz-option input {
+      position: absolute;
+      left: 20px;
+      top: 25px;
+      width: 22px;
+      height: 22px;
+      accent-color: var(--lime-deep);
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .action {
+      padding: 12px 18px;
+      border: 2px solid var(--ink);
+      border-radius: 10px;
+      background: var(--ink);
+      color: #fff;
+      cursor: pointer;
+      font-weight: 900;
+    }
+    .action.secondary { background: var(--paper); color: var(--ink); }
+    .action:hover { transform: translateY(-2px); }
+
+    .feedback {
+      display: none;
+      margin-top: 20px;
+      padding: 20px 22px;
+      border: 3px solid var(--ink);
+      border-radius: 14px;
+      background: var(--lime);
+      font-weight: 750;
+    }
+    .feedback.show { display: block; animation: pop .28s ease-out; }
+    .feedback.wrong { background: #ffe1d7; }
+
+    @keyframes pop {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .diagnosis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 34px;
+    }
+
+    .diagnosis-card {
+      padding: 24px;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      background: var(--paper);
+    }
+    .diagnosis-card.primary { box-shadow: 7px 8px 0 var(--lime); }
+    .diagnosis-code {
+      display: inline-block;
+      min-width: 54px;
+      margin-bottom: 12px;
+      padding: 5px 9px;
+      background: var(--ink);
+      color: var(--lime);
+      font-family: var(--display);
+      font-weight: 900;
+      text-align: center;
+    }
+    .diagnosis-card p { margin: 0; color: var(--muted); }
+
+    mark {
+      padding: 0 .08em;
+      background: var(--lime);
+      color: inherit;
+    }
+
+    /* === BEFORE / AFTER === */
+    .compare {
+      display: grid;
+      grid-template-columns: .82fr 1.18fr;
+      gap: 24px;
+      margin-top: 30px;
+    }
+
+    .compare-card {
+      padding: 28px;
+      border: 3px solid var(--ink);
+      border-radius: 16px;
+      background: var(--paper);
+    }
+    .compare-card.before { box-shadow: 8px 9px 0 #bfc4bf; }
+    .compare-card.after { box-shadow: 8px 9px 0 var(--lime); }
+
+    .compare-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding-bottom: 13px;
+      border-bottom: 2px dashed var(--line);
+      font-family: var(--display);
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .compare-card .english {
+      font-family: var(--display);
+      font-size: 21px;
+      font-weight: 750;
+    }
+
+    .sentence-map {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .sentence-map span {
+      padding: 6px 10px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: var(--paper-2);
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .boundary {
+      margin-top: 28px;
+      padding: 18px 22px;
+      border: 2px dashed var(--ink);
+      border-radius: 12px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* === PRACTICE WORKSPACE === */
+    .workspace {
+      display: grid;
+      grid-template-columns: .72fr 1.28fr;
+      gap: 24px;
+      margin-top: 34px;
+    }
+
+    .workspace-guide,
+    .workspace-writing {
+      padding: 26px;
+      border: 3px solid var(--ink);
+      border-radius: 16px;
+      background: var(--paper);
+    }
+
+    .workspace-guide ol {
+      margin: 18px 0 0;
+      padding-left: 24px;
+    }
+    .workspace-guide li { margin-bottom: 13px; }
+
+    textarea {
+      width: 100%;
+      min-height: 280px;
+      resize: vertical;
+      padding: 18px;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--ink);
+      font-family: var(--display);
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    textarea:focus { outline: 4px solid rgba(207, 255, 56, .72); }
+
+    .write-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .save-status { color: var(--lime-deep); }
+
+    /* === SELF CHECK === */
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      padding: 18px;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      background: var(--paper);
+      cursor: pointer;
+      font-weight: 750;
+    }
+    .check-item:has(input:checked) { background: var(--lime); }
+    .check-item input {
+      flex: 0 0 auto;
+      width: 22px;
+      height: 22px;
+      margin-top: 3px;
+      accent-color: var(--ink);
+    }
+
+    /* === FOOTER === */
+    footer {
+      padding: 54px 16px 70px;
+      background: var(--ink);
+      color: #fff;
+      text-align: center;
+    }
+    footer strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--lime);
+      font-family: var(--display);
+      font-size: 28px;
+    }
+    footer p {
+      max-width: 720px;
+      margin: 0 auto;
+      color: rgba(255, 255, 255, .72);
+      font-size: 14px;
+    }
+
+    /* === RESPONSIVE READING LAYOUT === */
+    @media (max-width: 900px) {
+      .topbar-inner { min-height: auto; padding: 12px 0; flex-wrap: wrap; }
+      .brand { width: 100%; }
+      .nav-links { order: 3; width: 100%; }
+      .hero { min-height: auto; padding: 72px 0; grid-template-columns: 1fr; }
+      .hero-side { transform: none; }
+      .lesson-goals,
+      .questions,
+      .chain { grid-template-columns: repeat(2, 1fr); }
+      .chain-step:nth-child(2)::after { display: none; }
+      .compare,
+      .workspace { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      .section { width: min(100% - 22px, var(--max)); padding: 58px 0; }
+      .hero { width: min(100% - 22px, 1240px); gap: 38px; }
+      .hero h1 { font-size: 52px; }
+      .lesson-goals,
+      .questions,
+      .chain,
+      .quiz-options,
+      .diagnosis-grid,
+      .checklist { grid-template-columns: 1fr; }
+      .chain-step::after { display: none !important; }
+      .prompt { padding: 24px; font-size: 22px; }
+      .sample { padding: 22px; font-size: 18px; }
+      .print-btn { display: none; }
+    }
+
+    /* === PRINT HANDOUT === */
+    @media print {
+      @page { size: A4; margin: 15mm; }
+      body { background: #fff; color: #000; }
+      .progress, .topbar, .button-row, .offline-note { display: none !important; }
+      .hero { min-height: auto; padding: 0 0 28px; grid-template-columns: 1fr; }
+      .hero-side { transform: none; box-shadow: none; }
+      .hero-side::after { display: none; }
+      .section { width: 100%; padding: 28px 0; break-inside: auto; }
+      .card, .question-card, .chain-step, .goal, .compare-card,
+      .diagnosis-card, .workspace-guide, .workspace-writing, .check-item {
+        box-shadow: none !important;
+        break-inside: avoid;
+      }
+      .feedback { display: block !important; }
+      textarea { min-height: 150px; }
+      footer { background: #fff; color: #000; border-top: 2px solid #000; }
+      footer strong { color: #000; }
+      footer p { color: #333; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <div class="progress" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+
+  <!-- === STICKY NAVIGATION === -->
+  <nav class="topbar" aria-label="讲义导航">
+    <div class="topbar-inner">
+      <div class="brand">IELTS WRITING LAB · 学生讲义</div>
+      <div class="nav-links">
+        <a href="#method">四个追问</a>
+        <a href="#chain">论证链</a>
+        <a href="#diagnosis">现场诊断</a>
+        <a href="#rewrite">改前改后</a>
+        <a href="#practice">自己练习</a>
+      </div>
+      <button class="print-btn" id="printBtn" type="button">打印 / 存 PDF</button>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- === HERO === -->
+    <header class="hero">
+      <div>
+        <div class="hero-meta">
+          <span class="tag lime">IELTS Task 2</span>
+          <span class="tag">基础 5–5.5 → 目标 6.5</span>
+          <span class="tag orange">学生离线讲义</span>
+        </div>
+        <h1>一句观点，<br><span class="highlight">如何写成一段话？</span></h1>
+        <p class="lead">重点不是先换“高级词”，而是让每一句都推动论证继续向前。</p>
+        <div class="offline-note">单文件离线版 · 断网可用 · 练习自动保存在本机</div>
+      </div>
+
+      <aside class="hero-side card" aria-label="本课方法">
+        <h3>BODY 追问四连</h3>
+        <ol>
+          <li>为什么？</li>
+          <li>举例呢？</li>
+          <li>和谁比？</li>
+          <li>结果是什么？</li>
+        </ol>
+      </aside>
+    </header>
+
+    <!-- === LESSON PROMPT AND GOALS === -->
+    <section class="section" id="prompt">
+      <div class="section-kicker">Lesson Prompt</div>
+      <h2>先锁定：这一段负责什么？</h2>
+      <article class="prompt card">
+        In some countries young people are encouraged to work or travel for a year between finishing high school and starting university studies.
+        <strong>Do you think the advantages outweigh the disadvantages?</strong>
+      </article>
+
+      <div class="lesson-goals">
+        <article class="goal">
+          <b>Question Type</b>
+          Advantages outweigh disadvantages
+        </article>
+        <article class="goal">
+          <b>Position</b>
+          Yes — the advantages are greater.
+        </article>
+        <article class="goal">
+          <b>Body Job</b>
+          完整解释一个主要优势。
+        </article>
+      </div>
+
+      <div class="rule-box">
+        本讲义只练一个主体段。完整文章仍需处理劣势，并说明为什么优势更重要；不能只写优势。
+      </div>
+    </section>
+
+    <!-- === CORE METHOD === -->
+    <section class="section" id="method">
+      <div class="section-kicker">Core Method</div>
+      <h2>观点写完，先别急着换词。</h2>
+      <p class="lead">把四个问题当作诊断清单。选择最能推动逻辑的 2–4 个，不要机械套四句话。</p>
+
+      <div class="questions">
+        <article class="question-card">
+          <span class="question-num">01</span>
+          <h3>为什么？</h3>
+          <p>解释原因或机制：这个好处究竟怎样发生？</p>
+        </article>
+        <article class="question-card">
+          <span class="question-num">02</span>
+          <h3>举例呢？</h3>
+          <p>把抽象观点放进具体人物、行动或场景。</p>
+        </article>
+        <article class="question-card">
+          <span class="question-num">03</span>
+          <h3>和谁比？</h3>
+          <p>用对比说明发生了什么变化，以及差异在哪里。</p>
+        </article>
+        <article class="question-card">
+          <span class="question-num">04</span>
+          <h3>结果是什么？</h3>
+          <p>说明最终影响，不要只重复“所以它很好”。</p>
+        </article>
+      </div>
+
+      <div class="rule-box">
+        自检：如果观点后面只能接 <strong>This is very beneficial</strong>，先问“为什么”，不要先找更难的形容词。
+      </div>
+    </section>
+
+    <!-- === ARGUMENT CHAIN === -->
+    <section class="section" id="chain">
+      <div class="section-kicker">Build the Chain</div>
+      <h2>一句观点 → 一条论证链</h2>
+      <div class="idea">A gap year can help young people <span class="highlight">make better university choices</span>.</div>
+
+      <div class="chain">
+        <article class="chain-step">
+          <b>WHY?</b>
+          <h3>为什么？</h3>
+          <p>工作或独立旅行让学生接触真实责任与不同生活方式。</p>
+        </article>
+        <article class="chain-step">
+          <b>EXAMPLE</b>
+          <h3>什么场景？</h3>
+          <p>例如在公司完成实际任务，或独立安排旅行预算与行程。</p>
+        </article>
+        <article class="chain-step">
+          <b>COMPARE</b>
+          <h3>和谁比？</h3>
+          <p>相比高中毕业后立即入学，他们更了解自己的兴趣与能力。</p>
+        </article>
+        <article class="chain-step">
+          <b>RESULT</b>
+          <h3>结果是什么？</h3>
+          <p>更可能选择合适专业，也更不容易入学后再转专业。</p>
+        </article>
+      </div>
+
+      <div class="rule-box">
+        逻辑线：<strong>真实经历 → 更了解自己 → 更合适的专业选择</strong><br>
+        TR：观点得到具体支持；CC：原因、场景、对比和结果连续推进。
+      </div>
+    </section>
+
+    <!-- === LIVE DIAGNOSIS QUIZ === -->
+    <section class="section" id="diagnosis">
+      <div class="section-kicker">Live Diagnosis</div>
+      <h2>这段最影响分数的问题是什么？</h2>
+
+      <article class="sample card">
+        <div class="sample-label"><span>典型 5.5 分水平段落</span><span>58 words</span></div>
+        Taking a gap year is very beneficial for young people because they can learn many useful things outside school. They may work or travel and gain more experience before university. This can help them in the future, make them more independent and prepare them for university. Therefore, the advantages of a gap year are greater than its disadvantages.
+      </article>
+
+      <form id="diagnosisQuiz">
+        <div class="quiz-options">
+          <label class="quiz-option">
+            <input type="radio" name="diagnosis" value="grammar">
+            语法错误太多
+          </label>
+          <label class="quiz-option">
+            <input type="radio" name="diagnosis" value="empty">
+            观点相关，但是论证太空
+          </label>
+        </div>
+        <div class="button-row">
+          <button class="action" type="submit">检查答案</button>
+          <button class="action secondary" type="reset">重新选择</button>
+        </div>
+        <div class="feedback" id="diagnosisFeedback" role="status" aria-live="polite"></div>
+      </form>
+
+      <div class="diagnosis-grid">
+        <article class="diagnosis-card primary">
+          <span class="diagnosis-code">TR</span>
+          <h3>相关，但没有充分展开</h3>
+          <p><mark>very beneficial</mark>、<mark>many useful things</mark>、<mark>more experience</mark> 和 <mark>help them in the future</mark> 都没有说明具体内容。</p>
+        </article>
+        <article class="diagnosis-card primary">
+          <span class="diagnosis-code">CC</span>
+          <h3>有连接词，但逻辑没推进</h3>
+          <p>because 和 therefore 把句子接起来了，中间却缺少“为什么产生这个结果”的因果链。</p>
+        </article>
+        <article class="diagnosis-card">
+          <span class="diagnosis-code">LR</span>
+          <h3>词义过于宽泛</h3>
+          <p>可以把 useful things 具体化为 real responsibilities、interests、abilities 等实际内容。</p>
+        </article>
+        <article class="diagnosis-card">
+          <span class="diagnosis-code">GRA</span>
+          <h3>不是最优先的问题</h3>
+          <p>段落基本能够理解。先修 TR 与 CC，比单独替换词汇或修改小语法点更重要。</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- === BEFORE AND AFTER === -->
+    <section class="section" id="rewrite">
+      <div class="section-kicker">Rewrite</div>
+      <h2>改写不是堆句子，而是补逻辑。</h2>
+
+      <div class="compare">
+        <article class="compare-card before">
+          <div class="compare-head"><span>Before</span><span>空泛概括</span></div>
+          <p class="english">A gap year is beneficial because young people can gain useful experience and prepare for university.</p>
+        </article>
+
+        <article class="compare-card after">
+          <div class="compare-head"><span>After</span><span>教学综合改写 · 56 words</span></div>
+          <p class="english">Taking a gap year can help school-leavers choose a more suitable university course. By working in a company or travelling independently, they encounter real responsibilities and discover which subjects and careers genuinely interest them. Compared with students who enter university immediately, they may therefore make a better-informed choice and be less likely to change majors later.</p>
+          <div class="sentence-map">
+            <span>观点</span>
+            <span>场景 / 原因</span>
+            <span>对比</span>
+            <span>结果</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="boundary">
+        这段文字是课堂教学综合改写，并非官方范文。它更接近 6.5 对段落展开和逻辑推进的要求，但不能仅凭一个主体段判断整篇作文分数。
+      </div>
+    </section>
+
+    <!-- === TRANSFER QUIZ === -->
+    <section class="section" id="transfer">
+      <div class="section-kicker">Transfer</div>
+      <h2>换到劣势，你还会展开吗？</h2>
+      <div class="idea">A gap year may place financial pressure on some families.</div>
+
+      <form id="transferQuiz">
+        <div class="quiz-options">
+          <label class="quiz-option">
+            <input type="radio" name="transfer" value="a">
+            A. This is a serious disadvantage and can be very bad for young people.
+          </label>
+          <label class="quiz-option">
+            <input type="radio" name="transfer" value="b">
+            B. If young people cannot find paid work, their parents may have to cover a full year of living and travel costs.
+          </label>
+        </div>
+        <div class="button-row">
+          <button class="action" type="submit">检查答案</button>
+          <button class="action secondary" type="reset">重新选择</button>
+        </div>
+        <div class="feedback" id="transferFeedback" role="status" aria-live="polite"></div>
+      </form>
+
+      <div class="rule-box">
+        下一步结果句：<strong>This extra expense may make a gap year inaccessible to students from lower-income families.</strong><br>
+        逻辑线：经济压力 → 父母承担全年费用 → 低收入家庭学生可能无法参加。
+      </div>
+    </section>
+
+    <!-- === STUDENT PRACTICE === -->
+    <section class="section" id="practice">
+      <div class="section-kicker">Your Turn</div>
+      <h2>现在写出你自己的主体段。</h2>
+      <p class="lead">先完成论证链，再考虑词汇升级。你的内容只保存在当前浏览器中。</p>
+
+      <div class="workspace">
+        <aside class="workspace-guide">
+          <h3>写前追问</h3>
+          <ol>
+            <li><strong>观点：</strong>这一段只证明哪一个好处或坏处？</li>
+            <li><strong>为什么：</strong>这个影响通过什么机制发生？</li>
+            <li><strong>场景：</strong>具体是谁，在做什么？</li>
+            <li><strong>对比：</strong>和哪一类人或哪种情况相比？</li>
+            <li><strong>结果：</strong>最后改变了什么？</li>
+          </ol>
+          <button class="action secondary" id="insertStarter" type="button">插入写作起点</button>
+        </aside>
+
+        <div class="workspace-writing">
+          <label for="studentDraft"><h3>主体段草稿</h3></label>
+          <textarea id="studentDraft" spellcheck="true" placeholder="在这里输入你的英文主体段……"></textarea>
+          <div class="write-meta">
+            <span id="wordCount">0 words</span>
+            <span class="save-status" id="saveStatus">尚未输入</span>
+          </div>
+          <div class="button-row">
+            <button class="action secondary" id="clearDraft" type="button">清空草稿</button>
+            <button class="action" id="copyDraft" type="button">复制草稿</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="checklist" id="checklist">
+        <label class="check-item"><input type="checkbox" data-check="one-idea">这一段只有一个清楚的中心观点。</label>
+        <label class="check-item"><input type="checkbox" data-check="why">我解释了为什么，而不只是换词重复观点。</label>
+        <label class="check-item"><input type="checkbox" data-check="specific">我加入了具体行动、对象或场景。</label>
+        <label class="check-item"><input type="checkbox" data-check="progress">后一句回答了前一句留下的问题。</label>
+        <label class="check-item"><input type="checkbox" data-check="result">结尾落到了具体结果，没有只写“这很好”。</label>
+        <label class="check-item"><input type="checkbox" data-check="task">内容仍然服务于题目和本段任务。</label>
+      </div>
+    </section>
+  </main>
+
+  <!-- === FOOTER === -->
+  <footer>
+    <strong>别急着换词，先把逻辑写完整。</strong>
+    <p>本讲义用于 IELTS Writing Task 2 主体段教学练习。示例段落为教学综合改写，不代表官方评分结果或官方范文。</p>
+  </footer>
+
+  <script>
+    /* === OFFLINE HELPERS === */
+    const storage = {
+      get(key, fallback = "") {
+        try {
+          const value = localStorage.getItem(key);
+          return value === null ? fallback : value;
+        } catch (_) { return fallback; }
+      },
+      set(key, value) {
+        try { localStorage.setItem(key, value); return true; }
+        catch (_) { return false; }
+      },
+      remove(key) {
+        try { localStorage.removeItem(key); }
+        catch (_) {}
+      }
+    };
+
+    /* === READING PROGRESS === */
+    const progressFill = document.getElementById("progressFill");
+    const updateProgress = () => {
+      const doc = document.documentElement;
+      const distance = doc.scrollHeight - doc.clientHeight;
+      const ratio = distance > 0 ? doc.scrollTop / distance : 0;
+      progressFill.style.width = `${Math.min(100, Math.max(0, ratio * 100))}%`;
+    };
+    document.addEventListener("scroll", updateProgress, { passive: true });
+    updateProgress();
+
+    /* === PRINT === */
+    document.getElementById("printBtn").addEventListener("click", () => window.print());
+
+    /* === QUIZ ENGINE === */
+    function setupQuiz(formId, feedbackId, correctValue, messages) {
+      const form = document.getElementById(formId);
+      const feedback = document.getElementById(feedbackId);
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const selected = new FormData(form).get(form.querySelector("input[type=radio]").name);
+        feedback.classList.remove("wrong");
+        if (!selected) {
+          feedback.textContent = "请先选择一个答案。";
+          feedback.classList.add("wrong", "show");
+          return;
+        }
+        const correct = selected === correctValue;
+        feedback.textContent = correct ? messages.correct : messages.wrong;
+        feedback.classList.toggle("wrong", !correct);
+        feedback.classList.add("show");
+      });
+
+      form.addEventListener("reset", () => {
+        feedback.classList.remove("show", "wrong");
+        feedback.textContent = "";
+      });
+    }
+
+    setupQuiz(
+      "diagnosisQuiz",
+      "diagnosisFeedback",
+      "empty",
+      {
+        correct: "正确。段落大体能够理解，真正的问题是 useful things、more experience 和 help them in the future 都没有具体展开。应优先修 TR 与 CC。",
+        wrong: "再看一次：这段并没有大量妨碍理解的语法错误。最影响分数的是观点相关，却缺少具体解释和逻辑推进。"
+      }
+    );
+
+    setupQuiz(
+      "transferQuiz",
+      "transferFeedback",
+      "b",
+      {
+        correct: "正确。B 解释了经济压力怎样产生：如果没有带薪工作，父母可能承担一整年的生活和旅行费用。",
+        wrong: "A 只是把 financial pressure 换成 serious disadvantage 和 very bad，本质上仍然在重复“这很严重”。"
+      }
+    );
+
+    /* === STUDENT WRITING WORKSPACE === */
+    const draftKey = "ielts-body-handout-draft-v1";
+    const checksKey = "ielts-body-handout-checks-v1";
+    const draft = document.getElementById("studentDraft");
+    const wordCount = document.getElementById("wordCount");
+    const saveStatus = document.getElementById("saveStatus");
+
+    const countWords = (text) => {
+      const matches = text.trim().match(/[A-Za-z]+(?:['’-][A-Za-z]+)*/g);
+      return matches ? matches.length : 0;
+    };
+
+    const refreshDraftMeta = () => {
+      wordCount.textContent = `${countWords(draft.value)} words`;
+    };
+
+    draft.value = storage.get(draftKey);
+    refreshDraftMeta();
+    if (draft.value) saveStatus.textContent = "已恢复本机草稿";
+
+    let saveTimer;
+    draft.addEventListener("input", () => {
+      refreshDraftMeta();
+      saveStatus.textContent = "正在保存…";
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(() => {
+        const saved = storage.set(draftKey, draft.value);
+        saveStatus.textContent = saved ? "已自动保存到本机" : "浏览器禁止保存，请手动复制";
+      }, 300);
+    });
+
+    document.getElementById("insertStarter").addEventListener("click", () => {
+      const starter = [
+        "Topic sentence: ",
+        "Why / mechanism: ",
+        "Example / specific situation: ",
+        "Comparison: ",
+        "Result: "
+      ].join("\\n");
+      if (!draft.value.trim()) {
+        draft.value = starter;
+        draft.dispatchEvent(new Event("input"));
+      }
+      draft.focus();
+    });
+
+    document.getElementById("clearDraft").addEventListener("click", () => {
+      if (!draft.value || window.confirm("确定清空当前草稿吗？")) {
+        draft.value = "";
+        storage.remove(draftKey);
+        refreshDraftMeta();
+        saveStatus.textContent = "草稿已清空";
+      }
+    });
+
+    document.getElementById("copyDraft").addEventListener("click", async (event) => {
+      const button = event.currentTarget;
+      if (!draft.value.trim()) {
+        saveStatus.textContent = "请先输入草稿";
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(draft.value);
+        button.textContent = "已复制";
+        setTimeout(() => { button.textContent = "复制草稿"; }, 1200);
+      } catch (_) {
+        draft.select();
+        document.execCommand("copy");
+        button.textContent = "已复制";
+        setTimeout(() => { button.textContent = "复制草稿"; }, 1200);
+      }
+    });
+
+    /* === PERSISTENT SELF-CHECK === */
+    let savedChecks = {};
+    try { savedChecks = JSON.parse(storage.get(checksKey, "{}")) || {}; }
+    catch (_) { savedChecks = {}; }
+
+    document.querySelectorAll("[data-check]").forEach((box) => {
+      box.checked = Boolean(savedChecks[box.dataset.check]);
+      box.addEventListener("change", () => {
+        savedChecks[box.dataset.check] = box.checked;
+        storage.set(checksKey, JSON.stringify(savedChecks));
+      });
+    });
+  </script>
+</body>
+</html>

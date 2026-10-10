@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L1 · 雅思 AI 对标 — 新东方/好未来 vs 新航道 · 补足清单</title>
+<style>
+  *{box-sizing:border-box;}
+  :root{
+    --ink:#1f2937;--mut:#6b7280;--line:#e5e7eb;--bg:#f6f7f9;
+    --slate:#334155;--slate2:#1e293b;--rust:#9a3412;--amber:#b45309;--amberbg:#fffbeb;
+    --red:#b91c1c;--redbg:#fef2f2;--green:#047857;--greenbg:#ecfdf5;--blue:#1d4ed8;
+    --xhd:#c026d3; /* 新航道高亮色 */
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;max-width:1080px;margin:0 auto;padding:32px 22px 90px;color:var(--ink);line-height:1.75;background:var(--bg);}
+  h1{font-size:26px;margin:0 0 6px;letter-spacing:-0.4px;line-height:1.35;}
+  .subtitle{color:var(--mut);font-size:14px;margin-bottom:18px;}
+  .meta-bar{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--mut);margin-bottom:22px;padding:11px 15px;background:#fff;border-radius:8px;border:1px solid var(--line);}
+  .meta-bar strong{color:var(--ink);}
+  nav.toc{position:sticky;top:0;z-index:50;background:rgba(246,247,249,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin:0 -22px 20px;padding:9px 22px;display:flex;gap:6px;flex-wrap:wrap;}
+  nav.toc a{font-size:12px;color:var(--rust);text-decoration:none;padding:4px 9px;border-radius:999px;border:1px solid #e7d4c4;background:#fff;white-space:nowrap;}
+  nav.toc a:hover{background:var(--rust);color:#fff;border-color:var(--rust);}
+
+  .hero{background:linear-gradient(135deg,#1e293b 0%,#9a3412 100%);color:#fff;padding:30px 32px;border-radius:14px;margin-bottom:18px;box-shadow:0 6px 20px rgba(30,41,59,.3);}
+  .hero h2{color:#fff;border:0;padding:0;font-size:20px;margin:0 0 6px;}
+  .hero .lead{font-size:15px;opacity:.95;margin:0 0 16px;}
+  .hero .lead b{color:#fde68a;}
+  .hero .tldr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .tldr-card{background:rgba(255,255,255,.12);padding:15px 16px;border-radius:10px;border-left:3px solid #fbbf24;}
+  .tldr-card .num{font-size:11px;font-weight:700;color:#fde68a;letter-spacing:.5px;margin-bottom:6px;}
+  .tldr-card .text{font-size:13px;line-height:1.6;}
+  .tldr-card b{color:#fff;}
+
+  .section{background:#fff;border-radius:14px;padding:26px 28px;margin-bottom:18px;box-shadow:0 1px 2px rgba(0,0,0,.04);}
+  h2{font-size:20px;margin:0 0 6px;border-left:4px solid var(--rust);padding-left:12px;}
+  h2 .em{color:var(--xhd);}
+  .sec-lead{color:var(--mut);font-size:13px;margin:0 0 16px;padding-left:13px;}
+  h3{font-size:15.5px;margin:20px 0 8px;}
+  h3 .tag{font-size:11px;font-weight:600;color:#fff;background:var(--slate);padding:2px 8px;border-radius:999px;margin-left:6px;}
+  p{margin:8px 0;}ul,ol{padding-left:20px;margin:8px 0;}li{margin:5px 0;}
+
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px;}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+  th{background:#eef2f7;font-weight:600;}
+  td.co{font-weight:700;white-space:nowrap;}
+  td.co.xdf{color:#0f766e;}td.co.tal{color:#7c3aed;}td.co.xhd{color:var(--xhd);}
+  tr:hover td{background:#fafbfc;}
+  .src{color:#9ca3af;font-size:11px;white-space:nowrap;}
+  .flag{display:inline-block;font-size:10.5px;font-weight:700;color:var(--amber);background:var(--amberbg);border:1px solid #fde68a;border-radius:4px;padding:0 5px;}
+  .yes{color:var(--green);font-weight:700;}.no{color:var(--red);font-weight:700;}.mid{color:var(--amber);font-weight:700;}
+  .live{color:var(--green);font-weight:700;}.none{color:var(--red);font-weight:700;}.plan{color:var(--amber);font-weight:700;}
+
+  .callout{padding:13px 17px;border-radius:10px;margin:14px 0;font-size:13.5px;}
+  .c-amber{background:var(--amberbg);border-left:4px solid #f59e0b;}
+  .c-red{background:var(--redbg);border-left:4px solid #ef4444;}
+  .c-green{background:var(--greenbg);border-left:4px solid #10b981;}
+  .c-xhd{background:#fdf4ff;border-left:4px solid var(--xhd);}
+  .callout b{color:var(--ink);}
+
+  /* gap cards */
+  .gap{border:1px solid var(--line);border-radius:12px;margin:14px 0;overflow:hidden;}
+  .gap .hd{display:flex;align-items:center;gap:10px;padding:11px 16px;background:linear-gradient(90deg,#fff7ed,#ffffff);border-bottom:1px solid var(--line);}
+  .gap .hd .no{font-size:13px;font-weight:800;color:#fff;background:var(--rust);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .gap .hd .ti{font-weight:700;font-size:15px;}
+  .gap .hd .sev{margin-left:auto;font-size:11px;font-weight:700;color:#fff;padding:2px 9px;border-radius:999px;}
+  .sev.hi{background:var(--red);}.sev.mid{background:var(--amber);}
+  .gap .bd{padding:13px 16px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .gap .bd h4{margin:0 0 5px;font-size:11.5px;letter-spacing:.4px;text-transform:uppercase;color:var(--mut);}
+  .gap .bd p{margin:0;font-size:13px;}
+  .gap .bd .evid{border-left:3px solid var(--slate);padding-left:10px;}
+  .gap .bd .fix{border-left:3px solid var(--green);padding-left:10px;}
+
+  /* roadmap */
+  .road{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0;}
+  .ph{border:1px solid var(--line);border-radius:11px;padding:14px 16px;background:#fff;}
+  .ph .t{font-weight:700;font-size:14px;margin-bottom:8px;display:flex;align-items:center;gap:7px;}
+  .ph .t .dot{width:9px;height:9px;border-radius:50%;}
+  .ph.s1 .dot{background:#10b981;}.ph.s2 .dot{background:#f59e0b;}.ph.s3 .dot{background:#6366f1;}
+  .ph ul{padding-left:17px;margin:6px 0 0;}.ph li{font-size:12.5px;margin:5px 0;}
+  .ph .who{font-size:11px;color:var(--mut);margin-top:8px;border-top:1px dashed var(--line);padding-top:7px;}
+
+  .footer{text-align:center;color:#9ca3af;font-size:12px;margin-top:24px;}
+  .srcgrid{columns:2;column-gap:22px;font-size:12px;}
+  .srcgrid p{break-inside:avoid;margin:0 0 9px;color:#4b5563;}
+  .srcgrid b{color:var(--ink);}
+  @media (max-width:760px){.hero .tldr-grid,.gap .bd,.road{grid-template-columns:1fr;}.srcgrid{columns:1;}}
+  @media print{nav.toc{display:none;}body{background:#fff;}.section{box-shadow:none;border:1px solid var(--line);}}
+</style>
+</head>
+<body>
+
+<h1>雅思 AI 对标 — 新东方 / 好未来 <span style="color:var(--xhd)">vs 新航道</span> · 补足清单</h1>
+<div class="subtitle">L1 · 竞品 battlecard — 谁正在跑什么、新航道差在哪、雅思侧怎么补（接 L0 全景，喂 PRD）</div>
+<div class="meta-bar">
+  <span>📅 <strong>2026-06-08</strong></span>
+  <span>🔭 <strong>3 路并行联网 + 本地内部底牌核对</strong></span>
+  <span>🎯 聚焦 <strong>雅思（写作 / 口语）</strong></span>
+  <span>🏢 自方 <strong>新航道（你所在机构）</strong></span>
+  <span>🔗 关联 <strong>Project B · 飞书教学服务系统</strong></span>
+</div>
+
+<nav class="toc">
+  <a href="#tldr">一句话结论</a>
+  <a href="#run">三方在跑什么</a>
+  <a href="#ielts">聚焦雅思</a>
+  <a href="#floor">独立工具底盘</a>
+  <a href="#matrix">能力对比</a>
+  <a href="#gap">新航道缺口</a>
+  <a href="#fix">补足清单</a>
+  <a href="#you">你的落点</a>
+  <a href="#caveat">纠偏/存疑</a>
+  <a href="#src">来源</a>
+</nav>
+
+<div class="hero" id="tldr">
+  <h2>一句话结论</h2>
+  <p class="lead">两大巨头最强的自研 AI <b>都没瞄准雅思写作</b>；新航道握着<b>最该用来做批改的资产（9 分达人教研 + 评分标准 + 一线写作经验）</b>，却<b>连一个 AI 写作批改都没有</b>。这是一个真实、可防守、且正好踩在你能力上的缺口。</p>
+  <div class="tldr-grid">
+    <div class="tldr-card">
+      <div class="num">新东方 · 最强 AI 没用在雅思上</div>
+      <div class="text">慧学系统(批改 10→2 分钟、97% 准、上万篇标注)押在<b>考研英语</b>；雅思只有「雅思 Pro」App 一层<b>黑箱 AI</b>，无第三方评测。</div>
+    </div>
+    <div class="tldr-card">
+      <div class="num">好未来 · 雅思是边缘业务</div>
+      <div class="text">AI 火力全在 K12 数学；雅思线(考满分/轻舟)只到 <b>AI 口语模考</b>，<b>AI 写作批改未成型</b>——是窗口不是壁垒。</div>
+    </div>
+    <div class="tldr-card">
+      <div class="num">新航道 · 有料没把料 AI 化</div>
+      <div class="text">公开 AI = 一个口语 App(鲸小爱) + 一句「无惧 AI」价值观。<b>写作批改 = 完全空白</b>，恰是最热、也最该由它来做的能力。</div>
+    </div>
+  </div>
+</div>
+
+<section class="section" id="run">
+  <h2>一、三方 AI 现在到底在跑什么</h2>
+  <p class="sec-lead">只列「已上线在跑 ✅」的，区分覆盖考试与雅思相关度。注意——巨头清单很长，但<b>真正落到雅思的就那么一两条</b>。</p>
+  <table>
+    <tr><th>产品</th><th>状态</th><th>覆盖考试 / 科目</th><th>雅思相关</th><th>最新数字 / 关键事实 <span class="src">(带时间)</span></th></tr>
+
+    <tr><td class="co xdf">新东方 · 慧学系统</td><td class="live">✅在跑</td><td>考研英语(批改/出题/自适应)</td><td class="no">✗ 不碰雅思</td><td>作文批改 10→2 分钟、准确率 97%；解锁率 42.79%、29 万份报告 <span class="src">2024 考季</span></td></tr>
+    <tr><td class="co xdf">新东方 · 雅思 Pro App</td><td class="live">✅在跑</td><td>雅思 听说读写</td><td class="yes">✓ 唯一直接碰雅思</td><td>AI 写作批改 + AI 口语陪练 + 剑 5–20 官方授权；下载 1M+、4.8/5。<span class="flag">底层模型未披露·无第三方评测</span></td></tr>
+    <tr><td class="co xdf">新东方 · AI 1对1</td><td class="live">✅在跑(2025-07)</td><td>青少英语口语(K12)</td><td class="no">✗</td><td>卡通 AI 老师；内测「每课开口几十次」<span class="flag">宣传口径</span></td></tr>
+    <tr><td class="co xdf">新东方 · 前途出国</td><td class="live">✅在跑</td><td>留学申请(选校/文书)</td><td class="mid">~ 留学非语培</td><td>20 万+ 录取数据做选校；文书仍<b>人工</b>(BFT/LEAD)；<b>无生成式 AI Agent</b></td></tr>
+    <tr><td class="co xdf">新东方 · 智能学习机</td><td class="live">✅在跑</td><td>K12 学科 + 素养</td><td class="no">✗</td><td>FY25 付费 114.8 万(+55.6%)；<b>无任何雅思内容</b></td></tr>
+
+    <tr><td class="co tal">好未来 · 九章 MathGPT</td><td class="live">✅在跑</td><td>K12 数学为核(扩英语作文批改)</td><td class="no">✗ K12 英语≠雅思</td><td>全学段全学科；英语批改对标 <b>KET/PET</b>(剑桥少儿，「小雅思」)</td></tr>
+    <tr><td class="co tal">好未来 · 学习机 Xpad</td><td class="live">✅在跑</td><td>幼-高全科；英语=剑桥少儿</td><td class="no">✗</td><td>35.6 万台(+88%)、硬件占比 29.4%；英语=KET/PET/FCE/欧标</td></tr>
+    <tr><td class="co tal">好未来 · 考满分 / 学而思大学生(原轻舟)</td><td class="live">✅在跑</td><td>雅思 / 托福 / GRE / GMAT</td><td class="yes">✓ 直接碰雅思</td><td>已上 <b>AI 口语模考</b> + 写作评分系统；<b>AI 写作批改未产品化/未主打</b> <span class="flag">机会窗口</span></td></tr>
+
+    <tr><td class="co xhd">新航道 · 鲸小爱英语</td><td class="live">✅在跑(v6.41.8, 2025-03)</td><td>雅思 <b>口语 + 听力</b></td><td class="yes">✓ 但只口语</td><td>鲸航科技(胡敏 2018 联创)；口语模考+机经点评；<b>无写作、无阅读</b>；天使轮数千万(2018)、用户量未披露</td></tr>
+    <tr><td class="co xhd">新航道 · AI 写作批改</td><td class="none">✗ 没有</td><td>—</td><td>—</td><td><b>无任何公开产品 —— 最大空白</b></td></tr>
+    <tr><td class="co xhd">新航道 · 智能题库 / AI 学习系统</td><td class="none">✗ 没有</td><td>—</td><td>—</td><td>未见公开信息；官方/协同 App 纯学员服务、无 AI</td></tr>
+    <tr><td class="co xhd">新航道 · 剑桥 CUP 合作</td><td class="plan">🟡 签约未落地</td><td>含「AI 数字出版资源」</td><td class="mid">~ 潜在</td><td>2023-11 胡敏与剑桥签约；<b>未见落地成 AI 产品</b></td></tr>
+  </table>
+  <div class="callout c-red"><b>读这张表最该记住的：</b>新东方/好未来把最重的 AI 投入(慧学、九章、学习机)全压在<b>考研、K12 数学</b>上；它们碰雅思的产品(雅思 Pro、考满分)都是<b>「应用层薄一层」</b>——黑箱模型、缺评测、写作批改没做透。而新航道在写作批改这条最热的线上<b>直接缺位</b>。</div>
+</section>
+
+<section class="section" id="ielts">
+  <h2>二、把镜头拉近：谁真的「碰」了雅思写作 / 口语</h2>
+  <p class="sec-lead">剥掉所有 K12、数学、考研的噪音，只看雅思。三方的真实身位是这样：</p>
+  <table>
+    <tr><th>玩家</th><th>雅思写作 AI</th><th>雅思口语 AI</th><th>护城河</th><th>软肋</th></tr>
+    <tr><td class="co xdf">新东方</td><td>雅思 Pro 有「AI 写作批改」<span class="flag">黑箱</span></td><td>雅思 Pro 有「AI 口语陪练」</td><td><b>剑 5–20 官方授权</b> + 品牌 + 线下网点</td><td>模型不透明、与考官一致性无公开数据；最强批改能力(慧学)给了考研</td></tr>
+    <tr><td class="co tal">好未来</td><td><b>未产品化</b>(技术同源九章但没做)</td><td>考满分有「AI 口语模考」</td><td>自研九章大模型 + 资本</td><td>雅思是边缘业务，AI 引擎为数学打磨，写作批改是窗口</td></tr>
+    <tr><td class="co xhd">新航道</td><td class="no"><b>✗ 完全没有</b></td><td>鲸小爱(口语+听力)</td><td><b>9 分达人教研 + 一线写作师资 + 评分标准沉淀</b></td><td>没把教研资产 AI 化；口语单点无闭环、且口语是最易被卷的场景</td></tr>
+  </table>
+  <div class="callout c-xhd"><b>关键洞察：</b>三方在雅思<b>写作批改</b>上其实<b>都很弱</b>——新东方黑箱、好未来没做、新航道空白。这不是「新航道落后巨头」，而是<b>整条雅思写作批改赛道在机构侧都没人做透</b>。谁先把「准的批改 + 教研壁垒 + 教学闭环」拼起来，谁就拿下身位。而新航道手里的牌（教研 + 老师 + 学员），恰恰是独立工具拼不出来的那部分。</div>
+</section>
+
+<section class="section" id="floor">
+  <h2>三、别忽略「独立工具底盘」——雅思写作批改已是红海</h2>
+  <p class="sec-lead">机构慢，但独立 AI 工具早就把「写作批改」做成红海了。这是新航道任何产品都要先跨过的及格线。</p>
+  <table>
+    <tr><th>工具</th><th>做什么</th><th>真实口碑</th></tr>
+    <tr><td><b>学为贵 · 雅思机考网</b></td><td>AI 写作批改：官方四维评分 + 逐句精批 + 一键润色；登录免费送 5 次</td><td><b>机构系里写作 AI 最成熟之一</b>；雅思官方白金合作 9 年(有真题授权背书)</td></tr>
+    <tr><td><b>雅思哥 App</b></td><td>2025 上线 AI 写作 + 口语评测(SVIP)，3 分钟出报告</td><td><b>C 端流量最大</b>；号称 1000 万用户 / 40 万次<span class="flag">宣传口径</span></td></tr>
+    <tr><td><b>IELTS9</b>(GPT-4)</td><td>逐句批改 + 词汇建议，严格对标官方四维</td><td>第三方测评：<b>评分与人工专家持平</b>；但只做写作、缺全篇改写</td></tr>
+    <tr><td><b>智课</b>(SmartStudy)</td><td>行业最早(2017 斩雅思)+ 智课批改网</td><td><b>起大早赶晚集</b>：C 端淡出、转 B 端技术输出</td></tr>
+    <tr><td>有道写作 / 微软爱写作 / LingoLeap / Essay.Art / 雅思掌门 / Mastery AI</td><td>独立 AI 批改(评分+纠错+润色+范文)</td><td>实测<b>仅雅思掌门 / IELTS9 / Mastery AI 与人工持平</b>；多数<b>评分虚高</b>(爱写作 6.5→给 8)、评语笼统</td></tr>
+  </table>
+  <div class="callout c-amber"><b>底盘给的两条情报：</b>① 这些工具<b>普遍卡在「评分准确度」和「没有教学闭环」</b>——大多一次性给个分就完。② 它们能做到的(秒级批改、四维评分、范文)已是<b>及格线</b>，新航道要做就必须<b>从一开始就比它们准、且带闭环</b>，否则没有理由让学员用机构的而不是免费工具。</div>
+</section>
+
+<section class="section" id="matrix">
+  <h2>四、能力对比：机构（新航道）vs 独立工具 / 巨头</h2>
+  <p class="sec-lead">看清自己强在哪、弱在哪，才知道该用什么打法。✅=优势 / 🟡=一般 / ❌=劣势。</p>
+  <table>
+    <tr><th>维度</th><th style="color:var(--xhd)">新航道(机构)</th><th>独立 AI 工具</th><th>巨头(新东方/好未来)</th></tr>
+    <tr><td><b>教研壁垒</b>(评分标准/范文/错误库)</td><td class="yes">✅ 强(9 分达人 + 一线师资)</td><td class="no">❌ 弱(通用 GPT+少量微调)</td><td class="yes">✅ 强(慧学=几百老师标上万篇)</td></tr>
+    <tr><td><b>人工兜底 / 情感陪伴</b></td><td class="yes">✅ 强(真人老师+督学)</td><td class="no">❌ 无</td><td class="mid">🟡 有但偏标准化</td></tr>
+    <tr><td><b>教学闭环</b>(测→批→训→督)</td><td class="yes">✅ 有现成链路</td><td class="mid">🟡 多为一次性批改</td><td class="yes">✅ 有(OMO)</td></tr>
+    <tr><td><b>品牌 / 付费信任</b></td><td class="yes">✅ 强(胡敏+留学全案+线下)</td><td class="mid">🟡 依赖口碑、易被质疑不准</td><td class="yes">✅ 强</td></tr>
+    <tr><td><b>AI 技术 / 迭代速度</b></td><td class="no">❌ 慢(无公开 AI 团队/自研模型)</td><td class="yes">✅ 快(AI 原生)</td><td class="yes">✅ 快(自研大模型)</td></tr>
+    <tr><td><b>成本 / 可及性</b></td><td class="no">❌ 贵(课程上万、AI 只是赠品)</td><td class="yes">✅ 便宜(6 元/篇、免费 5 次)</td><td class="mid">🟡 App 免费引流</td></tr>
+    <tr><td><b>雅思写作批改 现状</b></td><td class="no">❌ 空白</td><td class="yes">✅ 红海(但准确度参差)</td><td class="mid">🟡 黑箱/未产品化</td></tr>
+  </table>
+  <div class="callout c-green"><b>打法结论：</b>新航道<b>不该</b>去和独立工具拼「快、便宜、AI 原生」——那是劣势区。该用<b>优势区（教研壁垒 + 人工兜底 + 教学闭环 + 品牌信任）</b>去打独立工具的死穴（准确度 + 没闭环）。换句话说：<b>不做「又一个 AI 批改器」，做「把准的 AI 批改塞进机构教学闭环 + 老师终审」</b>——这正好是 L0 报告里证据最硬的机会（teacher-in-the-loop，有密歇根 RCT 背书）。</div>
+</section>
+
+<section class="section" id="gap">
+  <h2>五、新航道的缺口（按严重度排）</h2>
+  <p class="sec-lead">每条都配「证据」和「补足方向」。前两条是雅思侧最该先动的。</p>
+
+  <div class="gap">
+    <div class="hd"><div class="no">1</div><div class="ti">AI 写作批改 = 完全空白，而它最该由新航道来做</div><div class="sev hi">严重</div></div>
+    <div class="bd">
+      <div class="evid"><h4>证据</h4><p>新航道无任何公开 AI 写作批改产品；而学为贵、雅思哥、IELTS9 已把它做成红海，新东方雅思 Pro 也有(虽黑箱)。<b>独有反差</b>：新航道握着 9 分达人教材 + 一线写作教研 + 评分标准——这正是做批改最该用的语料，却没 AI 化。</p></div>
+      <div class="fix"><h4>补足方向</h4><p>做一个<b>对齐雅思官方四维(TR/CC/LR/GRA)</b>的批改，用<b>各 band 标杆范文做校准样例</b>(对标新东方慧学「上万篇标注」打法，但用在雅思、不是考研)。</p></div>
+    </div>
+  </div>
+
+  <div class="gap">
+    <div class="hd"><div class="no">2</div><div class="ti">鲸小爱只做口语单点，没有教学闭环</div><div class="sev hi">严重</div></div>
+    <div class="bd">
+      <div class="evid"><h4>证据</h4><p>鲸小爱仍在跑(2025-03 更新)但<b>只做口语+听力</b>，且定位是「报班赠品/获客钩子」，不是独立可买的智能学习平台。口语是大模型<b>最易做、最早被卷</b>的场景，新航道在此无差异化护城河。</p></div>
+      <div class="fix"><h4>补足方向</h4><p>把鲸小爱从「口语单点」扩成「<b>测评→批改→个性化训练→督学追踪</b>」的全闭环，写作批改是最该补的第一块拼图。</p></div>
+    </div>
+  </div>
+
+  <div class="gap">
+    <div class="hd"><div class="no">3</div><div class="ti">教研资产没有「语料化 / 模型化」</div><div class="sev mid">中</div></div>
+    <div class="bd">
+      <div class="evid"><h4>证据</h4><p>新东方用「20 位写作师 + 几百老师标注上万篇作文」喂出批改模型(97% 准)。新航道有同等量级的教研料(教材+范文+评分标准+老师批注)，但<b>停留在纸面/课堂，没结构化进任何系统</b>。</p></div>
+      <div class="fix"><h4>补足方向</h4><p>建<b>结构化教研知识库</b>：评分标准 + 各 band 标杆 + 高频错误库 + <b>中式英语负迁移库</b>(中国考生独有痛点)，作为批改模型的「校准 + RAG」底座。</p></div>
+    </div>
+  </div>
+
+  <div class="gap">
+    <div class="hd"><div class="no">4</div><div class="ti">没有对外的 AI 团队 / 技术迭代信号</div><div class="sev mid">中</div></div>
+    <div class="bd">
+      <div class="evid"><h4>证据</h4><p>多轮检索未见新航道公开招聘 AI 产品/算法/大模型岗，无自研模型。胡敏公开立场偏 AI 怀疑论(「用心用情靠未来人类」)——价值观没错，但<b>容易被误读为「不投 AI」</b>。</p></div>
+      <div class="fix"><h4>补足方向</h4><p>不必自研大模型——<b>接 DeepSeek/豆包 + 教研语料微调/RAG</b> 即可。关键是把「老师 + AI」讲成<b>人机协同</b>故事，正好呼应胡敏的人文立场(AI 提效、老师把关情感与高阶判断)。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="fix">
+  <h2>六、补足清单（针对新航道雅思 · 可落地路线）</h2>
+  <p class="sec-lead">不贪大。按短/中/长期排，每步都标「谁来做、对标谁」。核心打法 = 用机构优势补独立工具的死穴。</p>
+  <div class="road">
+    <div class="ph s1">
+      <div class="t"><span class="dot"></span>短期 · 0–3 月 · 单点见效</div>
+      <ul>
+        <li><b>雅思 Task 2 写作批改 MVP</b>：对齐官方四维，用 9 分达人范文做校准样例</li>
+        <li>接 DeepSeek/豆包 API + 评分标准 prompt，<b>不自研模型</b></li>
+        <li><b>老师终审</b>：AI 起草批注 → 老师改 12% → 给学生(teacher-in-the-loop)</li>
+        <li>先在你自己的班 + 借鉴你反馈方式的助教里小范围试点(你已有此基础)</li>
+      </ul>
+      <div class="who">对标：学为贵机考网的「四维+逐句」；超越点=准确度+老师兜底</div>
+    </div>
+    <div class="ph s2">
+      <div class="t"><span class="dot"></span>中期 · 3–9 月 · 建壁垒</div>
+      <ul>
+        <li><b>教研知识库结构化</b>：评分标准/各 band 标杆/高频错误/<b>中式英语负迁移库</b></li>
+        <li>把批改做成 <b>RAG + 校准</b>，专攻独立工具最弱的<b>高分段判别 + 切题(TR)</b></li>
+        <li>批改 + 鲸小爱口语 <b>并进一个学习闭环</b>(测→批→训→督)</li>
+        <li>多轮过程性反馈(初稿→改→再批)，培养「反馈素养」</li>
+      </ul>
+      <div class="who">对标：新东方慧学「上万篇标注」，但用在雅思写作</div>
+    </div>
+    <div class="ph s3">
+      <div class="t"><span class="dot"></span>长期 · 9 月+ · 平台化</div>
+      <ul>
+        <li>飞书低代码把闭环铺给<b>老师/助教/顾问/管理者</b>多角色用(=Project B 平台化延展)</li>
+        <li><b>「可验证提分」度量</b>：批改前后 band 变化、练习量、续费关联(对齐 VC/管理层偏好)</li>
+        <li>沉淀成新航道的「雅思写作 AI + 人机协同」差异化招生点</li>
+      </ul>
+      <div class="who">对标：把「机构教研」做成独立工具抄不走的护城河</div>
+    </div>
+  </div>
+  <div class="callout c-green"><b>一句话打法：</b>别做「又一个 AI 批改器」(那是独立工具红海)。做「<b>对齐雅思四维、高分段也准的批改 + 中式英语针对性 + 老师终审闭环</b>」——把新航道唯一拿得出、别人拿不出的「教研 + 老师 + 学员」三件套，变成 AI 批改的护城河。</div>
+</section>
+
+<section class="section" id="you">
+  <h2>七、<span class="em">你的落点</span>：这盘棋你正好站在中间</h2>
+  <p class="sec-lead">这不只是给新航道的建议——对你(雅思老师 → AI 教育 PM)，这条线和你已有的资产严丝合缝。</p>
+  <table>
+    <tr><th>补足清单需要的能力</th><th>你已有的资产</th></tr>
+    <tr><td>雅思四维评分标准 + 各 band 标杆范文</td><td>✅ 雅思全科实训教师、1400+ 小时、9 分达人教学法、公式册/答案册体系</td></tr>
+    <tr><td>把教研「语料化」喂模型</td><td>✅ 已做教学反馈自动化(ChatGPT+MiniMax，10→1 分钟)、把教学框架嵌进 Gemini Gem</td></tr>
+    <tr><td>teacher-in-the-loop 的产品底座</td><td>✅ <b>Project B = AI 教学服务成果生成 + 持续跟进系统</b>(飞书)，本质就是「老师信息沉淀→学生复习→助教跟进」的人机协同闭环</td></tr>
+    <tr><td>多角色需求 + 平台化落地</td><td>✅ Project B 飞书低代码延展(教师/助教/顾问/管理者多视图)、已有多角色反馈迭代习惯</td></tr>
+    <tr><td>中式英语负迁移的针对性反馈</td><td>✅ 一线带中国考生、翻译方法论已配「中→英+为什么」{en,cn,why}</td></tr>
+  </table>
+  <div class="callout c-xhd"><b>给你的判断：</b>新航道这个「写作批改空白」对你是<b>双重机会</b>——① 作为 PM 候选人，这是能写进 portfolio/PRD 的真实机会(接 L0 机会 6 + 本报告);② 作为新航道在职老师，这是你能在内部真正推动、用 Project B 延展落地的事。<b>把「Project B(教学服务闭环)」+「雅思写作批改(对齐四维+老师终审)」缝起来，就是你最有说服力的 PM 作品。</b></div>
+</section>
+
+<section class="section" id="caveat">
+  <h2>八、数据纠偏 & 存疑（别踩坑）</h2>
+  <ul>
+    <li><b>纠偏：新东方「设备业务利润率 23%」</b> —— 经核实，23.7% 实为<b>核心教育业务整体</b>经营利润率(剔除东方甄选)，<b>不是设备业务</b>；设备所在「教育新业务」官方口径仅「利润率 &gt; 10%」。引用时别把 23% 安到设备/学习机头上。</li>
+    <li><b>纠偏：慧学「10→2 分钟、97% 准」是「考研英语」</b>，不是雅思；新东方最强的批改 AI <b>没用在雅思上</b>。</li>
+    <li><b>防误报：「南昊 AI 批改作文」≠ 新航道</b> —— 搜「新航道 AI 批改」会高排一份南昊(Nanhao，北京阅卷扫描公司，nhcisc/nhii.cn)的 PDF，"nh"指南昊不是新航道，切勿张冠李戴。</li>
+    <li><b>存疑(宣传口径，无第三方验证)</b>：鲸小爱「学了几十位新航道老师经验」、雅思哥「1000 万用户/40 万次」、新通「AI 模考准确率高」、新东方雅思 Pro / 好未来考满分的 AI 与考官一致性数据(均未公开)。</li>
+    <li><b>好未来对雅思的身位</b>：是「侧翼/潜在」而非当下正面直接对手——直接重叠只在考满分/轻舟这条边缘线，且其 AI 只到「口语模考」。</li>
+  </ul>
+</section>
+
+<section class="section" id="src">
+  <h2>九、关键来源（精选）</h2>
+  <div class="srcgrid">
+    <p><b>新东方</b> · 慧学系统(多知网《新东方考研探索 AI 这一年》2024-12 / 新京报 2025-01) · AI 1对1(多知网/新浪科技 2025-06) · 雅思 Pro App(App Store via mwm.ai 2026-06) · 前途出国官网 · FY2025/FY2026Q1 财报会(21 经济网 2025-07 / 36氪 2025-10)</p>
+    <p><b>好未来/学而思</b> · 九章 MathGPT(财联社-WAIC 2025-07 / 界面 2023) · 学习机科目体系(新浪/聚超值测评 2025) · 考满分雅思 AI 口语模考(ielts.kmf.com 2024) · 学而思大学生/轻舟(App Store 2024) · FY2025 AI 战略(36氪 2025-04)</p>
+    <p><b>新航道 / 鲸小爱</b> · 鲸小爱发布(多知网 2018-10) · 鲸航科技官网 jinghangapps.com · 应用宝 v6.41.8(2025-03 在运营) · 报班送鲸小爱会员(新航道官网 2025) · 胡敏 AI 教育观(新航道官网 2024–25) · 剑桥 CUP 合作(2023-11)</p>
+    <p><b>雅思赛道 AI 工具</b> · 学为贵机考网 ieltscb.com · 智课斩雅思(多知网 2017)+批改网 smartpigai · 雅思哥 AI 评测(2025) · IELTS9(appinn 2024) · 知乎《六款 AI 雅思批改测评》(2024) · 搜狐《五平台对比》(2025)</p>
+    <p><b>防误报</b> · 南昊官网 nhcisc.com / nhii.cn(证明 nh=南昊≠新航道)</p>
+    <p><b>内部底牌(本地)</b> · 求职简历上下文(新航道雅思全科教师 1400+h、教学反馈自动化) · Project B project.md(AI 教学服务成果生成与持续跟进系统·飞书)</p>
+  </div>
+</section>
+
+<div class="footer">L1 · 雅思 AI 对标 battlecard · ai-pm-portfolio/analysis · 2026-06-08 · 接 L0 全景，喂后续 PRD</div>
+
+</body>
+</html>

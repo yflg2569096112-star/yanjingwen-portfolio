@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L2 · Niche Radar — 雅思写作/语言学习的"气象室"型细分机会</title>
+<style>
+  *{box-sizing:border-box;}
+  :root{
+    --ink:#1f2937;--mut:#6b7280;--line:#e5e7eb;--bg:#f6f7f9;
+    --teal:#134e4a;--violet:#6d28d9;--violet2:#7c3aed;--emer:#059669;--emerbg:#ecfdf5;
+    --amber:#b45309;--amberbg:#fffbeb;--red:#b91c1c;--redbg:#fef2f2;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;max-width:1080px;margin:0 auto;padding:32px 22px 90px;color:var(--ink);line-height:1.75;background:var(--bg);}
+  h1{font-size:26px;margin:0 0 6px;letter-spacing:-0.4px;line-height:1.35;}
+  .subtitle{color:var(--mut);font-size:14px;margin-bottom:18px;}
+  .meta-bar{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--mut);margin-bottom:22px;padding:11px 15px;background:#fff;border-radius:8px;border:1px solid var(--line);}
+  .meta-bar strong{color:var(--ink);}
+  nav.toc{position:sticky;top:0;z-index:50;background:rgba(246,247,249,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin:0 -22px 20px;padding:9px 22px;display:flex;gap:6px;flex-wrap:wrap;}
+  nav.toc a{font-size:12px;color:var(--violet);text-decoration:none;padding:4px 9px;border-radius:999px;border:1px solid #e2d9f3;background:#fff;white-space:nowrap;}
+  nav.toc a:hover{background:var(--violet);color:#fff;border-color:var(--violet);}
+
+  .hero{background:linear-gradient(135deg,#134e4a 0%,#6d28d9 100%);color:#fff;padding:30px 32px;border-radius:14px;margin-bottom:18px;box-shadow:0 6px 20px rgba(109,40,217,.28);}
+  .hero h2{color:#fff;border:0;padding:0;font-size:20px;margin:0 0 6px;}
+  .hero .lead{font-size:15px;opacity:.95;margin:0 0 16px;}
+  .hero .lead b{color:#fde68a;}
+  .hero .tldr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .tldr-card{background:rgba(255,255,255,.12);padding:15px 16px;border-radius:10px;border-left:3px solid #fbbf24;}
+  .tldr-card .num{font-size:11px;font-weight:700;color:#fde68a;letter-spacing:.5px;margin-bottom:6px;}
+  .tldr-card .text{font-size:13px;line-height:1.6;}
+  .tldr-card b{color:#fff;}
+
+  .section{background:#fff;border-radius:14px;padding:26px 28px;margin-bottom:18px;box-shadow:0 1px 2px rgba(0,0,0,.04);}
+  h2{font-size:20px;margin:0 0 6px;border-left:4px solid var(--violet);padding-left:12px;}
+  h2 .em{color:var(--emer);}
+  .sec-lead{color:var(--mut);font-size:13px;margin:0 0 16px;padding-left:13px;}
+  h3{font-size:15.5px;margin:18px 0 8px;}
+  p{margin:8px 0;}ul,ol{padding-left:20px;margin:8px 0;}li{margin:5px 0;}
+
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px;}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+  th{background:#f1edfa;font-weight:600;}
+  tr:hover td{background:#fafbfc;}
+  td.nm{font-weight:700;white-space:nowrap;}
+  .src{color:#9ca3af;font-size:11px;}
+  /* dot ratings */
+  .dots{letter-spacing:1px;font-size:12px;white-space:nowrap;}
+  .dots.p{color:var(--violet2);}      /* 承重 */
+  .dots.a{color:var(--amber);}        /* 契合 */
+  .gap{font-weight:700;font-size:11.5px;padding:1px 7px;border-radius:999px;white-space:nowrap;}
+  .gap.open{color:#065f46;background:var(--emerbg);border:1px solid #a7f3d0;}
+  .gap.half{color:var(--amber);background:var(--amberbg);border:1px solid #fde68a;}
+  .gap.full{color:var(--red);background:var(--redbg);border:1px solid #fecaca;}
+
+  .callout{padding:13px 17px;border-radius:10px;margin:14px 0;font-size:13.5px;}
+  .c-emer{background:var(--emerbg);border-left:4px solid #10b981;}
+  .c-violet{background:#f5f3ff;border-left:4px solid var(--violet);}
+  .c-amber{background:var(--amberbg);border-left:4px solid #f59e0b;}
+  .c-red{background:var(--redbg);border-left:4px solid #ef4444;}
+  .callout b{color:var(--ink);}
+
+  /* top picks */
+  .picks{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0;}
+  .pick{border:1px solid var(--line);border-radius:12px;padding:15px 16px;background:linear-gradient(180deg,#f5f3ff 0%,#ffffff 60%);}
+  .pick .tag{font-size:10.5px;font-weight:700;color:#fff;background:var(--violet2);padding:2px 8px;border-radius:999px;}
+  .pick h4{margin:9px 0 6px;font-size:15px;}
+  .pick p{margin:0;font-size:12.5px;color:#374151;}
+
+  /* moat diagram */
+  .moat{margin:16px 0;}
+  .moat .core{text-align:center;background:linear-gradient(135deg,#134e4a,#6d28d9);color:#fff;border-radius:12px;padding:14px 18px;font-weight:700;font-size:14px;max-width:520px;margin:0 auto 6px;box-shadow:0 4px 14px rgba(109,40,217,.25);}
+  .moat .core small{display:block;font-weight:400;opacity:.9;font-size:11.5px;margin-top:3px;}
+  .moat .arrow{text-align:center;color:var(--violet);font-size:20px;line-height:1;}
+  .moat .fan{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:6px;}
+  .moat .leaf{border:1px solid #ddd6fe;border-radius:10px;padding:11px 12px;background:#faf9ff;}
+  .moat .leaf .who{font-size:11px;color:var(--mut);}
+  .moat .leaf .what{font-weight:700;font-size:13px;margin-top:2px;}
+  .moat .leaf .ev{font-size:11px;color:#6b7280;margin-top:4px;}
+
+  .footer{text-align:center;color:#9ca3af;font-size:12px;margin-top:24px;}
+  .srcgrid{columns:2;column-gap:22px;font-size:12px;}
+  .srcgrid p{break-inside:avoid;margin:0 0 9px;color:#4b5563;}
+  .srcgrid b{color:var(--ink);}
+  @media (max-width:760px){.hero .tldr-grid,.picks,.moat .fan{grid-template-columns:1fr;}.srcgrid{columns:1;}}
+  @media print{nav.toc{display:none;}body{background:#fff;}.section{box-shadow:none;border:1px solid var(--line);}}
+</style>
+</head>
+<body>
+
+<h1>Niche Radar · 雅思写作/语言学习的"气象室"型细分机会</h1>
+<div class="subtitle">L2 · 6 路全网撒网 → 去重 + 承重/空白/契合三关筛 → 14 个站得住的 niche + 诚实红牌（接 L1，喂 PRD）</div>
+<div class="meta-bar">
+  <span>📅 <strong>2026-06-09</strong></span>
+  <span>🔭 <strong>6 路并行联网 · ~36 原始候选</strong></span>
+  <span>🧭 透镜 <strong>气象室 = 细 × 承重 × 被忽略 × 可防守</strong></span>
+  <span>✅ 入选 <strong>14</strong> · 🔴 证伪/红海 <strong>9</strong></span>
+  <span>🔗 关联 <strong>L0 全景 · L1 对标 · Project B</strong></span>
+</div>
+
+<nav class="toc">
+  <a href="#tldr">核心</a><a href="#rubric">怎么读</a><a href="#top">⭐Top3</a><a href="#moat">护城河</a>
+  <a href="#gA">A写作内功</a><a href="#gB">B邻近技能</a><a href="#gC">C新技术</a><a href="#gD">D人群</a><a href="#gE">E机构侧</a>
+  <a href="#red">🔴红牌</a><a href="#method">方法</a><a href="#src">来源</a>
+</nav>
+
+<div class="hero" id="tldr">
+  <h2>这张雷达在说什么</h2>
+  <p class="lead">"大而全的 AI 批改器"是海滩（已饱和）；真正决定成败、却没人做的是<b>海滩下面那些细而承重的"气象室"瞬间</b>。撒网撒回 36 个，去重 + 诚实剔除红海后，<b>14 个站得住</b>。</p>
+  <div class="tldr-grid">
+    <div class="tldr-card"><div class="num">方法在起作用</div><div class="text">不是堆数量——6 路里 <b>9 个候选被当场证伪</b>（医护 OET 已饱和、Part2 那 1 分钟根本不计分、流失预警是 SaaS 红海…）。留下的都过了"承重×空白"双关。</div></div>
+    <div class="tldr-card"><div class="num">分布在 5 个矿层</div><div class="text">写作内功 · 写作外邻近技能（口语/听力）· 新技术刚解锁 · 被忽略人群 · <b>机构/老师侧（接 Project B）</b>。最快落地的在机构侧。</div></div>
+    <div class="tldr-card"><div class="num">真护城河是"一鱼多吃"</div><div class="text">最强的几个 niche <b>共享一个底座</b>：你的批改讲解经验 + Project B 飞书沉淀。一份语料喂家长/新老师/质检/学生——见下方护城河图。</div></div>
+  </div>
+</div>
+
+<section class="section" id="rubric">
+  <h2>怎么读这张雷达</h2>
+  <p class="sec-lead">每个 niche 打三个分。三关都过才进表；任一关塌就降级或进红牌。</p>
+  <table>
+    <tr><th>维度</th><th>含义</th><th>记法</th></tr>
+    <tr><td><b>承重</b></td><td>成败是不是真在这一步决定（有研究/数据支撑，不是"感觉重要"）</td><td><span class="dots p">●●●●●</span> 越多越承重</td></tr>
+    <tr><td><b>空白</b></td><td>现在有没有人做透了</td><td><span class="gap open">🟢空</span> 真空 / <span class="gap half">🟡半</span> 有人蹭没做透 / <span class="gap full">🔴挤</span> 红海</td></tr>
+    <tr><td><b>契合</b></td><td>和你（雅思写作老师 + Project B + 新航道在职）的优势契合度</td><td><span class="dots a">●●●●●</span> 越多越吃你的料</td></tr>
+  </table>
+  <div class="callout c-amber"><b>诚实基调：</b>本雷达的价值一半在"找到了什么"、一半在"<b>诚实排除了什么</b>"。凡 agent 查到"其实已被做透/被通用 LLM 吃掉/根本不承重"的，都进了 <a href="#red" style="color:var(--violet)">🔴 红牌区</a> 并写明原因，而不是塞进清单凑数。</div>
+</section>
+
+<section class="section" id="top">
+  <h2>⭐ 三个推荐（按你想往哪打）</h2>
+  <div class="picks">
+    <div class="pick"><span class="tag">最快落地</span><h4>成果可感知化 + 教研沉淀</h4><p>接 Project B + 飞书，不赌 C 端市场，能在新航道内部真推动。直击 ~80% 流失主因。<b>（E 组）</b></p></div>
+    <div class="pick"><span class="tag">最干净的气象室</span><h4>名词短语致密化 / 自评校准</h4><p>承重证据最硬、最吃你的教学判断，纯 AI 做不了（会过度名词化 / 会"代判"帮倒忙）。<b>（A 组）</b></p></div>
+    <div class="pick"><span class="tag">PM 叙事最强</span><h4>草稿"思路链诊断"</h4><p>把 ScratchMath 研究范式从数学迁到雅思写作——研究刚点亮、产品全空，故事有背书。<b>（C 组）</b></p></div>
+  </div>
+</section>
+
+<section class="section" id="moat">
+  <h2>🎯 比单个 niche 更重要：你的<span class="em">"一鱼多吃"护城河</span></h2>
+  <p class="sec-lead">最强的几个 niche 不是各自独立——它们<b>共用同一个底座</b>。这才是你做 PM 最该讲的故事。</p>
+  <div class="moat">
+    <div class="core">资深写作老师的批改 / 讲解经验 + Project B（飞书沉淀）<small>一份教研语料底座，沉在新航道已全员上的飞书里</small></div>
+    <div class="arrow">▼</div>
+    <div class="fan">
+      <div class="leaf"><div class="who">→ 输出给家长</div><div class="what">成果可感知化</div><div class="ev">治 ~80% 流失</div></div>
+      <div class="leaf"><div class="who">→ 输出给新老师</div><div class="what">带教 / 经验显性化</div><div class="ev">抗名师流失</div></div>
+      <div class="leaf"><div class="who">→ 用作质检基准</div><div class="what">AI 查老师批改漂移</div><div class="ev">真蓝海</div></div>
+      <div class="leaf"><div class="who">→ 输出给学生</div><div class="what">纵向进步台账</div><div class="ev">历史=复利护城河</div></div>
+    </div>
+  </div>
+  <div class="callout c-violet"><b>所以你真正的护城河不是某一个 niche，是这个"教研语料底座"能同时承重好几个 niche。</b>独立工具拿通用 GPT 拼不出这份料，巨头又没把雅思写作当重点——这正好是 L1 报告里"新航道有料没把料 AI 化"那个缺口的产品化路径。</div>
+</section>
+
+<!-- GROUP A -->
+<section class="section" id="gA">
+  <h2>A · 写作内功 <span style="font-size:13px;color:var(--mut)">（你最主场）</span></h2>
+  <table>
+    <tr><th>niche</th><th>承重</th><th>空白</th><th>契合</th><th>承重的"那一下" · 现状</th></tr>
+    <tr><td class="nm">名词短语<br>致密化</td><td><span class="dots p">●●●●●</span></td><td><span class="gap half">🟡半</span></td><td><span class="dots a">●●●●●</span></td><td>把"动词+从句"压成致密名词组，是 6→7 的真天花板——<b>complex nominal/t-unit 是高分 L2 写作最强单一预测指标</b>。主流却喊"用难词难句"（反而扣分）。现状：零散 worksheet，没"诊断阶段→针对训练→追踪密度"的闭环；QuillBot 替你改但不教机制。<span class="src">Kyle 2018 MLJ；Biber/Gray/Poonpon 2011</span></td></tr>
+    <tr><td class="nm">自评校准<br>训练</td><td><span class="dots p">●●●●○</span></td><td><span class="gap open">🟢空</span></td><td><span class="dots a">●●●●○</span></td><td>中低分学生系统性<b>高估自己、看不见自己的错</b>（Dunning-Kruger），这是重考生反复同分的元凶。现状：grammar checker / band estimator 全是"替你判断"，<b>反而剥夺了校准训练</b>。"先自评→对真实 band→显示你高估在哪维"的循环没人做。<span class="src">TESL-EJ 元认知监控；D-K in L2</span></td></tr>
+    <tr><td class="nm">Theme-Rheme<br>信息流衔接</td><td><span class="dots p">●●●●○</span></td><td><span class="gap half">🟡半</span></td><td><span class="dots a">●●●●○</span></td><td>Coherence 本质是"已知→新知"的信息排布，<b>独立于语法</b>（句句对、照样不顺），而所有人把它等同于"加连接词"（机械堆=Band6 封顶）。现状：学术引擎已有（Thematizer ~85% 准）但给研究者、没接雅思、没"这里断流→这样改"。<span class="src">IELTS 官方 Cotton 2011；Thematizer/ThemePro</span></td></tr>
+    <tr><td class="nm">进步台账<br>（纵向）</td><td><span class="dots p">●●●●○</span></td><td><span class="gap open">🟢空</span></td><td><span class="dots a">●●●●○</span></td><td>所有 checker 都是<b>单篇快照</b>，没人答"我练了 3 个月到底有没有进步"——而进步感=留存命门（"so difficult to measure progress"）。现状：C 端做"个人进步曲线/根因画像"的没成熟产品；历史数据越用越厚=天然抗复制护城河。<span class="src">ieltsetc 2019；arXiv 2512.24460</span></td></tr>
+  </table>
+</section>
+
+<!-- GROUP B -->
+<section class="section" id="gB">
+  <h2>B · 写作外邻近技能 <span style="font-size:13px;color:var(--mut)">（口语/听力，与写作互补）</span></h2>
+  <table>
+    <tr><th>niche</th><th>承重</th><th>空白</th><th>契合</th><th>承重的"那一下" · 现状</th></tr>
+    <tr><td class="nm">连读/弱读/<br>语调实时塑形</td><td><span class="dots p">●●●●●</span></td><td><span class="gap half">🟡半</span></td><td><span class="dots a">●●●●○</span></td><td>连读/弱读/句子重音节奏=中式"一词一蹦 choppy"的根因，决定发音分（占口语 25%）。<b>剑桥：68% 的 B2 学习者卡在 suprasegmental（韵律）而非词汇语法</b>。现状：ELSA 只做单音、自承不覆盖连读；shadowing 类在蹭但多是 ASR+文本对比、非真韵律，<b>没有"雅思特定+真韵律反馈"的主导者</b>。<span class="src">剑桥 2023；ELSA 评测 2026</span></td></tr>
+    <tr><td class="nm">停顿"语言/<br>内容"归因</td><td><span class="dots p">●●●●○</span></td><td><span class="gap open">🟢空</span></td><td><span class="dots a">●●●●○</span></td><td>考官对"想内容"的停顿宽容、对"找词/想语法"的停顿扣分——<b>区分两类停顿是 Band6→7 的唯一判别口径</b>。现状：所有 AI 只给"流利度/语速/停顿次数"，<b>不归因停顿性质</b>。这是打分工具的盲区。<span class="src">Band 描述符；keithspeakingacademy</span></td></tr>
+    <tr><td class="nm">听力"预测+<br>记笔记"子技能</td><td><span class="dots p">●●●●○</span></td><td><span class="gap open">🟢空</span></td><td><span class="dots a">●●●○○</span></td><td>录音只放一遍，<b>听前 30 秒预测 + 听中记关键词</b>（尤其 Section4 讲座、地图题）决定 Band7+。现状：整个听力市场=堆 mock 题量；预测/记笔记只散落在网页课文+PDF，<b>没 app 做成训练闭环</b>。真空最干净。<span class="src">British Council note-taking PDF；ielts.net</span></td></tr>
+  </table>
+</section>
+
+<!-- GROUP C -->
+<section class="section" id="gC">
+  <h2>C · 新技术刚解锁 <span style="font-size:13px;color:var(--mut)">（窗口刚开，还能抢）</span></h2>
+  <table>
+    <tr><th>niche</th><th>承重</th><th>空白</th><th>契合</th><th>承重的"那一下" · 现状</th></tr>
+    <tr><td class="nm">草稿<br>"思路链诊断"</td><td><span class="dots p">●●●●●</span></td><td><span class="gap open">🟢空</span></td><td><span class="dots a">●●●●●</span></td><td>拍照草稿 → AI 不做 OCR 纠错，而是<b>重建并诊断你的"推理链"</b>：哪步从中式提纲跳来、哪个逻辑断点反复出现。雅思真正卡分是思路组织、不是语法。现状：<b>研究刚证明"方向对、模型还差一口气"（ScratchMath/MathCog/Oxford 全在数学），ESL 写作零产品</b>，市面全是 OCR→打分。技术就绪=中（写作草稿比数学涂鸦结构清晰）。<span class="src">arXiv 2603.24961 / 2504.00843</span></td></tr>
+    <tr><td class="nm">句中<br>非评判微提示</td><td><span class="dots p">●●●●○</span></td><td><span class="gap half">🟡半</span></td><td><span class="dots a">●●●○○</span></td><td>GPT-4o realtime 让"<b>学生还在说、屏幕悄悄浮一个非打断的支架词</b>"第一次可做。中国考生最大痛点是"开口即卡壳"。现状：现有要么事后反馈、要么打断式追问（Part3 已被中国玩家做透），<b>"说话当下、不打断、给支架"这层空着</b>，realtime API 出来才一年。<span class="src">realtime API；网易口语测评 2026</span></td></tr>
+    <tr><td class="nm">Task 1<br>按阶段读图引导</td><td><span class="dots p">●●●●○</span></td><td><span class="gap half">🟡半</span></td><td><span class="dots a">●●●●●</span></td><td>多模态读题图 → <b>现场生成"按阶段读这张图"的引导</b>（先总趋势→分组→比峰值交点），像老师手把手。Task1 死法是 data dump 忘 overview=读图思路问题。现状：打分工具饱和；staged walkthrough 只在研究原型 + Socrally 逼近（但它是固定题库 drill、非"任意图现场生成"）。正吃你"按阶段"教学法。<span class="src">Socrally；ScaffoldED AI 研究</span></td></tr>
+  </table>
+</section>
+
+<!-- GROUP D -->
+<section class="section" id="gD">
+  <h2>D · 被忽略的人群</h2>
+  <table>
+    <tr><th>niche</th><th>承重</th><th>空白</th><th>契合</th><th>承重的"那一下" · 现状</th></tr>
+    <tr><td class="nm">"够分就行"<br>目标分工程师</td><td><span class="dots p">●●●●●</span></td><td><span class="gap open">🟢空</span></td><td><span class="dots a">●●●●●</span></td><td>移民/工签考生只要每项 6.0/6.5，<b>单项卡线=签证泡汤</b>。"够分就行"和"冲高分"是两套相反策略（前者=消除失分项+田忌赛马配分），但<b>所有工具的隐含目标都是"越高越好"</b>。现状：几乎无产品化（All Ears English 一期播客点到但非产品）。<b>⚠️ 中国大陆 GT 仅 1.7%，承重主要在全球 GT 池（~20%）——做国内市场需谨慎。</b><span class="src">ielts.org 统计；runsunedu 引 2023-24</span></td></tr>
+  </table>
+</section>
+
+<!-- GROUP E -->
+<section class="section" id="gE">
+  <h2>E · 机构 / 老师侧 <span style="font-size:13px;color:var(--mut)">（B2B 内部提效，接 Project B，最快落地）</span></h2>
+  <table>
+    <tr><th>niche</th><th>承重</th><th>空白</th><th>契合</th><th>承重的"那一下" · 现状</th></tr>
+    <tr><td class="nm">成果可感知化<br>（给家长）</td><td><span class="dots p">●●●●●</span></td><td><span class="gap open">🟢空</span></td><td><span class="dots a">●●●●●</span></td><td>直击续费率：<b>约 80% 家长因"感知不到教学成果"而停止续费</b>（"家长不为承诺买单、为证据续费"）。现状：教务 SaaS 是老师手填模板、没解决"老师懒得写"的根因，留学语培尤其空白。<b>几乎=Project B 核心</b>，新航道飞书案例已把它当卖点。写作单科最易量化（进步/错误收敛/词汇升级）。<span class="src">教育界网 2025；飞书官网 2026-01</span></td></tr>
+    <tr><td class="nm">教研沉淀 +<br>新师带教</td><td><span class="dots p">●●●●●</span></td><td><span class="gap open">🟢空</span></td><td><span class="dots a">●●●●○</span></td><td>机构规模化生死线 + 抗名师流失（好未来"做大教研、淡化名师"方法论）。新东方训 AI 是"20 培训师+几百老师喂上万篇"=<b>经验萃取靠人力堆</b>。现状：SOP 靠文档+人肉，<b>没产品从老师实操自动萃取方法论</b>。新航道已自建 100 个 agent（含"新顾问培训"）验证需求。<span class="src">36氪；新京报；飞书官网</span></td></tr>
+    <tr><td class="nm">批改质检<br>（AI 查人）</td><td><span class="dots p">●●●●○</span></td><td><span class="gap open">🟢空</span></td><td><span class="dots a">●●●●○</span></td><td>雅思批改最主观，不同老师标准漂移→学生体感不公、投诉退费。现状：<b>全行业 AI 都在"替学生改"，没人做 B 端"AI 查老师批改的标准漂移"</b>（新东方只是"人查 AI 10%"=反向）。真蓝海，写作最主观最需要。<span class="src">博客园评测 2026；六款横评</span></td></tr>
+  </table>
+</section>
+
+<!-- RED CARD -->
+<section class="section" id="red">
+  <h2>🔴 红牌区 <span style="font-size:13px;color:var(--mut)">（诚实排除：已做透 / 被 LLM 吃 / 不承重）</span></h2>
+  <p class="sec-lead">这是这份雷达"可信"的关键——下面的没塞进清单凑数，而是写明为什么别碰。</p>
+  <table>
+    <tr><th>被排除的"伪 niche"</th><th>为什么红牌</th></tr>
+    <tr><td>无错句率教练（Band7=50% 无错句）</td><td>本质=语法检测+计数，<b>Grammarly/LanguageTool 已做透</b>，AI 在 Band5-6 接近人类，护城河薄</td></tr>
+    <tr><td>Part 3 交互追问 / 记忆型考官</td><td><b>通用 LLM + 中国玩家（可栗"教育 Agent"）正在吃</b>，窗口在关，护城河最浅</td></tr>
+    <tr><td>Part 2 那"1 分钟准备"笔记</td><td>最像气象室，但<b>这 1 分钟本身不计分</b>（官方多次降权），且 ChatGPT 已在帮 brainstorm</td></tr>
+    <tr><td>医护 OET vs IELTS</td><td><b>已做透，且 OET 已反超 IELTS 成英国护士首选</b>（2022/23 近 1.4 万护士），这群人已集体迁出</td></tr>
+    <tr><td>在职 2 周速成</td><td>Englitute/Leap Scholar 等 crash course <b>已饱和</b>；唯一残余=并入"目标分工程师"</td></tr>
+    <tr><td>学员流失/续报预警 · 排课 · C 端批改</td><td><b>教务 SaaS 红海</b>（校宝/校盈易/小成迹）+ C 端批改六七款做透；只有转 B 端"成果/质检"才有空间</td></tr>
+    <tr><td>"老烤鸭卡 6.5"诊断</td><td>实质=我们已有的"<b>错误复发追踪</b>"换皮，不算新人群</td></tr>
+    <tr><td>跨工具分数仲裁 / 刻薄判官 / 考场计时降级</td><td>🟡二线：可做，但护城河偏薄 / 偏行为训练，证据密度不如上面 14 个，列为备选不主攻</td></tr>
+  </table>
+</section>
+
+<!-- METHOD -->
+<section class="section" id="method">
+  <h2>方法论 & 存疑</h2>
+  <ul>
+    <li><b>怎么找的</b>：6 路并行联网，各用一个不同"找矿"视角——①学习者瓶颈/卡点 ②真实吐槽挖掘（Reddit/知乎/小红书/应用评论）③被忽略人群 ④写作外邻近技能 ⑤新技术解锁 ⑥机构/老师侧运营。每路独立取证、各返 4-8 候选，共 ~36 个。</li>
+    <li><b>怎么筛的</b>：去重 → 每个过"承重测试（有没有研究/数据证明它真决定成败）+ 空白测试（是不是真没人做透）"双关 → 三关都过进表，塌一关进红牌。</li>
+    <li><b>已避开</b>：本轮刻意不重复前面已锁定的 6 个角度（rewrite 闭环 / 审题 90 秒 / 错误复发 / 范文反向工程 / 中文思路→英文论证 / 老师终审）。</li>
+    <li><b>存疑项</b>：① Reddit/小红书原帖在调研环境无法直接抓取，论坛级吐槽多经第三方博客转引——写进正式 PRD 前建议你本人各捞 5-10 条一手帖复核；② "草稿思路链诊断"技术就绪度=中（研究证明视觉解读仍是瓶颈），是"窗口刚开"不是"现成能做"；③ 各厂商宣传的提分/续费数字（如某机构续费 51%→89%）多为营销口径，已标注不可当实证。</li>
+  </ul>
+  <div class="callout c-amber"><b>下一步（喂 PRD）</b>：从 Top3 里挑 1-2 个，像验证 rewrite 那样各跑一轮深度"承重+空白"双验证，挖到能写 PRD 的程度；或直接把"成果可感知化 + Project B"用 <code>/funnel</code> 走一遍 MVP 漏斗。</div>
+</section>
+
+<!-- SOURCES -->
+<section class="section" id="src">
+  <h2>关键来源（精选）</h2>
+  <div class="srcgrid">
+    <p><b>写作内功(A)</b> · Kyle 2018《MLJ》fine-grained phrasal indices · Biber/Gray/Poonpon 2011《TESOL Quarterly》clausal→phrasal 五阶段 · IELTS 官方 Cotton et al. 2011（C&C examiner rating）· Thematizer.org / ThemePro(LREC 2020) · TESL-EJ 元认知监控 · arXiv 2512.24460(IELTS revision platform)</p>
+    <p><b>邻近技能(B)</b> · 剑桥 2023 suprasegmental 68%（abblino 转引）· ELSA 评测(alllanguageresources/3D-Academy) · shadowing.app / Parroto · Keith Speaking Academy(停顿/Band6→7) · British Council Part4 note-taking PDF · ielts.net 预测训练</p>
+    <p><b>新技术(C)</b> · ScratchMath《Can MLLMs Read Students' Minds?》arXiv 2603.24961 · MathCog arXiv 2504.00843 · Oxford《Seeing the Big Picture》arXiv 2510.05538 · Socrally(read charts like an examiner) · OpenAI Realtime API · 网易《2025 雅思口语 AI 陪练》(咕噜/可栗)</p>
+    <p><b>人群(D)</b> · ielts.org Test Statistics(GT~20%) · runsunedu 引 2023-24 中国大陆成绩报告(GT 1.7%) · All Ears English EP778(minimum vs minimal) · 加澳移民最低分门槛(abroadpathway/immigrationandstudyabroad)</p>
+    <p><b>机构侧(E)</b> · 中金《在线 K12 教培经济模型》(续费/LTV) · 教育界网/知乎(80% 家长因感知不到成果停续) · 新京报《慧学》(20 培训师+几百老师) · 36氪(好未来"大教研淡化名师") · 飞书官网《新航道全员上飞书》2026-01(100 个 AI 智能体) · 校宝/校盈易(SaaS 红海对照)</p>
+    <p><b>红牌证伪</b> · Nursing Times(OET 反超 IELTS) · OET impact report(1.4 万护士) · ielts-advantage/Keith(Part2 1 分钟不计分) · OpenAI sycophancy 官方说明 · 博客园 2026 六款批改横评</p>
+  </div>
+</section>
+
+<div class="footer">L2 · Niche Radar · ai-pm-portfolio/analysis · 2026-06-09 · 接 L0 全景 / L1 对标，喂后续 PRD</div>
+
+</body>
+</html>

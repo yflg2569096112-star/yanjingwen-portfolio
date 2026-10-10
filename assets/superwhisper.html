@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Superwhisper｜每日产品拆解训练台</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --ink: #172033;
+      --muted: #667085;
+      --panel: #ffffff;
+      --line: #d8e0ea;
+      --blue: #2563eb;
+      --blue-soft: #eaf1ff;
+      --green: #166534;
+      --green-soft: #e9f7ed;
+      --amber: #9a3412;
+      --amber-soft: #fff3df;
+      --rose: #be123c;
+      --rose-soft: #fff1f2;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+    }
+
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 34px 18px 56px;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 12px; font-size: clamp(28px, 4vw, 46px); line-height: 1.12; letter-spacing: 0; }
+    h2 { margin-bottom: 14px; font-size: 22px; letter-spacing: 0; }
+    h3 { margin-bottom: 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin-bottom: 10px; }
+    ul { margin: 0; padding-left: 20px; }
+    li { margin: 6px 0; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr);
+      gap: 18px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+
+    .hero-copy, .screenshot, .panel, .candidate, .metric, .slide-card, .reflection-box, .cover-prompt-skill, .prompt-variable {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .hero-copy { padding: 26px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .tag, .pill {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      min-height: 25px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: #eef2f7;
+      color: #344054;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .tag.blue { background: var(--blue-soft); color: #17408f; }
+    .tag.rose { background: var(--rose-soft); color: var(--rose); }
+    .subtitle { color: var(--muted); font-size: 15px; }
+    .verdict { margin: 18px 0 0; padding: 15px; border-left: 4px solid var(--blue); background: var(--blue-soft); font-weight: 800; color: #173a83; }
+
+    .screenshot {
+      min-height: 310px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        linear-gradient(135deg, rgba(37,99,235,.12), rgba(22,101,52,.1)),
+        #fff;
+    }
+
+    .browser-bar {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: #cbd5e1; }
+    .mock-screen { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+    .mock-block { min-height: 86px; padding: 12px; border: 1px dashed #aab7c8; border-radius: 8px; background: rgba(255,255,255,.72); }
+    .mock-block strong { display: block; margin-bottom: 8px; }
+
+    .section-nav {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .section-nav a {
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .panel { margin-top: 16px; padding: 22px; }
+    .candidate-grid, .metric-grid, .learn-grid, .slide-grid, .reflection-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .candidate { padding: 16px; }
+    .candidate-rank { margin-bottom: 10px; color: var(--blue); font-weight: 900; }
+    .candidate span { color: var(--muted); font-size: 13px; font-weight: 700; }
+
+    .metric { padding: 15px; }
+    .metric b { display: block; margin-bottom: 4px; color: var(--muted); font-size: 12px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow-wrap: anywhere;
+    }
+
+    th, td {
+      padding: 11px 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    th { background: #f8fafc; color: #475467; }
+    .ok { background: var(--green-soft); color: var(--green); }
+    .warn { background: var(--amber-soft); color: var(--amber); }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .flow-step {
+      position: relative;
+      min-height: 116px;
+      padding: 14px;
+      border: 1px solid #bad0ff;
+      border-radius: 8px;
+      background: var(--blue-soft);
+    }
+
+    .flow-step span {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .learn-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .xhs {
+      border-color: #fecdd3;
+      background: linear-gradient(180deg, #fff, #fff7f8);
+    }
+
+    .slide-card { min-height: 124px; padding: 16px; }
+    .slide-card span { color: var(--rose); font-size: 12px; font-weight: 900; }
+    .draft {
+      margin-top: 12px;
+      padding: 16px;
+      border: 1px solid #fecdd3;
+      border-radius: 8px;
+      background: #fff;
+      white-space: pre-wrap;
+    }
+
+    .cover-prompt-skill {
+      margin-top: 14px;
+      padding: 16px;
+      background: #fff;
+      border-color: #fecdd3;
+    }
+
+    .prompt-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .prompt-head h3,
+    .cover-prompt-skill h4 {
+      margin-bottom: 6px;
+      letter-spacing: 0;
+    }
+
+    .prompt-variable-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .prompt-variable {
+      padding: 11px;
+      background: #fff7f8;
+    }
+
+    .prompt-variable b {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--rose);
+      font-size: 12px;
+    }
+
+    .prompt-block {
+      margin: 0;
+      padding: 14px;
+      border: 1px solid #fecdd3;
+      border-radius: 8px;
+      background: #fff;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .reflection-box { padding: 15px; min-height: 118px; background: #fcfcfd; }
+    .reflection-box p { color: var(--muted); font-size: 13px; }
+    .write-line { height: 42px; border-bottom: 1px solid #cbd5e1; }
+
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .check-grid label {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      font-weight: 700;
+    }
+
+    .small { color: var(--muted); font-size: 13px; }
+
+    @media (max-width: 920px) {
+      .hero, .candidate-grid, .metric-grid, .learn-grid, .slide-grid, .reflection-grid, .check-grid, .prompt-variable-grid { grid-template-columns: 1fr; }
+      .section-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 560px) {
+      main { padding: 22px 12px 40px; }
+      .hero-copy, .panel { padding: 18px; }
+      .section-nav, .flow, .mock-screen { grid-template-columns: 1fr; }
+      th, td { padding: 9px 7px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="meta">
+          <span class="tag blue">2026-06-20</span>
+          <span class="tag">每天练，择优发</span>
+          <span class="tag rose">转型中的自己人</span>
+          <span class="tag">AI dictation / personal workflow input layer</span>
+        </div>
+        <h1>Superwhisper｜每日产品拆解训练台</h1>
+        <p class="subtitle">AI powered voice to text for macOS, Windows, and iOS.</p>
+        <p><strong>官网：</strong><a href="https://superwhisper.com/">https://superwhisper.com/</a></p>
+        <div class="verdict">Superwhisper 值得拆，不是因为“语音转文字”这个功能新，而是因为它把语音做成了一个跨 App 的个人输入层：在任何输入框里说话，经过本地或云端模型、模式和 prompt 处理后，直接变成可发送、可写作、可给 AI 的文本。</div>
+      </div>
+      <aside class="screenshot" aria-label="官网截图占位">
+        <div>
+          <div class="browser-bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span>https://superwhisper.com/</span>
+          </div>
+          <div class="mock-screen">
+            <div class="mock-block"><strong>官网截图位</strong><span class="small">放首屏、定价页或核心功能截图。</span></div>
+            <div class="mock-block"><strong>今日结论</strong><span class="small">它对 Project B 的启发是：课堂内容和老师想法的输入成本如果降不下来，后面的 AI 整理、质检、学生复习页都很难稳定发生；先把老师的语音/碎片想法变成结构化文本入口，可能比一开始做完整平台更现实。</span></div>
+          </div>
+        </div>
+        <p class="small">导出小红书配图时，优先截取本页的卡片和流程图区。</p>
+      </aside>
+    </section>
+
+    <nav class="section-nav">
+      <a href="#s1">1. 一句话判断</a><a href="#s2">2. 用户与场景</a><a href="#s3">3. PMF 证据</a><a href="#s4">4. 产品路径</a><a href="#s5">5. 商业模型</a><a href="#s6">6. 交互与功能取舍</a><a href="#s7">7. 我能偷学什么</a><a href="#s8">8. 我的小红书表达</a>
+    </nav>
+
+    <section class="panel" id="candidates">
+      <h2>候选池</h2>
+      <p class="small">每天先看 3 个候选，再选 1 个进入深拆。推荐顺序以 PMF 信号、可学习性、与你转型路线的相关性为准。</p>
+      <div class="candidate-grid">
+    <article class="candidate">
+      <div class="candidate-rank">#1</div>
+      <h3>Superwhisper</h3>
+      <p>适合训练“高频个人输入层”判断：语音不是内容终点，而是任何工作流的入口。</p>
+      <span>个人 AI 工作流 / 教师输入入口 / AI 工具运营</span>
+    </article>
+  
+    <article class="candidate">
+      <div class="candidate-rank">#2</div>
+      <h3>Cap</h3>
+      <p>适合下次拆开源录屏、异步协作和 creator-led distribution。</p>
+      <span>内容工作流 / 开源 PLG</span>
+    </article>
+  
+    <article class="candidate">
+      <div class="candidate-rank">#3</div>
+      <h3>Raycast</h3>
+      <p>适合拆 launcher 如何成为 power user 工作流入口和插件生态。</p>
+      <span>个人效率平台 / 插件生态</span>
+    </article>
+  </div>
+    </section>
+
+    <section class="panel" id="s1">
+      <h2>1. 一句话判断</h2>
+      <p>Superwhisper 值得拆，不是因为“语音转文字”这个功能新，而是因为它把语音做成了一个跨 App 的个人输入层：在任何输入框里说话，经过本地或云端模型、模式和 prompt 处理后，直接变成可发送、可写作、可给 AI 的文本。</p>
+      <p><strong>为什么值得拆：</strong>它对 Project B 的启发是：课堂内容和老师想法的输入成本如果降不下来，后面的 AI 整理、质检、学生复习页都很难稳定发生；先把老师的语音/碎片想法变成结构化文本入口，可能比一开始做完整平台更现实。</p>
+    </section>
+
+    <section class="panel" id="s2">
+      <h2>2. 用户与场景</h2>
+      <div class="metric-grid">
+        <div class="metric"><b>用户</b>每天要写很多内容、发消息、做笔记、和 AI 对话的 Mac / Windows / iOS power users，尤其是创作者、开发者、产品人、研究者、老师和有打字负担的人。</div>
+        <div class="metric"><b>痛点</b>打字慢、长文本输入累、手机或电脑原生 dictation 不够稳定；普通语音转写只给原始文本，不能按不同场景自动改写成邮件、Slack、笔记或 AI prompt。</div>
+        <div class="metric"><b>旧方法</b>用系统自带听写、录音后转写、Whisper 本地工具、手机语音输入，或者先说给 AI 再让 AI 改写。</div>
+      </div>
+      <p style="margin-top:12px"><strong>为什么现在可以做：</strong>本地小模型和云端大模型都成熟了，用户开始把 AI 当日常输入界面；语音输入从“偶尔转写”变成“每天多次触发的操作系统级入口”。</p>
+    </section>
+
+    <section class="panel" id="s3">
+      <h2>3. PMF 证据</h2>
+      <table>
+        <thead><tr><th>类型</th><th>信号</th><th>来源</th><th>强度</th></tr></thead>
+        <tbody>
+      <tr>
+        <td><span class="pill ok">证据</span></td>
+        <td>官网定位为 macOS、Windows、iOS 的 AI voice to text，强调任何 App 中可用、离线和云端语音识别、100+ 语言、自定义 AI modes。</td>
+        <td>https://superwhisper.com/</td>
+        <td>high</td>
+      </tr>
+    
+      <tr>
+        <td><span class="pill ok">证据</span></td>
+        <td>官网定价显示免费层，Pro 月付 $8.49、年付 $84.99、Lifetime $249.99，并提供学生折扣。</td>
+        <td>https://superwhisper.com/checkout?product=prod_PbC0CBtHsCt6Hf</td>
+        <td>high</td>
+      </tr>
+    
+      <tr>
+        <td><span class="pill ok">证据</span></td>
+        <td>Product Hunt 页面显示 4.9 分、20 reviews、约 596 followers，并把它归为 AI Dictation Apps；评论集中提到速度、准确、custom modes、prompt、local processing。</td>
+        <td>https://www.producthunt.com/products/superwhisper</td>
+        <td>medium</td>
+      </tr>
+    
+      <tr>
+        <td><span class="pill ok">证据</span></td>
+        <td>iOS 官方页强调 Talk into your phone, get formatted text in any app，offline、private、100+ languages，并支持 iPhone 场景。</td>
+        <td>https://superwhisper.com/ios</td>
+        <td>high</td>
+      </tr>
+    
+      <tr>
+        <td><span class="pill ok">证据</span></td>
+        <td>Argmax case study 称 hundreds of thousands use Superwhisper across iOS and macOS，并提到默认 onboarding 升级后 Free Trial to Pro conversion rate 提升 2x。</td>
+        <td>https://www.argmaxinc.com/blog/superwhisper</td>
+        <td>medium</td>
+      </tr>
+    
+      <tr>
+        <td><span class="pill warn">推测</span></td>
+        <td>留存不来自单次转写，而来自把“按快捷键说话”训练成肌肉记忆：写邮件、Slack、笔记、AI prompt、会议记录都走同一个入口。</td>
+        <td>基于官网功能和用户评论的产品推测</td>
+        <td>medium</td>
+      </tr>
+    
+      <tr>
+        <td><span class="pill warn">推测</span></td>
+        <td>Lifetime 定价可能不只是变现方式，也是在降低订阅疲劳，让 power users 更愿意把它当长期基础工具。</td>
+        <td>基于定价结构和 Product Hunt 用户评论的推测</td>
+        <td>medium</td>
+      </tr>
+    </tbody>
+      </table>
+      <p class="small">规则：没有真实公开来源就写成推测，不能把热度当作 PMF。</p>
+    </section>
+
+    <section class="panel" id="s4">
+      <h2>4. 产品路径</h2>
+      <div class="flow">
+    <div class="flow-step">
+      <span>01</span>
+      <strong>下载并授权麦克风</strong>
+    </div>
+  
+    <div class="flow-step">
+      <span>02</span>
+      <strong>设置快捷键或 iOS 入口</strong>
+    </div>
+  
+    <div class="flow-step">
+      <span>03</span>
+      <strong>在任意 App 中按住说话</strong>
+    </div>
+  
+    <div class="flow-step">
+      <span>04</span>
+      <strong>选择本地/云端模型与 custom mode</strong>
+    </div>
+  
+    <div class="flow-step">
+      <span>05</span>
+      <strong>输出被改写成邮件、笔记、消息或 AI prompt</strong>
+    </div>
+  
+    <div class="flow-step">
+      <span>06</span>
+      <strong>高频复用后升级 Pro 或 lifetime</strong>
+    </div>
+  </div>
+    </section>
+
+    <section class="panel" id="s5">
+      <h2>5. 商业模型</h2>
+      <div class="metric-grid">
+        <div class="metric"><b>定价</b>免费层覆盖日常基础使用；Pro $8.49/month、$84.99/year、Lifetime $249.99。付费卖的是更高级模型、Cloud/Local AI models、自带 API keys、工作流控制和长期使用确定性。</div>
+        <div class="metric"><b>目标客群</b>个人 power users 优先，包括开发者、创作者、产品人、研究者、老师、销售、咨询顾问和需要减少打字负担的人。</div>
+        <div class="metric"><b>获客渠道</b>Product Hunt、Mac/iOS productivity 社群、YouTube 教程、App Store 搜索、口碑推荐、与 Wispr Flow / MacWhisper / Typeless 等替代品对比。</div>
+        <div class="metric"><b>付费触发</b>用户发现它不是偶尔转写，而是每天多次替代键盘输入；当 custom modes、模型选择、离线隐私和长期使用稳定性变重要时付费。</div>
+        <div class="metric"><b>小团队适配</b>适合小团队或独立开发者切入，因为它先服务个人高频痛点，再通过跨平台、模型、prompt modes 和 automation 扩展深度。</div>
+      </div>
+    </section>
+
+    <section class="panel" id="s6">
+      <h2>6. 交互与功能取舍</h2>
+      <div class="learn-grid">
+        <div class="learn-card"><h3>克制</h3><ul><li>不先做团队会议平台，而是先做个人输入层。</li><li>核心动作非常短：按快捷键，说话，文本出现在当前 App。</li><li>用 modes/prompt 承接复杂度，而不是把首页做成复杂工作台。</li></ul></div>
+        <div class="learn-card"><h3>增长/留存钩子</h3><ul><li>用户一旦形成快捷键肌肉记忆，迁移成本会上升。</li><li>Productivity / Mac / AI 工具社群天然愿意分享自己的 workflow。</li><li>Lifetime 付费和本地隐私定位容易激发 power users 讨论和推荐。</li></ul></div>
+        <div class="learn-card"><h3>风险</h3><ul><li>语音输入赛道竞争很强，Wispr Flow、MacWhisper、系统原生听写和其他 AI dictation 工具都会挤压差异。</li><li>模式、模型、API keys 太强也可能让普通用户觉得复杂。</li><li>如果 Windows、Android、移动端体验跟不上，跨平台用户会被更完整的替代品吸走。</li></ul></div>
+      </div>
+    </section>
+
+    <section class="panel" id="s7">
+      <h2>7. 我能偷学什么</h2>
+      <div class="learn-grid">
+        <div class="learn-card"><h3>产品判断</h3><ul><li>高频入口比大功能更重要：如果一个动作每天发生几十次，它本身就可能成为产品。</li><li>Superwhisper 的差异不是“能转写”，而是“在任何 App 里把语音变成合适格式的文本”。</li><li>面向 power users 的产品可以用可配置性、隐私、本地模型和 lifetime 定价建立信任。</li></ul></div>
+        <div class="learn-card"><h3>AI / 工作流落地</h3><ul><li>语音输入一旦跨越任何 App，就不是一个单点工具，而是个人工作流的前置输入层。</li><li>AI 工具的价值常常发生在输入后处理：清理、改写、按场景格式化，而不是原始识别。</li><li>Custom modes 是一个关键设计：同一段语音可以变成邮件、Slack、笔记、代码提示或 AI prompt。</li></ul></div>
+        <div class="learn-card"><h3>教育场景迁移</h3><ul><li>Project B 可以学习 Superwhisper 的低摩擦输入：老师课后不一定愿意写长反馈，但可能愿意用语音快速说出学生问题。</li><li>课堂笔记入口可以从“老师手动整理文档”改成“老师语音补充 -&gt; AI 结构化 -&gt; 老师确认”。</li><li>如果老师、助教、学生都能用低成本语音补充信息，Project B 的数据回流会比只靠正式表单更自然。</li></ul></div>
+      </div>
+    </section>
+
+    <section class="panel xhs" id="s8">
+      <h2>8. 我的小红书表达</h2>
+      <div class="metric-grid">
+        <div class="metric"><b>标题</b>我今天拆了 Superwhisper：语音转文字为什么能变成产品？</div>
+        <div class="metric"><b>封面</b>不是转写工具，而是个人 AI 输入层</div>
+        <div class="metric"><b>评论区问题</b>你觉得 AI 工具更应该先做大平台，还是先占住一个高频入口？</div>
+      </div>
+      
+    <div class="cover-prompt-skill">
+      <div class="prompt-head">
+        <div>
+          <h3>小红书封面 prompt skill</h3>
+          <p class="small">基于 <a href="https://github.com/VigoZhao/AI-Visual-Prompt-Cookbook">VigoZhao/AI-Visual-Prompt-Cookbook</a> 的结构化视觉 prompt 工作流：选 style.json，替换变量，再生成封面图提示词。</p>
+        </div>
+        <span class="tag blue">school-grid-paper-cutout-poster</span>
+      </div>
+      <p><strong>为什么选这个风格：</strong>Superwhisper 这篇适合用“语音变成工作流纸条”的学习笔记隐喻：网格纸、声波、输入框、不同 App 的小纸片，突出它不是单次转写，而是输入层。</p>
+      <div class="prompt-variable-grid">
+    <div class="prompt-variable">
+      <b>SUBJECT</b>
+      <span>a torn-paper microphone sending audio waves into several small app windows and note cards</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>SUBJECT_ACTION</b>
+      <span>turning spoken words into formatted text across different apps</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>PRODUCT_OR_PROP</b>
+      <span>paper microphone, audio wave strip, app windows, prompt mode cards, keyboard shortcut mark</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>LOCATION</b>
+      <span>warm classroom grid paper desk surface</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>BACKGROUND_ELEMENTS</b>
+      <span>empty ruled squares, tiny arrows from voice to text to app windows, one small privacy lock mark</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>MAIN_TEXT</b>
+      <span>Superwhisper 不只是转写</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>SECONDARY_TEXT</b>
+      <span>个人 AI 输入层</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>ACCENT_SYMBOL</b>
+      <span>tiny generic blue microphone mark</span>
+    </div>
+  
+    <div class="prompt-variable">
+      <b>ASPECT_RATIO</b>
+      <span>9:16</span>
+    </div>
+  </div>
+      <h4>final prompt</h4>
+      <pre class="prompt-block">Create a 9:16 Xiaohongshu cover in the school-grid-paper-cutout-poster visual style. Use warm classroom grid paper as the full background. The main subject is a torn-paper microphone sending audio waves into several small app windows and note cards, showing spoken words becoming formatted text across different apps. Add prompt mode cards, a tiny keyboard shortcut mark, and one small privacy lock mark. Use imperfect handwritten Chinese notebook text. Main readable text: “Superwhisper 不只是转写”. Secondary small text: “个人 AI 输入层”. Keep it sparse, handmade, warm, like a product teardown study note for someone transitioning into AI product work. Avoid real logos, QR codes, brand marks, glossy 3D renders, busy dashboards, and generic tech gradients.</pre>
+    </div>
+  
+      <h3 style="margin-top:16px">3-5 张配图脚本</h3>
+      <div class="slide-grid">
+    <article class="slide-card">
+      <span>图 1</span>
+      <p>我为什么选 Superwhisper：它把语音输入做成了跨 App 的个人入口</p>
+    </article>
+  
+    <article class="slide-card">
+      <span>图 2</span>
+      <p>它的路径很短：按快捷键 -&gt; 说话 -&gt; 模型识别 -&gt; mode 改写 -&gt; 文本落到当前 App</p>
+    </article>
+  
+    <article class="slide-card">
+      <span>图 3</span>
+      <p>PMF 信号：官网免费层 + Pro $8.49 + lifetime $249.99，Product Hunt 4.9 分，用户讨论集中在高频使用</p>
+    </article>
+  
+    <article class="slide-card">
+      <span>图 4</span>
+      <p>我最想偷学：AI 工具不一定要做大平台，先占住一个高频入口</p>
+    </article>
+  
+    <article class="slide-card">
+      <span>图 5</span>
+      <p>对 Project B 的启发：老师语音补充 -&gt; AI 结构化 -&gt; 老师确认，可能比让老师写长反馈更自然</p>
+    </article>
+  </div>
+      <h3 style="margin-top:16px">正文草稿</h3>
+      <div class="draft">今天拆 Superwhisper，我想明白一件事：语音转文字本身不稀奇，但“把语音变成任何 App 的输入层”就有产品价值了。
+
+如果只是录音转写，那它像一个功能。但 Superwhisper 的切口是：你在邮件、Slack、笔记、AI 对话框、任何输入框里，按一下快捷键，说话，然后它直接给你一段适合当前场景的文字。
+
+这就不是“转写结果”，而是“输入方式被替换”。
+
+我觉得它对 Project B 的启发很直接：老师不一定愿意课后再写一大段反馈，但可能愿意对着麦克风说 30 秒：这个学生今天卡在哪里、下次要提醒什么。然后 AI 把这段话结构化，老师确认，助教跟进，学生复习页更新。
+
+今天偷学到的一句话：产品不一定要大，先占住一个高频入口，后面才有工作流。</div>
+    </section>
+
+    <section class="panel" id="reflection">
+      <h2>20 分钟个人判断区</h2>
+      <p class="small">这一块必须由 Jack 自己补。它决定这篇内容是不是你的转型训练，而不是资料搬运。</p>
+      <div class="reflection-grid">
+        
+          <div class="reflection-box">
+            <p>Superwhisper 最打动我的点，是离线隐私、custom modes，还是任何 App 可用？为什么？</p>
+            <div class="write-line"></div>
+            <div class="write-line"></div>
+          </div>
+        
+          <div class="reflection-box">
+            <p>我觉得它的 PMF 证据强不强？哪些是真实高频使用证据，哪些只是早期用户热度？</p>
+            <div class="write-line"></div>
+            <div class="write-line"></div>
+          </div>
+        
+          <div class="reflection-box">
+            <p>如果迁移到 Project B，我最应该先做哪个语音入口：老师课后补充、助教检查备注，还是学生口头反馈？</p>
+            <div class="write-line"></div>
+            <div class="write-line"></div>
+          </div>
+        
+      </div>
+    </section>
+
+    
+    <section class="panel checklist" id="quality-gate">
+      <h2>发布前检查</h2>
+      <div class="check-grid">
+        <label><input type="checkbox"> 30 秒看懂：为什么今天拆它</label>
+        <label><input type="checkbox"> 已区分证据和推测</label>
+        <label><input type="checkbox"> 有清楚产品路径图</label>
+        <label><input type="checkbox"> 有 Jack 自己的 3 条判断</label>
+        <label><input type="checkbox"> 能直接抽出 3-5 张小红书图文页</label>
+      </div>
+    </section>
+  
+  </main>
+</body>
+</html>

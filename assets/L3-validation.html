@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L3 · 深度双验证 — 成果可感知化 + 多师统筹（E 组 niche → PRD）</title>
+<style>
+  *{box-sizing:border-box;}
+  :root{
+    --ink:#1f2937;--mut:#6b7280;--line:#e5e7eb;--bg:#f6f7f9;
+    --teal:#134e4a;--violet:#6d28d9;--violet2:#7c3aed;--emer:#059669;--emerbg:#ecfdf5;
+    --amber:#b45309;--amberbg:#fffbeb;--red:#b91c1c;--redbg:#fef2f2;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;max-width:1080px;margin:0 auto;padding:32px 22px 90px;color:var(--ink);line-height:1.75;background:var(--bg);}
+  h1{font-size:26px;margin:0 0 6px;letter-spacing:-0.4px;line-height:1.35;}
+  .subtitle{color:var(--mut);font-size:14px;margin-bottom:18px;}
+  .meta-bar{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--mut);margin-bottom:22px;padding:11px 15px;background:#fff;border-radius:8px;border:1px solid var(--line);}
+  .meta-bar strong{color:var(--ink);}
+  nav.toc{position:sticky;top:0;z-index:50;background:rgba(246,247,249,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin:0 -22px 20px;padding:9px 22px;display:flex;gap:6px;flex-wrap:wrap;}
+  nav.toc a{font-size:12px;color:var(--violet);text-decoration:none;padding:4px 9px;border-radius:999px;border:1px solid #e2d9f3;background:#fff;white-space:nowrap;}
+  nav.toc a:hover{background:var(--violet);color:#fff;border-color:var(--violet);}
+
+  .hero{background:linear-gradient(135deg,#134e4a 0%,#6d28d9 100%);color:#fff;padding:30px 32px;border-radius:14px;margin-bottom:18px;box-shadow:0 6px 20px rgba(109,40,217,.28);}
+  .hero h2{color:#fff;border:0;padding:0;font-size:20px;margin:0 0 6px;}
+  .hero .lead{font-size:15px;opacity:.95;margin:0 0 16px;}
+  .hero .lead b{color:#fde68a;}
+  .hero .tldr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .tldr-card{background:rgba(255,255,255,.12);padding:15px 16px;border-radius:10px;border-left:3px solid #fbbf24;}
+  .tldr-card .num{font-size:11px;font-weight:700;color:#fde68a;letter-spacing:.5px;margin-bottom:6px;}
+  .tldr-card .text{font-size:13px;line-height:1.6;}
+  .tldr-card b{color:#fff;}
+
+  .section{background:#fff;border-radius:14px;padding:26px 28px;margin-bottom:18px;box-shadow:0 1px 2px rgba(0,0,0,.04);}
+  .section.danger{border:1px solid #fecaca;background:linear-gradient(180deg,#fff5f5 0%,#ffffff 55%);}
+  h2{font-size:20px;margin:0 0 6px;border-left:4px solid var(--violet);padding-left:12px;}
+  h2.red{border-left-color:#ef4444;}
+  h2 .em{color:var(--emer);}
+  .sec-lead{color:var(--mut);font-size:13px;margin:0 0 16px;padding-left:13px;}
+  h3{font-size:15.5px;margin:18px 0 8px;}
+  p{margin:8px 0;}ul,ol{padding-left:20px;margin:8px 0;}li{margin:5px 0;}
+
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px;}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+  th{background:#f1edfa;font-weight:600;}
+  tr:hover td{background:#fafbfc;}
+  td.nm{font-weight:700;white-space:nowrap;}
+  .src{color:#9ca3af;font-size:11px;}
+
+  /* verdict pills */
+  .v{font-weight:700;font-size:11.5px;padding:1px 8px;border-radius:999px;white-space:nowrap;}
+  .v.yes{color:#065f46;background:var(--emerbg);border:1px solid #a7f3d0;}
+  .v.part{color:var(--amber);background:var(--amberbg);border:1px solid #fde68a;}
+  .v.no{color:var(--red);background:var(--redbg);border:1px solid #fecaca;}
+  .v.thin{color:#4b5563;background:#f3f4f6;border:1px solid #e5e7eb;}
+  .tag-red{font-weight:700;font-size:11px;color:var(--red);background:var(--redbg);border:1px solid #fecaca;padding:1px 7px;border-radius:999px;white-space:nowrap;}
+  .tag-ok{font-weight:700;font-size:11px;color:#065f46;background:var(--emerbg);border:1px solid #a7f3d0;padding:1px 7px;border-radius:999px;white-space:nowrap;}
+
+  .callout{padding:13px 17px;border-radius:10px;margin:14px 0;font-size:13.5px;}
+  .c-emer{background:var(--emerbg);border-left:4px solid #10b981;}
+  .c-violet{background:#f5f3ff;border-left:4px solid var(--violet);}
+  .c-amber{background:var(--amberbg);border-left:4px solid #f59e0b;}
+  .c-red{background:var(--redbg);border-left:4px solid #ef4444;}
+  .callout b{color:var(--ink);}
+
+  /* axis cards (white-space axes) */
+  .axes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0;}
+  .axis{border:1px solid var(--line);border-radius:12px;padding:14px 15px;background:linear-gradient(180deg,#ecfdf5 0%,#ffffff 60%);}
+  .axis .tag{font-size:10.5px;font-weight:700;color:#fff;background:var(--emer);padding:2px 8px;border-radius:999px;}
+  .axis h4{margin:9px 0 5px;font-size:14px;}
+  .axis p{margin:0;font-size:12px;color:#374151;}
+
+  /* moat diagram */
+  .moat{margin:16px 0;}
+  .moat .core{text-align:center;background:linear-gradient(135deg,#134e4a,#6d28d9);color:#fff;border-radius:12px;padding:14px 18px;font-weight:700;font-size:14px;max-width:560px;margin:0 auto 6px;box-shadow:0 4px 14px rgba(109,40,217,.25);}
+  .moat .core small{display:block;font-weight:400;opacity:.9;font-size:11.5px;margin-top:3px;}
+  .moat .arrow{text-align:center;color:var(--violet);font-size:20px;line-height:1;}
+  .moat .fan{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px;}
+  .moat .leaf{border:1px solid #ddd6fe;border-radius:10px;padding:12px 13px;background:#faf9ff;}
+  .moat .leaf .who{font-size:11px;color:var(--mut);}
+  .moat .leaf .what{font-weight:700;font-size:13px;margin-top:2px;}
+  .moat .leaf .ev{font-size:11px;color:#6b7280;margin-top:4px;}
+
+  /* prd block */
+  .prd{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;}
+  .prd .box{border:1px solid var(--line);border-radius:10px;padding:13px 15px;background:#fafbff;}
+  .prd .box .k{font-size:11px;font-weight:700;color:var(--violet2);letter-spacing:.3px;margin-bottom:5px;}
+  .prd .box .t{font-size:12.5px;color:#374151;}
+  .prd .box.full{grid-column:1 / -1;}
+
+  .footer{text-align:center;color:#9ca3af;font-size:12px;margin-top:24px;}
+  .srcgrid{columns:2;column-gap:22px;font-size:12px;}
+  .srcgrid p{break-inside:avoid;margin:0 0 9px;color:#4b5563;}
+  .srcgrid b{color:var(--ink);}
+  @media (max-width:760px){.hero .tldr-grid,.axes,.moat .fan,.prd{grid-template-columns:1fr;}.srcgrid{columns:1;}}
+  @media print{nav.toc{display:none;}body{background:#fff;}.section{box-shadow:none;border:1px solid var(--line);}}
+</style>
+</head>
+<body>
+
+<h1>深度双验证 · 成果可感知化 + 多师统筹（E 组 niche → PRD）</h1>
+<div class="subtitle">L3 · 4 路并行（承重×2 + 空白×2）→ 把 L2 Top3 里 E 组收窄到可写 PRD · 锚定 2026-06-09 一手家长痛点</div>
+<div class="meta-bar">
+  <span>📅 <strong>2026-06-09</strong></span>
+  <span>🔬 <strong>4 路并行联网（承重×2 + 空白×2）</strong></span>
+  <span>🧭 <strong>双验证 = 承重 × 空白</strong></span>
+  <span>✅ <strong>够格进 PRD（带 3 修正）</strong></span>
+  <span>🔗 接 <strong>L2 雷达 · Project B · 一手痛点</strong></span>
+</div>
+
+<nav class="toc">
+  <a href="#tldr">核心裁决</a><a href="#myth">⚠️撤雷·80%</a><a href="#bear">承重矩阵</a><a href="#gap">空白矩阵</a>
+  <a href="#moat">护城河</a><a href="#prd">→PRD 输入</a><a href="#verify">一手核验</a><a href="#src">来源</a>
+</nav>
+
+<div class="hero" id="tldr">
+  <h2>这次双验证在说什么</h2>
+  <p class="lead">承重——<b>问题真、且贵</b>；空白——<b>不是处女地，是"交集"空白</b>。够格进 PRD，但必须：撤掉一个假数字、把价值主张当"待 MVP 自证的假设"写、护城河押在<b>叙事 + 判断 + 飞书多师</b>。</p>
+  <div class="tldr-grid">
+    <div class="tldr-card"><div class="num">承重：真且贵</div><div class="text">续费是机构命门（中金模型生命周期利润率仅 <b>3%</b>、续班率越近盈亏线杠杆越大）+ VIP 多师分科有结构性<b>统筹真空</b>。问题侧 🟢。</div></div>
+    <div class="tldr-card"><div class="num">价值主张是假设</div><div class="text">"可视化→留存"机制可信（Harkin meta <b>d=0.40</b>，"外化/公开"还放大效应），但"拉续费"只有营销数据 + 有<b>"做错反伤"</b>反证 → ROI 待 MVP 自证。</div></div>
+    <div class="tldr-card"><div class="num">空白 = 交集</div><div class="text">竞品做了相邻 <b>2/3</b>（跨科罗列有/叙事有/单科评语有），没合龙。差异化只能押<b>"跨科归因叙事 + 判断 + 飞书多师"</b>。</div></div>
+  </div>
+</div>
+
+<section class="section danger" id="myth">
+  <h2 class="red">⚠️ 必须先撤的雷 — "80% 因感知不到成果流失"是假的</h2>
+  <p class="sec-lead">本轮最重要的诚实修正，直接改写 L2 的一处引用（L2 E 组曾写"~80% 流失因感知不到成果"）。</p>
+  <ul>
+    <li><b>查无原始出处。</b>中文语境里真实的"80%"是《家庭教育蓝皮书 2024》（34 万家长样本）：<b>80% 家长对孩子学业感到焦虑</b>——这是<b>家长焦虑</b>，不是"因感知不到成果而流失"的占比。两者被自媒体/营销张冠李戴的可能性极高。</li>
+    <li><b>所有"效果占流失 30%~40%"全是 SaaS 厂商营销口径</b>（功能演示/单机构 case 稿），且<b>没把"真实没进步"和"没感知到进步"拆开</b> → 无法证明"感知 &gt; 真实"。</li>
+  </ul>
+  <div class="callout c-red"><b>含义：</b>PRD / 对外材料 / 任何尽调里 <b>不能再引"80% 因感知不到成果流失"</b>——会被一击即破。替代写法：<b>"业内定性共识：家长感知不到成果是公认的流失主因之一"</b>，或自己做小样本调研拿一手数字。</div>
+</section>
+
+<section class="section" id="bear">
+  <h2>承重验证 — 成败真在这里被决定吗</h2>
+  <p class="sec-lead">把 niche 拆成可证伪的命题，逐条裁决。🟢 成立 · 🟡 部分/倾向 · 🔴 证伪 · ⚪ 证据不足。</p>
+  <table>
+    <tr><th>命题</th><th>裁决</th><th>关键证据（带来源性质）</th><th>短板 / 反证</th></tr>
+    <tr>
+      <td class="nm">P1<br>续费是命门</td><td><span class="v yes">🟢 成立</span></td>
+      <td>中金在线教育 UE/LTV 模型：生命周期累计营业利润率仅 <b>3%</b>、续班率"越近盈亏线、每 +5pct 撬动利润 +5~6pct"<span class="src">🟢券商</span>；新东方财报素质教育 <b>留存 &gt;70% / 续费 &gt;60%</b><span class="src">🟢财报</span></td>
+      <td>中金报告系双减前（2021-02），结构逻辑成立、绝对数字过时；续班率→估值弹性无干净系数 <span class="src">⚪</span></td>
+    </tr>
+    <tr>
+      <td class="nm">P4<br>多师分科结构</td><td><span class="v yes">🟢 成立</span></td>
+      <td>雅思/留学 VIP 普遍<b>按听说读写分科主讲</b> +"主讲/学管/陪练"三层；学管师 = <b>服务+续费岗，明确"不做教学"</b>，学情靠"下课问老师再转述"<span class="src">🟡JD+知乎</span></td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="nm">P6<br>缺"成果叙事"统筹</td><td><span class="v yes">🟢 成立</span></td>
+      <td><b>三缺</b>：没人（角色错配，学管不做教学）/ 没数据（靠教师主观评价、无法量化）/ 没流程（排课·考勤·记账信息孤岛）<span class="src">🟡多源口径一致</span></td>
+      <td>教务 SaaS 在追"成长档案/雷达图"，但只解"数据聚合"≠"VIP 分科场景的成果叙事统筹"</td>
+    </tr>
+    <tr>
+      <td class="nm">P5<br>词汇等跨科<br>模块无人 owns</td><td><span class="v part">🟡 倾向成立</span></td>
+      <td><b>新航道官方自承</b>：分科"将原本结合的单词<b>人为割裂</b>，一本词汇手册变四本"<span class="src">🟢机构一手</span>；俞敏洪 2013 雅思年度报告点名"分科 → 整合断层"<span class="src">🟢机构权威·旧</span></td>
+      <td>缺一手从业者帖直说"词汇没人管"；机构话术声称"学管督学听写 = 有人抓"——覆盖停在"督促背单词"而非"统筹跨四科迁移"</td>
+    </tr>
+    <tr>
+      <td class="nm">P3<br>可视化 → 续费<br>（因果）</td><td><span class="v part">🟡 部分成立</span></td>
+      <td><b>机制硬</b>：Harkin 2016《Psych Bulletin》138 RCT meta，进度监测 → 目标达成 <b>d=0.40</b>，且"<b>外化/公开</b>"是效应放大器（正对应"给家长看"）<span class="src">🟢顶级学术</span></td>
+      <td><b>落点虚</b>：拉续费只有营销案例（续费+22%/+40%、无对照组）<span class="src">🔴</span>；<b>反证：Kluger &amp; de Nisi 1996，约 1/3 反馈效应为负</b> → 做错反伤</td>
+    </tr>
+    <tr>
+      <td class="nm">P2<br>感知 &gt; 真实</td><td><span class="v no">🔴 证伪</span> <span class="v thin">⚪ 数据不足</span></td>
+      <td>唯一学术侧证 Reichheld：流失客户 65~85% 流失前自称"满意"——支持"满意≠留存"<span class="src">🟢学术·但西方金融业</span></td>
+      <td>网传 80% 查无出处（见上）；外推到中国家长是推断不是事实；中文"效果占比"未拆分真实/感知</td>
+    </tr>
+  </table>
+  <div class="callout c-violet"><b>承重净判断：</b>结构性裂缝（P4 + P6）是<b>真承重柱</b>，问题真实且昂贵（P1）；价值主张（P3）机制可信但 ROI 待自证，并带"做错反伤"风险。<b>关键缝</b> → 高端留学 5V1 里有"<b>主线顾问统筹全局</b>"这个做实的角色，而<b>雅思备考/分科教学侧没有对等的统筹角色</b>（学管 ≠ 主线顾问：前者管服务+续费，后者管学术统筹）。这条落差就是缝。</div>
+</section>
+
+<section class="section" id="gap">
+  <h2>空白验证 — 没人做透吗</h2>
+  <p class="sec-lead">两路 agent 从<b>家长端</b>和<b>飞书端</b>双向夹逼，结论一致：不是整体空白，是<b>交集</b>空白。</p>
+
+  <h3>3a · 家长端三轴：跨科整合 × 叙事化 × 老师判断 → 交集为空</h3>
+  <div class="axes">
+    <div class="axis"><span class="tag">✅ 串联空白</span><h4>跨科目整合</h4><p>多数（校宝/猿辅导/作业帮/学而思/ClassIn）<b>单科闭环</b>；少数"多科"是<b>并列成绩表</b>，罗列≠串联。</p></div>
+    <div class="axis"><span class="tag">✅ 进步叙事空白</span><h4>叙事化</h4><p>只有照片流/作品集（ClassDojo/Seesaw），<b>偏低龄、只记录"发生了什么"、不判断"意味着什么进步"</b>。</p></div>
+    <div class="axis"><span class="tag">✅ 跨科判断空白</span><h4>老师专业判断</h4><p>学而思评语、AI 生成评语有"老师的话"，但都是<b>单科/单点</b>，非"跨科全局判断"。</p></div>
+  </div>
+  <div class="callout c-emer"><b>白点（三轴交集）：</b>"由懂教学的老师做判断、把孩子多科离散成果（分数/作业/课堂/习惯）主动串成一条『他这段在哪些方面变好了、为什么、下一步往哪走』的连贯叙事，交付家长去感知进步"——<b>没有任何被调研产品做透</b>。三个鸿沟：罗列→串联 / 数据→判断 / 记录→感知。</div>
+  <div class="callout c-amber"><b>诚实反证：</b>学而思在"单科数据+老师评语+进步感"已逼近天花板（差异化只能押"跨科串联"轴，<b>不能宣称"进步感没人做"</b>）；体制内综评（北师大 SEED/璞公英）在"跨科整合"有雏形但德育取向；"AI 一键生成评语"已红海。<b>需补验：实测学而思/猿辅导家长端是否已悄悄做"跨科汇总"——反证白点是否成立的关键。</b></div>
+
+  <h3>3b · 飞书端四元：语培VIP × 多师汇聚统一视图 × 家长成果卡 × 飞书原生 → 交集为空</h3>
+  <table>
+    <tr><th>原子能力</th><th>市场状态</th><th>空白?</th></tr>
+    <tr><td>排课/CRM/考勤/课消 · 单师课评推送 · 单表进度跟踪 · AI 学情/批改</td><td>极成熟（校宝/校管家/飞书模板/蜜蜂家校）</td><td><span class="tag-red">❌ 红海</span></td></tr>
+    <tr><td class="nm">① 多个老师对同一批学生 → 汇聚成"一个学生的统一视图"</td><td>只在<b>校区/班级</b>颗粒度，没下沉到"一个学生×N 个老师"；语培 VIP 靠学管<b>人肉统筹</b></td><td><span class="tag-ok">✅ 空白</span></td></tr>
+    <tr><td class="nm">② 自动产出"给家长的成果叙事卡"（分数提升+各师贡献+下阶段）</td><td>有单师课评、K12 成长卡、海外报告卡，<b>无"多师汇聚→语培成果叙事卡"</b></td><td><span class="tag-ok">✅ 空白</span></td></tr>
+    <tr><td class="nm">③ 飞书低代码实现 + 接机构教学服务系统</td><td>飞书有零件（多维表格/仪表盘/机器人），<b>无人打包成飞书上的现成方案</b></td><td><span class="tag-ok">✅ 空白 + 时间窗</span></td></tr>
+  </table>
+  <div class="callout c-emer"><b>白点坐标 = ① × ② × ③ 交集</b>（语培VIP + 多师汇聚 + 家长成果卡 + 飞书原生），四角交叉（飞书模板/Lark Base/高途案例/第三方评测）均未命中。<b>窗口：</b>新航道 2026-01 全员上飞书、高途为飞书首个头部语培客户，但<b>两家公开披露都止步教研/质检/转写，"教学交付侧的多师统筹+家长成果"是公开的空白格</b>——谁先在飞书生态补上，吃到"底座已就位、上层应用没人做"的时间差。</div>
+  <div class="callout c-amber"><b>诚实反证：</b>多师协同是 VIP 标配（新意不在"要不要多师"，在"产出有没有被产品化汇聚+叙事化"）；"成果可视化驱动续费"是成熟话术（新的是"多师汇聚版+飞书原生"）；海外 OpenEduCat/Canva 已能"多师→家长报告卡"（最近的现成实现，但 K12 范式、不在飞书、不接国内系统）；<b>校宝"AI 学情分析"是最可能翻盘的暗点</b>（颗粒度校区/班级，是否下沉学生级多师汇聚无公开材料）。</div>
+</section>
+
+<section class="section" id="moat">
+  <h2>护城河落点 <span style="font-size:13px;color:var(--mut)">（被这轮逼出来的修正）</span></h2>
+  <div class="callout c-red"><b>先划掉红海：</b>纯"做报告 / 做成果卡 / 做进步感 / 做数据聚合 / AI 生成评语"——<b>全是红海，零壁垒</b>。校宝/学而思/匠邦都在做，做这些 = 没护城河。</div>
+  <div class="moat">
+    <div class="core">真壁垒 = 三件叠加，缺一不可<small>教研语料底座（你的批改/讲解经验）+ Project B 飞书沉淀</small></div>
+    <div class="arrow">▼</div>
+    <div class="fan">
+      <div class="leaf"><div class="who">① 判断质量</div><div class="what">跨科归因叙事</div><div class="ev">需要懂教学的你；AI 生成评语恰恰缺这个</div></div>
+      <div class="leaf"><div class="who">② 落地底座</div><div class="what">飞书原生多师汇聚</div><div class="ev">接 Project B + 踩 2026 飞书时间窗</div></div>
+      <div class="leaf"><div class="who">③ 场景收窄</div><div class="what">语培 VIP 不泛化</div><div class="ev">不摊薄到 K12，吃 4V1 高客单价裂缝</div></div>
+    </div>
+  </div>
+  <div class="callout c-violet"><b>这正好咬合 dossier 的"一鱼多吃护城河 = 教研语料底座 + Project B 飞书沉淀"。</b>　<b>鲸小爱并入（反向证据）：</b>鲸小爱 = 口语+听力单点、无教学闭环、2026-06 疑似停用。新航道<b>亲自下场做 C 端单点 AI（胡敏的赌注、拿了天使轮、教研背书）都没活下来</b>，恰是 L0"单点工具高流失"病灶的内部活样本——反向加固"做机构侧教学闭环、不做又一个 C 端 App"。（停用待确认；"为什么停"是做新东西最该避开的坑。）</div>
+</section>
+
+<section class="section" id="prd">
+  <h2>→ PRD 输入 <span style="font-size:13px;color:var(--mut)">（验证结果已够料，可直接起草）</span></h2>
+  <div class="prd">
+    <div class="box full"><div class="k">PROBLEM STATEMENT</div><div class="t">以 2026-06-09 一手家长原话开场（"四个老师分开、没人统筹协调 / 词汇谁来抓"）+ 结构性裂缝：高客单价 = 多师分科 → 跨科模块无归属 → 学管缺角色/数据/流程把成果串成给家长的统一叙事。标"一手家长原话"，<b>不引任何无出处数字</b>。</div></div>
+    <div class="box"><div class="k">目标用户 / 场景</div><div class="t">三方：①<b>学管师</b>（直接用户·省工时+续费 KPI）②<b>家长</b>（价值接收·感知进步）③<b>多师</b>（数据供给）。先在<b>新航道锦秋雅思 VIP 内部</b>跑（自带班+Project B 底座）；约束：学生/家长不在飞书组织内 → <b>飞书做后端引擎 + 轻量端</b>。</div></div>
+    <div class="box"><div class="k">为什么新航道/你能赢</div><div class="t">判断质量（懂教学的老师）+ Project B 飞书沉淀 + 2026 飞书时间窗 + 教研语料一鱼多吃。差异化<b>必须押</b>：跨科归因叙事 + 判断 + 飞书原生多师汇聚 + 语培 VIP；<b>不押</b>：做报告/成果卡/进步感/数据聚合/AI 评语。</div></div>
+    <div class="box full"><div class="k">价值假设（可证伪，无假数字）</div>
+      <table style="margin:6px 0 0;">
+        <tr><th>假设</th><th>内容</th><th>类型</th></tr>
+        <tr><td class="nm">H1 效率</td><td>给学管一个"多师汇聚的跨科成果叙事卡"，整理一次 VIP 学生成果的工时 ↓ ≥ X%</td><td><span class="v yes">leading·易测</span></td></tr>
+        <tr><td class="nm">H2 感知</td><td>收到成果卡的家长，对"孩子在进步 / 有人统筹"的感知评分 &gt; 对照组</td><td><span class="v yes">leading·问卷</span></td></tr>
+        <tr><td class="nm">H3 续费</td><td>收到成果卡的 VIP 家长，续费意向/实际续费 &gt; 对照组</td><td><span class="v part">lagging·MVP 后验</span></td></tr>
+        <tr><td class="nm">H4 护栏</td><td>成果卡<b>不会</b>因暴露"没进步"而降低家长满意度</td><td><span class="v no">护栏·对应 P3 反证</span></td></tr>
+      </table>
+    </div>
+    <div class="box full"><div class="k">度量 &amp; 风险红线</div><div class="t"><b>度量（诚实）：</b>H1/H2 是 leading，MVP 快速验；H3 是 lagging，靠 MVP A/B 自证；H4 是护栏。不用"80%"那类口径。　<b>风险红线：</b>① P3 做错反伤（暴露停滞期→加速流失；需"如何呈现停滞期"的设计护栏）② P2 叙事陷阱（别引假数字）③ 工具侧蚕食（校宝/学而思在追数据聚合；壁垒必须在叙事+判断+飞书多师）④ 校宝暗点未核。</div></div>
+  </div>
+</section>
+
+<section class="section" id="verify">
+  <h2>写 PRD 前必做的 4 个一手核验 <span style="font-size:13px;color:var(--mut)">（诚实，别跳）</span></h2>
+  <div class="callout c-amber">
+    <ol style="margin:0;">
+      <li><b>P5 顶到 🟢</b>：访谈 2-3 个一线学管 + 知乎/小红书站内捞原帖，把"词汇等跨科模块系统性无人 owns"从强推理坐实为一手。</li>
+      <li><b>实测学而思/猿辅导家长端</b>：阶段报告是否已悄悄做"跨科汇总"——反证家长端白点是否成立的关键。</li>
+      <li><b>校宝/校管家产品 demo 核验</b>："一个学生能否看到全部老师的汇聚视图、并一键出家长成果卡"——唯一可能翻盘的暗点。</li>
+      <li><b>鲸小爱</b>：确认停用 + 为什么停；并在 VIP/反馈群再捞 5-10 条同类家长发言，验证"课后/统筹缺口"是高频共性（补全 L2 存疑项）。</li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="src">
+  <h2>证据强度 & 关键来源</h2>
+  <table>
+    <tr><th>主题</th><th>强度</th></tr>
+    <tr><td>续费/LTV 是经济命门（中金 UE 模型 + 新东方财报）</td><td><span class="v yes">🟢 强</span></td></tr>
+    <tr><td>VIP 多师分科结构 + 学管"不做教学"</td><td><span class="v yes">🟢 强</span></td></tr>
+    <tr><td>词汇等跨科模块无人 owns</td><td><span class="v part">🟡 中（缺一手从业帖）</span></td></tr>
+    <tr><td>可视化/反馈 → 学习/坚持（机制）</td><td><span class="v yes">🟢 强（Harkin 2016 meta）</span></td></tr>
+    <tr><td>可视化 → <b>续费</b>（因果）</td><td><span class="v no">🔴 弱（仅营销 + 1/3 负效应反证）</span></td></tr>
+    <tr><td>"80% 因感知不到成果流失"</td><td><span class="v thin">⚪ 证伪（查无出处）</span></td></tr>
+    <tr><td>家长端/飞书端"交集空白"</td><td><span class="v yes">🟢 强（四角交叉 + 逐页实证）</span></td></tr>
+    <tr><td>校宝 AI 学情是否下沉学生级多师汇聚</td><td><span class="v part">🟡 暗点（需 demo 核验）</span></td></tr>
+  </table>
+  <div class="srcgrid">
+    <p><b>承重·续费经济学</b> · 中金《在线教育系列之二：在线 K-12 教培经济模型》(2021-02，UE/LTV/续班率敏感性) · 国盛证券 K12 教培景气度(2025-02) · 新东方/好未来财报对比(经济观察网) · 《家庭教育蓝皮书 2024》(80% 家长焦虑·非流失)</p>
+    <p><b>承重·机制与反证</b> · Harkin et al. 2016《Psychological Bulletin》138-RCT meta(pubmed 26479070) · Wisniewski 2020 / Hattie 反馈 meta · Reichheld &amp; Sasser "Zero Defections"(HBR) + Ehrenberg-Bass 反证 · Kluger &amp; de Nisi 1996(反馈 1/3 负效应)</p>
+    <p><b>承重·多师统筹</b> · 新航道官方"分科割裂词汇"文 · 俞敏洪 2013 雅思年度报告 · 学管师 JD/知乎(服务+续费岗·不做教学) · 高端留学 5V1"主线顾问统筹"(chancecollege/headway)</p>
+    <p><b>空白·家长端</b> · 校宝家/校宝在线官网 · 猿辅导 AI 学情(woshipm/中华网) · 学而思学情报告(GeekPark·好未来供稿·营销) · ClassIn 手册 · 蜜蜂家校 · 北师大 SEED · 璞公英 · ClassDojo/Seesaw/Teachmint(对照)</p>
+    <p><b>空白·飞书端</b> · 飞书教育模板库 + 《赋能教育机构》 · Lark Student Progress Tracker(逐页实证) · 高途×飞书(新华日报/China Daily) · 校宝/校管家(doit 三大 SaaS 评测) · OpenEduCat/MagicSchool 报告生成</p>
+    <p><b>一手锚点</b> · <code>06_inspirations/sources/2026-06-09_screenshot_speaking-vocab-coordination-gap.md</code>（新航道锦秋雅思 VIP 家长原话，第 1 条一手家长证据）</p>
+  </div>
+</section>
+
+<div class="footer">L3 · 深度双验证（成果可感知化 + 多师统筹）· ai-pm-portfolio/analysis · 2026-06-09 · 接 L2 雷达 E 组，喂下一步 PRD</div>
+
+</body>
+</html>
