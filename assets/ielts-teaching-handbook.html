@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>IELTS 教学手册</title>
+<style>
+:root{
+  --bg:#f7f4ee;--bg2:#fff;--bg3:#eeebe3;--bg4:#e5e0d6;
+  --ink:#1a1a18;--muted:#6b6357;--faint:#9a9285;--rule:#d4cdbf;
+  --blue:#185fa5;--bluebg:#e6f1fb;--green:#3b6d11;--greenbg:#eaf3de;
+  --amber:#854f0b;--amberbg:#faeeda;--red:#c84b2f;--redbg:#faece7;
+  --purple:#534ab7;--purplebg:#eeedfe;--teal:#0f6e56;--tealbg:#e1f5ee;
+  --b56c:#854f0b;--b56bg:#faeeda;--b67c:#185fa5;--b67bg:#e6f1fb;--b78c:#3b6d11;--b78bg:#eaf3de;
+  --sidebar:240px;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#15140e;--bg2:#1e1d16;--bg3:#27261e;--bg4:#302f26;
+  --ink:#e8e3d6;--muted:#9a9285;--faint:#6b6357;--rule:#38352a;
+  --blue:#5b9de0;--bluebg:#0d2540;--green:#6ab84a;--greenbg:#0d2200;
+  --amber:#f0b04a;--amberbg:#2a1e00;--red:#e8705a;--redbg:#2a0f08;
+  --purple:#8b84e0;--purplebg:#1a1840;--teal:#3dc9a0;--tealbg:#002418;
+  --b56c:#f0b04a;--b56bg:#2a1e00;--b67c:#5b9de0;--b67bg:#0d2540;--b78c:#6ab84a;--b78bg:#0d2200;
+}}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7;font-size:15px;}
+/* layout */
+#sb{position:fixed;top:0;left:0;width:var(--sidebar);height:100vh;background:var(--bg2);border-right:1px solid var(--rule);overflow-y:auto;z-index:200;}
+#main{margin-left:var(--sidebar);padding:2rem 2.5rem 5rem;max-width:920px;}
+@media(max-width:768px){#sb{transform:translateX(-100%);transition:.25s;}#sb.open{transform:none;}#main{margin-left:0;padding:1rem 1rem 4rem;padding-top:60px;}#topbar{display:flex!important;}}
+/* topbar */
+#topbar{display:none;position:fixed;top:0;left:0;right:0;height:48px;background:var(--bg2);border-bottom:1px solid var(--rule);align-items:center;gap:12px;padding:0 1rem;z-index:150;font-size:14px;font-weight:600;}
+#mbtn{width:32px;height:32px;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;justify-content:center;gap:5px;padding:4px;}
+#mbtn span{height:1.5px;background:var(--ink);border-radius:2px;display:block;}
+#ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:190;}
+/* sidebar */
+.sb-header{padding:1.2rem 1.2rem .7rem;border-bottom:1px solid var(--rule);}
+.sb-brand{font-size:15px;font-weight:600;}
+.sb-sub{font-size:11px;color:var(--faint);margin-top:2px;}
+.sb-search{padding:.6rem 1rem;border-bottom:1px solid var(--rule);}
+.sb-search input{width:100%;background:var(--bg3);border:1px solid var(--rule);border-radius:6px;padding:5px 9px;font-size:12px;color:var(--ink);outline:none;}
+.sb-search input:focus{border-color:var(--blue);}
+.sb-section{padding:.3rem 0;}
+.sb-label{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:.35rem 1.2rem .15rem;}
+.sb-item{display:flex;align-items:center;padding:.38rem 1.2rem;font-size:13px;color:var(--muted);text-decoration:none;border-left:3px solid transparent;cursor:pointer;transition:.1s;}
+.sb-item:hover{color:var(--ink);background:var(--bg3);}
+.sb-item.active{color:var(--blue);border-left-color:var(--blue);background:var(--bluebg);}
+.sb-sub{padding-left:2rem;font-size:12px;}
+/* page */
+.page{display:none;}
+.page.active{display:block;animation:fi .15s;}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.page-hero{margin-bottom:1.75rem;}
+.page-hero h1{font-size:1.9rem;font-weight:700;}
+.tagline{font-size:14px;color:var(--muted);margin-top:.25rem;}
+/* chapter */
+.chapter{margin-bottom:1rem;}
+.ch-toggle{cursor:pointer;display:flex;align-items:center;gap:10px;padding:.85rem 1rem;background:var(--bg2);border:1px solid var(--rule);border-radius:10px;user-select:none;transition:.12s;}
+.ch-toggle:hover{background:var(--bg3);}
+.ch-badge{font-size:11px;font-weight:600;padding:2px 9px;border-radius:12px;flex-shrink:0;}
+.ch-title{font-size:1rem;font-weight:600;flex:1;}
+.ch-arrow{color:var(--faint);font-size:12px;transition:.2s;}
+.ch-arrow.open{transform:rotate(90deg);}
+.ch-body{display:none;padding:.75rem 0 .25rem;}
+.ch-body.open{display:block;}
+/* method card */
+.mcard{border-radius:8px;overflow:hidden;margin-bottom:.75rem;border:1px solid var(--rule);}
+.mcard-head{padding:.65rem 1rem;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;}
+.band-pill{font-size:10px;font-weight:700;padding:2px 9px;border-radius:12px;}
+.bp56{background:var(--b56bg);color:var(--b56c);}
+.bp67{background:var(--b67bg);color:var(--b67c);}
+.bp78{background:var(--b78bg);color:var(--b78c);}
+.mcard-title{font-size:.95rem;font-weight:600;}
+.mcard-level{padding:.65rem 1rem;font-size:13.5px;line-height:1.65;}
+.mcard-level:nth-child(even){background:var(--bg3);}
+.level-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);margin-bottom:.3rem;}
+.mcard-info{padding:.5rem 1rem;font-size:12.5px;border-top:1px solid var(--rule);display:flex;gap:.5rem;}
+.info-icon{font-weight:700;color:var(--red);flex-shrink:0;}
+/* example block */
+.example-block{background:var(--bg2);border:1px solid var(--rule);border-radius:8px;margin:.5rem 0 .75rem;overflow:hidden;}
+.example-head{display:flex;align-items:center;gap:10px;padding:.55rem 1rem;background:var(--bg3);flex-wrap:wrap;}
+.ex-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:var(--greenbg);color:var(--green);padding:2px 8px;border-radius:10px;flex-shrink:0;}
+.ex-passage{font-size:13px;font-weight:500;flex:1;}
+.ex-src{font-size:11px;color:var(--faint);font-style:italic;}
+/* mistake block */
+.mistake-block{background:var(--redbg);border:1px solid #e8b4a8;border-radius:8px;margin:.5rem 0 .75rem;overflow:hidden;}
+.mistake-head{display:flex;align-items:center;gap:10px;padding:.5rem 1rem;background:#f7dbd5;flex-wrap:wrap;}
+.mk-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--red);flex-shrink:0;}
+.mk-q{font-size:13px;font-weight:500;flex:1;}
+.mistake-body{padding:.65rem 1rem;display:flex;flex-direction:column;gap:.45rem;}
+.mk-row{display:flex;gap:10px;font-size:13px;align-items:flex-start;}
+.mk-tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;flex-shrink:0;margin-top:2px;}
+.wrong-tag{background:#f7dbd5;color:var(--red);}
+.reason-tag{background:var(--amberbg);color:var(--amber);}
+.fix-tag{background:var(--greenbg);color:var(--green);}
+/* sub sections */
+.sub-section{margin:.25rem 0 .75rem 0;padding-left:1rem;border-left:3px solid var(--rule);}
+.sub-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin:.5rem 0 .35rem;}
+/* misc */
+.source{font-size:11px;color:var(--faint);font-style:italic;margin:.3rem 0 .5rem;}
+.box{border-radius:6px;padding:.7rem 1rem;margin:.65rem 0;font-size:13.5px;line-height:1.65;}
+.box-title{font-weight:600;margin-bottom:.3rem;}
+.box-dark{background:#1a1a18;color:#d4cdbf;border-radius:8px;}
+.box-dark .box-title{color:#fde68a;}
+.box-amber{background:var(--amberbg);border-left:4px solid var(--amber);border-radius:0;}
+.box-blue{background:var(--bluebg);border-left:4px solid var(--blue);border-radius:0;}
+table.tbl{width:100%;border-collapse:collapse;font-size:13px;margin:.5rem 0;display:block;overflow-x:auto;}
+.tbl th{background:var(--ink);color:var(--bg);padding:7px 10px;text-align:left;font-weight:500;white-space:nowrap;}
+.tbl td{padding:6px 10px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.55;}
+.tbl tr:nth-child(even) td{background:var(--bg3);}
+.slot{border:1.5px dashed var(--rule);border-radius:6px;padding:.55rem 1rem;margin:.65rem 0;font-size:12px;color:var(--faint);}
+.hl{background:#ffe06688;border-radius:2px;}
+/* home grid */
+.home-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:1.5rem 0;}
+@media(max-width:560px){.home-grid{grid-template-columns:1fr;}}
+.sc{background:var(--bg2);border:1px solid var(--rule);border-radius:10px;padding:1.1rem 1.2rem;cursor:pointer;transition:.15s;}
+.sc:hover{background:var(--bg3);transform:translateY(-1px);}
+.sc-icon{font-size:1.4rem;margin-bottom:.4rem;}
+.sc-title{font-size:1rem;font-weight:600;}
+.sc-sub{font-size:12px;color:var(--muted);margin-top:3px;}
+</style>
+</head>
+<body>
+<div id="ov" onclick="closeSb()"></div>
+<div id="topbar">
+  <button id="mbtn" onclick="openSb()"><span></span><span></span><span></span></button>
+  IELTS 教学手册
+</div>
+<nav id="sb">
+  <div class="sb-header">
+    <div class="sb-brand">IELTS 教学手册</div>
+    <div class="sb-sub">最后更新：2026-03-28</div>
+  </div>
+  <div class="sb-search">
+    <input id="search-input" type="text" placeholder="搜索方法、例题、关键词…" oninput="doSearch(this.value)">
+  </div>
+  <div class="sb-section"><a class="sb-item active" onclick="show('home')">🏠 首页</a>
+<div class="sb-label">Reading</div>
+<a class="sb-item" onclick="show('r')"><span style="width:6px;height:6px;border-radius:50%;background:var(--blue);display:inline-block;margin-right:6px;flex-shrink:0"></span>Reading 首页</a>
+<a class="sb-item sb-sub" onclick="show('r-ch0')">基础层：定位词体</a>
+<a class="sb-item sb-sub" onclick="show('r-ch1')">第1章</a>
+<a class="sb-item sb-sub" onclick="show('r-ch2')">第2章</a>
+<a class="sb-item sb-sub" onclick="show('r-ch3')">第3章</a>
+<a class="sb-item sb-sub" onclick="show('r-ch6')">第6章</a>
+<a class="sb-item sb-sub" onclick="show('r-ch7')">第7章</a>
+<a class="sb-item sb-sub" onclick="show('r-ch8')">第8章</a>
+<div class="sb-label">Writing</div>
+<a class="sb-item" onclick="show('w')"><span style="width:6px;height:6px;border-radius:50%;background:var(--red);display:inline-block;margin-right:6px;flex-shrink:0"></span>Writing 首页</a>
+<a class="sb-item sb-sub" onclick="show('w-ch0')">第0章</a>
+<a class="sb-item sb-sub" onclick="show('w-ch1')">第1章</a>
+<div class="sb-label">Speaking</div>
+<a class="sb-item" onclick="show('s')"><span style="width:6px;height:6px;border-radius:50%;background:var(--purple);display:inline-block;margin-right:6px;flex-shrink:0"></span>Speaking 首页</a>
+<a class="sb-item sb-sub" onclick="show('s-ch0')">第0章</a>
+<a class="sb-item sb-sub" onclick="show('s-ch2')">Part 1 话</a>
+<div class="sb-label">Listening</div>
+<a class="sb-item" onclick="show('l')"><span style="width:6px;height:6px;border-radius:50%;background:var(--teal);display:inline-block;margin-right:6px;flex-shrink:0"></span>Listening 首页</a>
+<a class="sb-item sb-sub" onclick="show('l-ch1')">第1章</a>
+<a class="sb-item sb-sub" onclick="show('l-ch2')">第2章</a>
+<div class="sb-label">系统</div>
+<a class="sb-item" onclick="show('log')">📋 更新记录</a>
+</div>
+</nav>
+<main id="main">
+
+<div id="page-home" class="page active">
+  <div class="page-hero">
+    <h1>IELTS 教学手册</h1>
+    <div class="tagline">方法 · 例题 · 学生错误记录 · 持续积累</div>
+  </div>
+  <div class="home-grid">
+<div class="sc" onclick="show('r')">
+  <div class="sc-icon">📖</div>
+  <div class="sc-title">Reading</div>
+  <div class="sc-sub">五种题型 · 方法+例题+错误记录（11个方法）</div>
+</div>
+<div class="sc" onclick="show('w')">
+  <div class="sc-icon">✍️</div>
+  <div class="sc-title">Writing</div>
+  <div class="sc-sub">通用方法 + 六大话题 · 观点库（4个方法）</div>
+</div>
+<div class="sc" onclick="show('s')">
+  <div class="sc-icon">🎙️</div>
+  <div class="sc-title">Speaking</div>
+  <div class="sc-sub">Part 1/2/3 · 素材库（4个方法）</div>
+</div>
+<div class="sc" onclick="show('l')">
+  <div class="sc-icon">🎧</div>
+  <div class="sc-title">Listening</div>
+  <div class="sc-sub">待建立（4个方法）</div>
+</div></div>
+</div>
+
+
+<div id="page-r" class="page">
+  <div class="page-hero">
+    <h1 style="color:var(--blue)">Reading</h1>
+    <div class="tagline">教学手册 · 方法 → 例题 → 学生错误</div>
+  </div>
+  
+<div class="chapter" id="r-ch0">
+  <div class="ch-toggle" onclick="toggle(this)">
+    <span class="ch-badge" style="background:var(--blue)20;color:var(--blue)">基础层</span>
+    <span class="ch-title">基础层：定位词体系（所有题型通用）</span>
+    <span class="ch-arrow">▶</span>
+  </div>
+  <div class="ch-body open">
+    
+<div class="mcard" id="r-base-m-001">
+  <div class="mcard-head" style="background:var(--b67bg)">
+    <span class="band-pill bp67">Band 通用</span>
+    <span class="mcard-title">定位词两级体系</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>大定位（原词出现）：专有名词、人名、地名、数字、时间——直接在原文搜索，最可靠。小定位（不原词出现）：only / however / initially / then / finally / but——这些词标志着考点在其后。</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>主旨词排除：文章标题中出现的核心词（如 domestication）贯穿全文，不能作定位词——用它找会找到几十处。引号定位（匹配题专用）：选项中带引号的词组通常不被替换，可直接搜索。</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>双定位法：当同一大定位词在两道题中重复出现，先找第二道题定位，再往前回溯第一道题——顺序原则保证第一题在第二题前。</p></div><div class="mcard-info"><span class="info-icon">💡</span>找到定位词就以为找到了答案。定位词帮你找到段落，统一替换帮你找到具体句子——这是两步，不是一步。</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>给学生5道题，每道先圈定位词，判断大定位还是小定位，标注完再去文章找——比直接读快3倍。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-17</div>
+</div>
+    <div class="slot">▼ 新内容插入此处 — 章节：基础层：定位词体系（所有题型通用）</div>
+  </div>
+</div>
+<div class="chapter" id="r-ch1">
+  <div class="ch-toggle" onclick="toggle(this)">
+    <span class="ch-badge" style="background:var(--blue)20;color:var(--blue)">第1章</span>
+    <span class="ch-title">第1章　填空题 Sentence Completion</span>
+    <span class="ch-arrow">▶</span>
+  </div>
+  <div class="ch-body open">
+    
+<div class="mcard" id="r-ch1-m-001">
+  <div class="mcard-head" style="background:var(--b56bg)">
+    <span class="band-pill bp56">Band 5→6</span>
+    <span class="mcard-title">填空题三步做题法</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>Step 1 预判词性：90%填名词，9%形容词，&lt;1%动词。默认先填名词。<br>Step 2 找大定位：用专有名词/数字在原文锁定段落（顺序原则：题目顺序=原文顺序）。<br>Step 3 找统一替换：题干动词/形容词 ≠ 原文动词/形容词，必须找同义词对应。</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>答案平移规则：找到答案词后，直接从原文复制，不改形式（含复数s、时态、大小写）。<br>双定位法：大定位词在两题重复时，先找第二题，再往前回溯第一题位置。</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>生词不慌原则：不认识的词不等于做不出来。通过「定位词锁定段落 → 统一替换锁定句子 → 上下文语义确认答案」，90%生词题可以做对。课堂原话：「这个词你以后估计也不会再看到了——不需要知道它什么意思，通过定位和逻辑链找出答案词。」</p></div><div class="mcard-info"><span class="info-icon">💡</span>找到大定位就以为找到答案，但答案在定位词附近好几句之外。「定位词帮你找到段落，统一替换帮你找到具体句子——这是两步。」</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>给学生一道填空题+原文，让他们画出「题干词→原文词」的替换路径，不直接找答案。做10题替换路径练习，比做100道普通题更有效。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-17</div>
+</div><div class="sub-section"><div class="sub-label">例题</div>
+<div class="example-block">
+  <div class="example-head">
+    <span class="ex-label">例题</span>
+    <span class="ex-passage">剑桥雅思 P1 伦敦地铁历史</span>
+    <span class="ex-src">2026-03-17</span>
+  </div>
+  <table class="tbl"><thead><tr><th>题目</th><th>定位词</th><th>统一替换</th><th>答案</th></tr></thead><tbody><tr><td>the ___ of London increased rapidly 1800–1850</td><td>数字1800–1850</td><td>increased rapidly → grew at an astonishing rate</td><td><strong>population</strong> <span style="color:var(--faint);font-size:12px">(主语位置→名词)</span></td></tr><tr><td>moved to newly constructed ___ in suburbs</td><td>CP（人名）</td><td>moved people to → relocate</td><td><strong>suburbs</strong> <span style="color:var(--faint);font-size:12px">(原词平移，保留复数)</span></td></tr><tr><td>a number of ___ agreed with the person's idea</td><td>person's idea</td><td>agreed with → submitted the plan</td><td><strong>businessmen</strong> <span style="color:var(--faint);font-size:12px">(只有人能agree)</span></td></tr><tr><td>initially had problems ___ funding</td><td>小定位：initially</td><td>直接用</td><td><strong>raising</strong> <span style="color:var(--faint);font-size:12px">(限定词，考点跟在后面)</span></td></tr><tr><td>negative articles appeared in the ___</td><td>articles</td><td>appeared → printed by the press</td><td><strong>press</strong> <span style="color:var(--faint);font-size:12px">(媒体/报纸)</span></td></tr><tr><td>tunnel was covered with ___ on top</td><td>CNC（专有名词）</td><td>covered with → laid on top of</td><td><strong>soil</strong> <span style="color:var(--faint);font-size:12px">(上下文猜词)</span></td></tr></tbody></table>
+</div></div>
+<div class="mcard" id="r-ch1-m-002">
+  <div class="mcard-head" style="background:var(--b67bg)">
+    <span class="band-pill bp67">Band 6→7</span>
+    <span class="mcard-title">跨句指代：答案在上一句的指代关系里</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>识别特征：题干有「which/that + 关系从句」描述某物的功能，但找不到直接对应句。<br>解法：往前一句找「These / They / It / This」等代词，代词所指就是答案。<br>例：Q21 ditches——原文①「They dig ditches」→ 原文②「These are then used to drain」→ These = ditches</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>记忆口诀：「功能句在后，名称句在前。」凡是题干描述某物功能或用途，答案词往往在描述该功能的前一句。</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>不只是 These/They，任何指代关系都可能跨句。动词主语也可能是指代：「Logging companies dig ditches... [These structures] are then used to drain」——理解这种句式能处理更复杂的指代题。</p></div><div class="mcard-info"><span class="info-icon">💡</span>只看功能句（drain water out），以为答案是 water 或 peatlands，忽略了 These 的指代。必须追问：「These 指的是上一句的哪个名词？」</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>给学生5道含代词（these/they/it/this）的填空题，要求写出「指代词→指代对象」的关系链，而不是直接找答案。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-17</div>
+</div><div class="sub-section"><div class="sub-label">例题</div>
+<div class="example-block">
+  <div class="example-head">
+    <span class="ex-label">例题</span>
+    <span class="ex-passage">剑雅19 T3 P2 湿地</span>
+    <span class="ex-src">2026-03-17, 2026-03-18</span>
+  </div>
+  <p class="source">D段+E段集中出题，顺序原则完全成立。本例题同时挂在：跨句指代、ONE WORD选词、冒号法则、X value辨析。</p><table class="tbl"><thead><tr><th>题目</th><th>定位词</th><th>统一替换</th><th>答案</th><th>规律</th></tr></thead><tbody><tr><td>Q18</td><td>drained/release/storing → D段</td><td>release carbon = net carbon emitters；storing it = carbon stores</td><td><strong>carbon</strong></td><td>统一替换 / ONE WORD</td></tr><tr><td>Q19</td><td>cleared/more likely → D段（Q18之后）</td><td>more likely to occur = increases the risk of；原文 forest fires，题干已有语境</td><td><strong>fires</strong></td><td>统一替换 / ONE WORD</td></tr><tr><td>Q20</td><td>peatland forests/oil palm → D段（Q19之后）</td><td>destroys = being lost；原文 biodiversity value，填核心名词</td><td><strong>biodiversity</strong></td><td>X value辨析 / ONE WORD</td></tr><tr><td>Q21</td><td>logging companies/drained → E段</td><td>①They dig ditches → ②These used to drain；These = ditches</td><td><strong>ditches</strong></td><td>跨句指代</td></tr><tr><td>Q22</td><td>coastal flooding/land loss → E段</td><td>冒号后是解释，答案在冒号前；「process known as subsidence」</td><td><strong>subsidence</strong></td><td>冒号法则</td></tr></tbody></table><div class="box box-amber"><div class="box-title">课堂实录</div>Q20学生想填value→提示「被破坏的是biodiversity，value是修饰词」；Q21学生通过逻辑链自己推出ditches；Q22理解冒号后是解释后立刻找到subsidence。</div>
+</div></div><div class="sub-section"><div class="sub-label">学生典型错误</div>
+<div class="mistake-block">
+  <div class="mistake-head">
+    <span class="mk-label">⚠ 典型错误</span>
+    <span class="mk-q">Q21 ditches（剑雅19湿地）</span>
+    <span class="ex-src">2026-03-18</span>
+  </div>
+  <div class="mistake-body">
+    <div class="mk-row"><span class="mk-tag wrong-tag">学生填了</span><span>water 或 peatlands</span></div>
+    <div class="mk-row"><span class="mk-tag reason-tag">错误原因</span><span>只看功能句「These are then used to drain water」，没有往前追溯 These 指代什么。</span></div>
+    <div class="mk-row"><span class="mk-tag fix-tag">正确做法</span><span>往前一句：「They dig ditches to enter the peat swamps」→ These = ditches</span></div>
+  </div>
+</div></div>
+<div class="mcard" id="r-ch1-r-001">
+  <div class="mcard-head" style="background:var(--b56bg)">
+    <span class="band-pill bp56">Band 5→6</span>
+    <span class="mcard-title">ONE WORD ONLY 选词原则</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>原文是两个词时（如 forest fires / carbon emitters），判断哪个词是「真正要传达的新信息」，只填那个词。</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>判断规则：题干已经给出了修饰词的语境 → 只填核心名词。<br>「X value」结构 → 填X不填value（被破坏/被影响的是X）。<br>题干缺少修饰词信息 → 两个词都要填（若题目允许）。</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>判断口诀：「哪个词是这道题真正要传达的新信息？」通常是名词性核心词，修饰词（forest / severe / large-scale 等）往往可以省略。</p></div><div class="mcard-info"><span class="info-icon">💡</span>Q19原文是 forest fires，学生填了 forest fires 两个词——ONE WORD ONLY 时，题干语境已有足够信息，只填 fires。</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>给学生10道 ONE WORD ONLY 的题，专门找原文是两个词的题目，练习判断「填哪个词」而不是直接填。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-17</div>
+</div><div class="sub-section"><div class="sub-label">例题</div>
+<div class="example-block">
+  <div class="example-head">
+    <span class="ex-label">例题</span>
+    <span class="ex-passage">剑雅19 T3 P2 湿地</span>
+    <span class="ex-src">2026-03-17, 2026-03-18</span>
+  </div>
+  <table class="tbl"><thead><tr><th>题目</th><th>定位词</th><th>统一替换</th><th>答案</th><th>规律</th></tr></thead><tbody><tr><td>Q19：Once peatland areas have been cleared, ___ are more likely to occur.</td><td>cleared/more likely</td><td>more likely to occur = increases the risk of</td><td><strong>fires（不是 forest fires）</strong> <span style="color:var(--faint);font-size:12px">(原文是 forest fires，但题干有 peatland areas 语境，核心新信息是 fires)</span></td><td>ONE WORD</td></tr><tr><td>Q20：Clearing peatland forests... destroys the ___ of the local environment.</td><td>destroys</td><td>destroys = being lost；原文 biodiversity value</td><td><strong>biodiversity（不是 value）</strong> <span style="color:var(--faint);font-size:12px">(biodiversity value 里，被破坏的是 biodiversity，value 是修饰词)</span></td><td>ONE WORD / X value辨析</td></tr></tbody></table>
+</div></div><div class="sub-section"><div class="sub-label">学生典型错误</div>
+<div class="mistake-block">
+  <div class="mistake-head">
+    <span class="mk-label">⚠ 典型错误</span>
+    <span class="mk-q">Q19 fires（剑雅19湿地）</span>
+    <span class="ex-src">2026-03-17</span>
+  </div>
+  <div class="mistake-body">
+    <div class="mk-row"><span class="mk-tag wrong-tag">学生填了</span><span>forest fires（两个词）</span></div>
+    <div class="mk-row"><span class="mk-tag reason-tag">错误原因</span><span>看到原文是 forest fires，直接搬过来，忘了 ONE WORD ONLY 的要求。</span></div>
+    <div class="mk-row"><span class="mk-tag fix-tag">正确做法</span><span>题干语境已有「peatland areas」，核心新信息是 fires，forest 是修饰词可以省略。</span></div>
+  </div>
+</div>
+<div class="mistake-block">
+  <div class="mistake-head">
+    <span class="mk-label">⚠ 典型错误</span>
+    <span class="mk-q">Q20 biodiversity（剑雅19湿地）</span>
+    <span class="ex-src">2026-03-18</span>
+  </div>
+  <div class="mistake-body">
+    <div class="mk-row"><span class="mk-tag wrong-tag">学生填了</span><span>value</span></div>
+    <div class="mk-row"><span class="mk-tag reason-tag">错误原因</span><span>看到原文「biodiversity value」，填了 value——以为题干说「destroy the value」就填 value。</span></div>
+    <div class="mk-row"><span class="mk-tag fix-tag">正确做法</span><span>「X value」结构里被破坏的永远是X（biodiversity），value 只是修饰词。</span></div>
+  </div>
+</div></div>
+<div class="mcard" id="r-ch1-r-002">
+  <div class="mcard-head" style="background:var(--b67bg)">
+    <span class="band-pill bp67">Band 6→7</span>
+    <span class="mcard-title">冒号法则：题干冒号后面是解释，不是答案</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>题干结构：「Draining peatlands leads to ___ : a serious problem which can eventually result in coastal flooding.」<br>冒号后的内容是解释，帮你确认答案方向，但答案本身在冒号前的空格。</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>正确做法：先读冒号后的内容，理解答案的「类型/范围」，再回到冒号前找答案词。<br>Q22：冒号后说「会导致 coastal flooding 和 land loss」→ 确认方向，答案在冒号前。</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>冒号后的解释通常包含两类信息：①答案的性质（a serious problem / a key factor）②答案的结果（leads to flooding）。两类信息都用于确认，不用于填写。</p></div><div class="mcard-info"><span class="info-icon">💡</span>学生把冒号后的词（flooding / problem）填进去——冒号后是解释不是答案，答案在冒号前。课堂原话：「冒号就是解释这个东西，是个prompt。」</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>每次看到题干有冒号，让学生先读冒号后的内容理解「答案的类型」，再回到冒号前找词——形成习惯后自动跳过这个陷阱。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-18</div>
+</div><div class="sub-section"><div class="sub-label">例题</div>
+<div class="example-block">
+  <div class="example-head">
+    <span class="ex-label">例题</span>
+    <span class="ex-passage">剑雅19 T3 P2 湿地</span>
+    <span class="ex-src">2026-03-18</span>
+  </div>
+  <table class="tbl"><thead><tr><th>题目</th><th>定位词</th><th>统一替换</th><th>答案</th><th>规律</th></tr></thead><tbody><tr><td>Q22：Draining peatlands leads to ___ : a serious problem which can eventually result in coastal flooding and land loss.</td><td>coastal flooding/land loss → E段</td><td>冒号后是解释，答案在冒号前；原文「a process known as subsidence」</td><td><strong>subsidence</strong> <span style="color:var(--faint);font-size:12px">(冒号后「a serious problem... coastal flooding」是解释，告诉你答案是某种严重问题，答案本身是 subsidence)</span></td><td>冒号法则</td></tr></tbody></table><div class="box box-amber"><div class="box-title">课堂实录</div>学生理解冒号后是解释后，立刻往前找，找到 subsidence。</div>
+</div></div>
+<div class="mcard" id="r-ch1-r-003">
+  <div class="mcard-head" style="background:var(--b56bg)">
+    <span class="band-pill bp56">Band 5→6</span>
+    <span class="mcard-title">「X value」结构辨析：被破坏的是X不是value</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>当原文出现「[名词] value」结构，被描述/被破坏/被影响的对象是名词（X），不是 value。<br>例：biodiversity value → 被破坏的是 biodiversity，填 biodiversity 不填 value。</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>判断方法：看题干的动词在做什么（destroys / loses / reduces）→ 这个动作的对象是X（生物多样性本身），value 只是说明这个X有价值。</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>迁移：同样的逻辑适用于其他「X quality / X level / X rate」结构。被影响的永远是X本身，quality/level/rate 是修饰词。</p></div><div class="mcard-info"><span class="info-icon">💡</span>学生看到「destroys the ___」和原文「biodiversity value」，直接填 value——「destroys value」表面上也说得通，但原文说的是生物多样性被消灭，不是「价值」被消灭。</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>给学生5组「X value/quality/level」结构，让他们判断「如果题干是 destroys the ___，应该填哪个词」，建立直觉。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-18</div>
+</div><div class="sub-section"><div class="sub-label">例题</div>
+<div class="example-block">
+  <div class="example-head">
+    <span class="ex-label">例题</span>
+    <span class="ex-passage">剑雅19 T3 P2 湿地</span>
+    <span class="ex-src">2026-03-18</span>
+  </div>
+  <table class="tbl"><thead><tr><th>题目</th><th>定位词</th><th>统一替换</th><th>答案</th><th>规律</th></tr></thead><tbody><tr><td>Q20：Clearing peatland forests to make way for oil palm plantations destroys the ___ of the local environment.</td><td>peatland forests/oil palm → D段</td><td>destroys = being lost；原文「extremely high biodiversity value being lost」</td><td><strong>biodiversity</strong> <span style="color:var(--faint);font-size:12px">(题干：destroys the ___；原文：biodiversity value being lost → 被消灭的是 biodiversity)</span></td><td>X value辨析 / ONE WORD</td></tr></tbody></table><div class="box box-amber"><div class="box-title">课堂实录</div>学生填了 value，老师提示：「被破坏的是生物多样性（biodiversity），value是修饰它的，填value不知道是什么value。」学生立刻理解并改正。</div>
+</div></div><div class="sub-section"><div class="sub-label">学生典型错误</div>
+<div class="mistake-block">
+  <div class="mistake-head">
+    <span class="mk-label">⚠ 典型错误</span>
+    <span class="mk-q">Q20 biodiversity（剑雅19湿地）</span>
+    <span class="ex-src">2026-03-18</span>
+  </div>
+  <div class="mistake-body">
+    <div class="mk-row"><span class="mk-tag wrong-tag">学生填了</span><span>value</span></div>
+    <div class="mk-row"><span class="mk-tag reason-tag">错误原因</span><span>看到原文「biodiversity value」，认为题干「destroys the value」对应填 value。</span></div>
+    <div class="mk-row"><span class="mk-tag fix-tag">正确做法</span><span>「X value」里被破坏的是X本身（biodiversity），value 只是描述X的属性，不是独立的填写对象。</span></div>
+  </div>
+</div></div>
+    <div class="slot">▼ 新内容插入此处 — 章节：第1章　填空题 Sentence Completion</div>
+  </div>
+</div>
+<div class="chapter" id="r-ch2">
+  <div class="ch-toggle" onclick="toggle(this)">
+    <span class="ch-badge" style="background:var(--blue)20;color:var(--blue)">第2章</span>
+    <span class="ch-title">第2章　判断题 True / False / Not Given</span>
+    <span class="ch-arrow">▶</span>
+  </div>
+  <div class="ch-body open">
+    
+<div class="mcard" id="r-ch2-m-001">
+  <div class="mcard-head" style="background:var(--b56bg)">
+    <span class="band-pill bp56">Band 5→6</span>
+    <span class="mcard-title">三种答案的唯一条件</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>TRUE：题干所有信息与原文一致（允许统一替换，方向一致）。<br>FALSE：题干某一处与原文直接矛盾（仅一个词/短语级别矛盾，其余能对应）。<br>NOT GIVEN①（无中生有）= 原文完全没有这个逻辑。<br>NOT GIVEN②（无端比较）= 原文没有比较概念，题干有。</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>FALSE vs NG 区分口诀：先问「原文有没有这个概念」。有→找矛盾，有矛盾=FALSE。没有→NG。<br>FALSE的矛盾通常是：①形容词反义（first ↔ not first）②数量不同 ③否定变肯定。</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>无端比较识别：题干出现比较词（more than / faster than / the first），但原文只有陈述没有对比→NG。做题前先扫题干有没有比较词，有则警惕NG。</p></div><div class="mcard-info"><span class="info-icon">💡</span>学生常把「我没找到」误认为是NG——但「没找到」可能是定位没做好。先用大定位锁定段落，在那个段落里找矛盾，找不到矛盾才是NG。</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>自己出题训练：给学生一段原文，让他们写3道判断题（1TRUE/1FALSE/1NG）。比做100道题更有效，因为出题时必须理解NG的设计逻辑。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-17</div>
+</div><div class="sub-section"><div class="sub-label">例题</div>
+<div class="example-block">
+  <div class="example-head">
+    <span class="ex-label">例题</span>
+    <span class="ex-passage">剑桥雅思 P1 伦敦地铁历史</span>
+    <span class="ex-src">2026-03-17</span>
+  </div>
+  <table class="tbl"><thead><tr><th>题目</th><th>答案</th><th>分析</th></tr></thead><tbody><tr><td>Other countries had built underground railways before Metropolitan Line.</td><td><strong>FALSE</strong></td><td>原文：Metropolitan Line 是 world's FIRST underground railway。题干暗示「之前已有其他地铁」= 与原文直接矛盾。</td></tr><tr><td>More passengers than predicted on the first day.</td><td><strong>NG</strong></td><td>原文只说「almost 40,000 passengers」，没有预测数字。题干出现比较（actual vs predicted）但原文无此比较 → 无端比较型NG。</td></tr><tr><td>Ventilation system proved difficult to prevent pollution.</td><td><strong>TRUE</strong></td><td>however转折后：原文「remained a problem」= 依旧是问题 = 与题干「difficult to prevent pollution」方向一致。</td></tr><tr><td>A different approach was needed for the central section.</td><td><strong>TRUE</strong></td><td>原文「was not an option in this part of the capital」= 不能用同样方法。题干「different approach was needed」= 逻辑一致。</td></tr><tr><td>Windows in the carriage were at eye level.</td><td><strong>FALSE</strong></td><td>原文「windows near the roof」（房顶附近）；题干「at eye level」（与视线平齐）= 位置矛盾。</td></tr><tr><td>The railway was a financial success from the start.</td><td><strong>FALSE</strong></td><td>原文「did not make a profit」= 没有盈利；题干「financial success」= 直接矛盾。</td></tr><tr><td>Electric locomotives introduced more quickly than steam ones.</td><td><strong>NG</strong></td><td>原文只提到电力机车，没有「引入速度」比较的概念 → 无中生有型NG。</td></tr></tbody></table>
+</div>
+<div class="example-block">
+  <div class="example-head">
+    <span class="ex-label">例题</span>
+    <span class="ex-passage">（来源待补充）灵长类动物攻击性研究</span>
+    <span class="ex-src">2026-03-23</span>
+  </div>
+  <table class="tbl"><thead><tr><th>题目</th><th>答案</th><th>分析</th></tr></thead><tbody><tr><td>Q40: Animal research has failed to reveal a link between changes in the environment and the emergence of aggressive tendencies.</td><td><strong>NO</strong></td><td>原文（九段三句）：Research has shown repeatedly that when the natural habitats of primates such as apes and gorillas are disrupted, they tend to become more violent. → 原文说研究「反复表明（shown repeatedly）」环境变化（栖息地破坏）会导致攻击性增加，即已成功揭示联系；题干说「未能揭示（failed to reveal）」→ 与原文直接矛盾。</td></tr></tbody></table>
+</div>
+<div class="example-block">
+  <div class="example-head">
+    <span class="ex-label">例题</span>
+    <span class="ex-passage">剑雅19 T2 P3 天才儿童（Gifted child）Q33-37</span>
+    <span class="ex-src">2026-03-23</span>
+  </div>
+  <p class="source">判断题Q33-37，含NG辨析陷阱（特别是Q36爱因斯坦态度题）</p><table class="tbl"><thead><tr><th>题目</th><th>答案</th><th>分析</th></tr></thead><tbody><tr><td>Q33: Many people who ended up winning Nobel prizes only reached an average standard when young.</td><td><strong>TRUE</strong></td><td>原文第三段：most Nobel Prize winners are not on the exceptional as children → 在童年时期并不出众 = average standard when young，与题干一致。</td></tr><tr><td>Q34: 某诺贝尔奖得主在童年时缺乏自信</td><td><strong>NG</strong></td><td>原文提到诺贝尔奖得主童年不出众，但从未提到他们是否缺乏自信（confident/confidence）→ 无中生有型NG。</td></tr><tr><td>Q35: 科学家们对天才是否天生这一问题能达成一致</td><td><strong>FALSE</strong></td><td>原文：wild jury is out on giftedness, with age and other factors potentially making the difference → jury is out = 无法达成共识，与题干「reach agreement」矛盾。</td></tr><tr><td>Q36: 爱因斯坦对公众关于他的观点感到失落（upset）</td><td><strong>NG</strong></td><td>原文记录了爱因斯坦的话：「it's not that I'm so smart, it's just I stay with problems longer」——他只是客观描述自己，没有表达任何upset/失落的情绪 → NG。</td></tr><tr><td>Q37: 爱因斯坦把自己的成功归因于思考速度快</td><td><strong>FALSE</strong></td><td>原文：「I stay with problems longer」= 在问题上坚持更久，不是速度快 → 与题干「速度」直接矛盾。</td></tr></tbody></table><div class="box box-amber"><div class="box-title">课堂实录</div>Q36是本组最容易出错的题：学生选FALSE，但FALSE需要原文出现与'upset'相对的情绪（如'not care/满意'），原文只是客观引用爱因斯坦的话，没有态度描述，应为NG。</div>
+</div></div>
+    <div class="slot">▼ 新内容插入此处 — 章节：第2章　判断题 True / False / Not Given</div>
+  </div>
+</div>
+<div class="chapter" id="r-ch3">
+  <div class="ch-toggle" onclick="toggle(this)">
+    <span class="ch-badge" style="background:var(--blue)20;color:var(--blue)">第3章</span>
+    <span class="ch-title">第3章　人名匹配 Name Matching</span>
+    <span class="ch-arrow">▶</span>
+  </div>
+  <div class="ch-body open">
+    
+<div class="mcard" id="r-ch3-m-001">
+  <div class="mcard-head" style="background:var(--b56bg)">
+    <span class="band-pill bp56">Band 5→6</span>
+    <span class="mcard-title">人名匹配四步法</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>Step 1：圈出所有人名（第一次全名，第二次起只有姓，不要漏）。<br>Step 2：只看两类内容：①引号内的话 ②says/notes/adds/argues/indicates/claims 后内容。<br>Step 3：简化每个选项为2–3个核心词（主语+动作+宾语；去掉主旨词）。<br>Step 4：匹配时至少对上2个核心词才能选。</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>NB规则：出现NB = 有一个人名被用两次。提前标记，不然做到最后发现少一道题。<br>没有NB = 每个人名各用一次，可以用排除法。</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>高效策略：不通读全文。直接在文章里找4个人名，每找到一个立刻看引号内容，与4道题对照。通常一轮就能全做完——每个专家的观点高度独特，不会混淆。</p></div><div class="mcard-info"><span class="info-icon">💡</span>答案有时是专家「顺带说的一句话」（如Q26 van Eijk在C段），不是他在那段的核心观点。段落主旨法找不到，只有人名定位+引号搜索才能稳定找到。</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>观点归属训练：给学生含多个专家引用的文章，不给题目，让他们用一句话写出每个专家的核心观点。训练快速提炼他人立场的能力。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-17</div>
+</div><div class="sub-section"><div class="sub-label">例题</div>
+<div class="example-block">
+  <div class="example-head">
+    <span class="ex-label">例题</span>
+    <span class="ex-passage">剑雅19 T3 P2 湿地</span>
+    <span class="ex-src">2026-03-17, 2026-03-18</span>
+  </div>
+  <p class="source">四道题答案分散在C/F/G/H段，不按段落顺序排列，专练「不按顺序找」的能力。</p><table class="tbl"><thead><tr><th>题目</th><th>答案</th><th>分析</th></tr></thead><tbody><tr><td>Q23→A McCartney</td><td><strong></strong></td><td>G段：「local people are involved in wetland planning and decision making」→ communities=local people ✓ included=involved ✓</td></tr><tr><td>Q24→C Silvius</td><td><strong></strong></td><td>H段：「different governments have different attitudes」→ policies vary=different attitudes ✓</td></tr><tr><td>Q25→D Tickner</td><td><strong></strong></td><td>F段：「does not blame... deliberate」+「never wanted to damage」→ without intention=not deliberate ✓</td></tr><tr><td>Q26→B van Eijk</td><td><strong></strong></td><td>C段引号（⚠️不是C段主旨）：「as simple as planting a few trees」→ need not be complex ✓。只能人名定位找到，段落主旨法找不到。</td></tr></tbody></table>
+</div></div>
+    <div class="slot">▼ 新内容插入此处 — 章节：第3章　人名匹配 Name Matching</div>
+  </div>
+</div>
+<div class="chapter" id="r-ch6">
+  <div class="ch-toggle" onclick="toggle(this)">
+    <span class="ch-badge" style="background:var(--blue)20;color:var(--blue)">第6章</span>
+    <span class="ch-title">第6章</span>
+    <span class="ch-arrow">▶</span>
+  </div>
+  <div class="ch-body open">
+    
+<div class="mcard" id="r-ch6-m-a4b2">
+  <div class="mcard-head" style="background:var(--b67bg)">
+    <span class="band-pill bp67">Band 6→7</span>
+    <span class="mcard-title">多选题做题策略：分散型 vs 密集型</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>分散型：答案分布在文章不同段落，每道题对应不同区域，按题号顺序找即可。<br>密集型：所有答案集中在同一段或相邻段落，需要先把全部选项看懂，再在一段内集中比对。</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>判断题型的方法：<br>① 分散型：每道题通常有独立定位词（人名/时间/专有名词），和其他题的定位区域不重叠。<br>② 密集型：题目问的都是同一个话题下的不同方面，定位词高度相似或集中在一个段落标志词后。<br>课堂原话：「分散的，和金字塔那篇有点像；密集的，就像在一段里找两个」</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>分散型优先按顺序原则做；密集型需要先简化所有选项为2-3个核心词，再统一进段找对应——不要边读边对，容易漏。</p></div><div class="mcard-info"><span class="info-icon">💡</span>看到多选题先不急于找定位，先判断是分散还是密集。分散型每题独立做；密集型先通读选项再集中比对。</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>给学生两道多选题（一分散一密集），让他们先判断类型，再用不同策略做——目的是让他们主动识别题型而不是无脑找定位。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-23</div>
+</div><div class="sub-section"><div class="sub-label">例题</div>
+<div class="example-block">
+  <div class="example-head">
+    <span class="ex-label">例题</span>
+    <span class="ex-passage">剑雅19 T2 P2 Athletes and stress</span>
+    <span class="ex-src">2026-03-23</span>
+  </div>
+  <p class="source">分散型多选题。答案跨B段和C段，每道题分别有独立定位区域。</p><table class="tbl"><thead><tr><th>题目</th><th>定位词</th><th>统一替换</th><th>答案</th><th>规律</th></tr></thead><tbody><tr><td>Q23-24: Which TWO aspects of tournament increased pressure on ER?</td><td>ER（人名）→ C段 倒数第三行</td><td>aspects of tournament → larger audience / higher expectations / more skillful opponent</td><td><strong>D（tournament压力）</strong> <span style="color:var(--faint);font-size:12px">(C段：how much larger audience, higher expectations, facing more skillful opponent → 这才是D的真正定位，B段只是症状描述)</span></td><td>分散型 / 人名定位</td></tr><tr><td>Q23-24 其中一项：表现出的症状</td><td>symptoms → B段</td><td>difficulty regulating breathing and heart rate during a match</td><td><strong>（对应症状选项）</strong> <span style="color:var(--faint);font-size:12px">(两道题答案分别在B段和C段，典型分散型)</span></td><td>分散型</td></tr></tbody></table><div class="box box-amber"><div class="box-title">课堂实录</div>学生一开始把B段的症状描述当作D选项的定位，老师指出D的真正定位在C段（larger audience/higher expectations/opponent），B段只是侧面例子。</div>
+</div>
+<div class="example-block">
+  <div class="example-head">
+    <span class="ex-label">例题</span>
+    <span class="ex-passage">剑雅19 T1 P2 海盗历史</span>
+    <span class="ex-src">2026-03-23</span>
+  </div>
+  <p class="source">密集型多选题。Q20-21答案集中在B段，Q22-23答案集中在另一段。</p><table class="tbl"><thead><tr><th>题目</th><th>定位词</th><th>统一替换</th><th>答案</th><th>规律</th></tr></thead><tbody><tr><td>Q20: 居民为何依赖海洋？</td><td>B段中部：relied heavily on marine resources</td><td>relied heavily → depend on the sea more than farming</td><td><strong>D（依赖海洋胜于陆地）</strong> <span style="color:var(--faint);font-size:12px">(rely on = depend on；sea = marine resources)</span></td><td>密集型 / 统一替换</td></tr><tr><td>Q21: 海盗优势来源？</td><td>B段末句：knowledge of local area</td><td>knowledge of local area → help avoid retaliation → escape capture</td><td><strong>B（逃避追捕）</strong> <span style="color:var(--faint);font-size:12px">(avoid retaliation from state fleet = escape capture；logic: 熟悉地形→躲避官方追击)</span></td><td>密集型 / 统一替换</td></tr><tr><td>Q22-23: 关于Grace（人名）</td><td>Grace出现的段落</td><td>赞美（canticle/favorable）→ favorable view of piracy in certain texts</td><td><strong>C + E（正面视角出现在文字记录中）</strong> <span style="color:var(--faint);font-size:12px">(B选项陷阱：两本书≠导致态度转变；E选项：favorable view of piracy is evident in certain Greek texts)</span></td><td>密集型</td></tr></tbody></table><div class="box box-amber"><div class="box-title">课堂实录</div>Q22-23学生选了B+C，老师指出B的逻辑链不成立（书出现了，但原文没说导致态度转变），正确逻辑是书里出现了对海盗的正面描述（favorable view），应选C+E。</div>
+</div></div>
+    <div class="slot">▼ 新内容插入此处 — 章节：第6章</div>
+  </div>
+</div>
+<div class="chapter" id="r-ch7">
+  <div class="ch-toggle" onclick="toggle(this)">
+    <span class="ch-badge" style="background:var(--blue)20;color:var(--blue)">第7章</span>
+    <span class="ch-title">第7章</span>
+    <span class="ch-arrow">▶</span>
+  </div>
+  <div class="ch-body open">
+    
+<div class="mcard" id="r-ch7-m-c3d1">
+  <div class="mcard-head" style="background:var(--b78bg)">
+    <span class="band-pill bp78">Band 7→8</span>
+    <span class="mcard-title">单选题两种题型：细节推理题 vs 段落推理题</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>细节推理题：能定位到具体原句，做法和多选题类似——找定位词→锁定句子→排除陷阱选项。<br>段落推理题：需要读完整段，归纳段意，再把段意与选项对应——不能靠单句定位。</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>优先级策略：碰到单选题先判断类型。细节推理题先做；段落推理题如果读不懂段意，放在最后做——这类题是Reading中难度最高的。<br>判断方法：题干问「根据X段作者说明了什么」或「第X段的主要观点是」→段落推理题；题干有明显定位词→细节推理题。</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>陷阱识别核心：单选题最多陷阱就是「细节正确但方向错」。看到的细节在原文里确实提到了，但整段的逻辑走向是反驳这个细节或者说明别的事情。解题关键是先抓主旨句（段首+段尾），再看细节在段中的作用。<br>课堂原话：「千万不能被细节陷阱带跑——你要看他在讲的到底是什么，他这一段的主旨到底是什么。」</p></div><div class="mcard-info"><span class="info-icon">💡</span>最常见错误：看到某个选项的词在原文出现了，就选那个——但这个词出现的位置可能是旧观点、举例或者被反驳的内容，不是作者的主张。</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>练习：做完单选题后，不看答案，先写出「这道题我选XX因为我认为段意是……」——迫使自己用段意选题而不是词汇匹配。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-23</div>
+</div><div class="sub-section"><div class="sub-label">例题</div>
+<div class="example-block">
+  <div class="example-head">
+    <span class="ex-label">例题</span>
+    <span class="ex-passage">剑雅12 T4 P2 野猫（Scottish wildcat）</span>
+    <span class="ex-src">2026-03-23</span>
+  </div>
+  <p class="source">单选题Q14-18。Q18是段落推理题；其余是细节推理题。</p><table class="tbl"><thead><tr><th>题目</th><th>定位词</th><th>统一替换</th><th>答案</th><th>规律</th></tr></thead><tbody><tr><td>Q14: 关于野猫在英国存活时间</td><td>D段末句：bring forward the estimated extinction date by five thousand years</td><td>extinction date brought forward → survived longer than previously thought</td><td><strong>D（存活时间比之前认为的更长）</strong> <span style="color:var(--faint);font-size:12px">(灭绝时间提前5000年 = 原来以为更早灭绝，现在发现活更长)</span></td><td>细节推理 / 统一替换</td></tr><tr><td>Q14 陷阱选项C：从英国消失是几千年前</td><td>D段中部有「several thousand years ago」</td><td>旧观点：at least six thousand years ago灭绝</td><td><strong>C是旧观点陷阱，不选</strong> <span style="color:var(--faint);font-size:12px">(原文后半段推翻了这个旧观点，「几千年前」是被反驳的旧说法，不是段意)</span></td><td>旧观点vs新观点陷阱</td></tr><tr><td>Q15: 关于大型野生动物重新引入的作用</td><td>段末：killers turn out to be bringers of life</td><td>bringers of life → beneficial to wildlife / bring life back</td><td><strong>A（对野生生物有益）</strong> <span style="color:var(--faint);font-size:12px">(段意：大型动物并非破坏者，而是生命带来者。B（change direction）只对应段中细节，不是段意。)</span></td><td>段落推理 / 段末主旨句</td></tr><tr><td>Q16: 关于英国保护运动的方向</td><td>段末：take a misguided project</td><td>misguided = wrong direction；a jar of pickles比喻 = 静态保护</td><td><strong>C（英国保护运动方向有误）</strong> <span style="color:var(--faint);font-size:12px">(比喻：把自然当作pickles jar（密封保存）= 错误的静态保护观念)</span></td><td>段落推理 / 比喻理解</td></tr><tr><td>Q17: 关于政策对捕捞业的影响</td><td>段末：policy would greatly boost catches in surrounding seas</td><td>boost catches = increase fishing industry</td><td><strong>A（对捕捞业有益）</strong> <span style="color:var(--faint);font-size:12px">(反常识题：禁止在繁殖地捕捞反而会促进周边捕捞业——鱼有地方繁殖才能持续)</span></td><td>细节推理 / 反常识注意</td></tr><tr><td>Q18: 关于rewilding活动为何传播迅速</td><td>段末：helps create a more inspiring vision → enthusiasm is spreading</td><td>more inspiring vision → greater appeal to people</td><td><strong>C（对人们更有吸引力）</strong> <span style="color:var(--faint);font-size:12px">(段落推理题：enthusiasm spreading的原因是「more inspiring vision」= 更有吸引力/启发性)</span></td><td>段落推理</td></tr></tbody></table><div class="box box-amber"><div class="box-title">课堂实录</div>学生Q14选了C（几千年前灭绝），老师解释这是旧观点，文章后半段推翻了它。Q15学生选了B（change direction），老师指出段末才是段意（bringers of life），change direction只是细节。</div>
+</div>
+<div class="example-block">
+  <div class="example-head">
+    <span class="ex-label">例题</span>
+    <span class="ex-passage">剑雅19 T2 P3 天才儿童（Gifted child）</span>
+    <span class="ex-src">2026-03-23</span>
+  </div>
+  <p class="source">单选题Q38-40。均需定位到具体段落。</p><table class="tbl"><thead><tr><th>题目</th><th>定位词</th><th>统一替换</th><th>答案</th><th>规律</th></tr></thead><tbody><tr><td>Q38: 某人认为让孩子发挥天赋需要什么？</td><td>人名定位 → 倒数第五段</td><td>curiosity/persistence → develop attributes like curiosity and persistence</td><td><strong>C（发展好奇心、坚持等品质）</strong> <span style="color:var(--faint);font-size:12px">(陷阱：B（assistance from peers）在最后一句有support提到，但原文是「support at home and school」，school≠peers)</span></td><td>细节推理 / 人名定位</td></tr><tr><td>Q38 陷阱选项B：同伴帮助</td><td>最后一句：need the right support at home and school</td><td>support = assistance；但school ≠ peers</td><td><strong>B错误：school支持≠同龄人支持</strong> <span style="color:var(--faint);font-size:12px">(school里有老师和同学，不能等同于peers（同龄人）)</span></td><td>陷阱：概念偷换</td></tr><tr><td>Q39: 某人对天赋的观点</td><td>第二句：doesn't think talents are at the heart of performance</td><td>not at the heart = not the key factor</td><td><strong>B（天赋不是表现的核心因素）</strong></td><td>细节推理 / 统一替换</td></tr><tr><td>Q40: 成功者的共同特征研究发现</td><td>倒数第二句：adults in the child's life who value and supported education</td><td>value education = recognizes the benefit of education</td><td><strong>D（身边有认识到教育价值的成年人）</strong></td><td>细节推理 / 统一替换</td></tr></tbody></table><div class="box box-amber"><div class="box-title">课堂实录</div>Q38学生几乎选了B，老师指出school support不等于peer assistance——school里面也有老师，不能直接画等号。</div>
+</div>
+<div class="example-block">
+  <div class="example-head">
+    <span class="ex-label">例题</span>
+    <span class="ex-passage">剑雅19 T4 P3 人类是否天性自私</span>
+    <span class="ex-src">2026-03-23</span>
+  </div>
+  <p class="source">单选题，关键是区分「作者观点」vs「大众观点/其他人观点」。</p><table class="tbl"><thead><tr><th>题目</th><th>定位词</th><th>统一替换</th><th>答案</th><th>规律</th></tr></thead><tbody><tr><td>Q1: 第一段作者在做什么？</td><td>第一句：There has long been a general assumption that human beings are fundamentally selfish</td><td>describe a general assumption = describe a commonly held belief</td><td><strong>C（描述一个普遍持有的观点）</strong> <span style="color:var(--faint);font-size:12px">(陷阱：B说证明人类贪婪的观点正确——但作者只是在描述大众假设，不是论证它)</span></td><td>段落推理 / 作者vs他人观点</td></tr><tr><td>Q2: 某理论为何变得流行？</td><td>第二句：became popular because fit so well with attitudes of twentieth century society</td><td>fit with attitudes of the time = in line with prevailing views</td><td><strong>（presented a view in line with the attitude of the times）</strong></td><td>细节推理 / 统一替换</td></tr><tr><td>Q3: 第四段作者推断什么？</td><td>末句：small population density → unlikely to compete for resources</td><td>unlikely to compete → resources were plentiful</td><td><strong>B（资源充足）</strong></td><td>细节推理 / 逻辑推断</td></tr><tr><td>Q4: 关于早期社会人类行为</td><td>倒数第二句：moral obligation to share everything</td><td>obligation to share = not fundamentally greedy</td><td><strong>A（早期人类有分享义务→非天性贪婪）</strong></td><td>细节推理 / 逻辑推断</td></tr></tbody></table><div class="box box-amber"><div class="box-title">课堂实录</div>这篇文章核心区分：作者vs大众的观点。学生Q1几乎选B，老师说要先看第一段第一句是general assumption（大众假设），说明作者在描述观点而非论证。</div>
+</div></div><div class="sub-section"><div class="sub-label">学生典型错误</div>
+<div class="mistake-block">
+  <div class="mistake-head">
+    <span class="mk-label">⚠ 典型错误</span>
+    <span class="mk-q">Q14 剑12 T4 P2 野猫单选题</span>
+    <span class="ex-src">2026-03-23</span>
+  </div>
+  <div class="mistake-body">
+    <div class="mk-row"><span class="mk-tag wrong-tag">学生填了</span><span>C（vanished from Britain several thousand years ago）</span></div>
+    <div class="mk-row"><span class="mk-tag reason-tag">错误原因</span><span>看到原文里确实出现「several thousand years ago」就选了，没意识到这是文章正在反驳的旧观点。</span></div>
+    <div class="mk-row"><span class="mk-tag fix-tag">正确做法</span><span>判断一个内容是否是新观点（段意）还是旧观点（被反驳），要看它在文章逻辑中的位置——旧观点通常出现在「However/but/new evidence suggests」之前。</span></div>
+  </div>
+</div>
+<div class="mistake-block">
+  <div class="mistake-head">
+    <span class="mk-label">⚠ 典型错误</span>
+    <span class="mk-q">Q38 剑19 T2P3 天才儿童</span>
+    <span class="ex-src">2026-03-23</span>
+  </div>
+  <div class="mistake-body">
+    <div class="mk-row"><span class="mk-tag wrong-tag">学生填了</span><span>B（assistance from peers）</span></div>
+    <div class="mk-row"><span class="mk-tag reason-tag">错误原因</span><span>原文最后一句有「support at home and school」，把school support等同于peer assistance。</span></div>
+    <div class="mk-row"><span class="mk-tag fix-tag">正确做法</span><span>school包含老师和同学，不能等同于peers（同龄人）。选项用词更窄，原文用词更宽——宽的不能对应窄的。</span></div>
+  </div>
+</div>
+<div class="mistake-block">
+  <div class="mistake-head">
+    <span class="mk-label">⚠ 典型错误</span>
+    <span class="mk-q">Q15 剑12 T4 P2 野猫单选题</span>
+    <span class="ex-src">2026-03-23</span>
+  </div>
+  <div class="mistake-body">
+    <div class="mk-row"><span class="mk-tag wrong-tag">学生填了</span><span>B（change direction of conservation）</span></div>
+    <div class="mk-row"><span class="mk-tag reason-tag">错误原因</span><span>从逻辑推断大型动物会改变保护方向，这个逻辑说得通，但不是段落的主旨。</span></div>
+    <div class="mk-row"><span class="mk-tag fix-tag">正确做法</span><span>段末明确说「killers turn out to be bringers of life」——带来生命，带来有益影响，应选A（beneficial to wildlife）。选项B的内容在段中有提及但非段意。</span></div>
+  </div>
+</div></div>
+    <div class="slot">▼ 新内容插入此处 — 章节：第7章</div>
+  </div>
+</div>
+<div class="chapter" id="r-ch8">
+  <div class="ch-toggle" onclick="toggle(this)">
+    <span class="ch-badge" style="background:var(--blue)20;color:var(--blue)">第8章</span>
+    <span class="ch-title">第8章</span>
+    <span class="ch-arrow">▶</span>
+  </div>
+  <div class="ch-body open">
+    
+<div class="mcard" id="r-ch8-m-e5f6">
+  <div class="mcard-head" style="background:var(--b78bg)">
+    <span class="band-pill bp78">Band 7→8</span>
+    <span class="mcard-title">Summary填空匹配：二次匹配法</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>本质是填空题，但答案不从原文直接抄，而是从给定的A-K词库（名词/形容词）中选。<br>二次匹配：①先根据题干找定位，确认原文中的对应词/概念；②再在A-K选项里找哪个词能替换原文该词。</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>预判词性：空格前后能判断词性（名词/形容词），可以先排除掉选项里不符合词性的词。<br>逻辑预判：题目顺序=原文顺序，做前几道对了可以用来缩小后几道的范围。<br>课堂原话：「你可以根据前5个猜一下，这类题猜的正确率是比较高的。」</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>当A-K里有生词：先把认识的词和已确认的答案对应完，剩余选项对应剩余空格，这是一种有效的排除策略。<br>高频词汇提示：appeal（名词=吸引力）、devote（投入/奉献）、innovation（创新）、satisfaction（满足感）——这几个词是常考替换词。</p></div><div class="mcard-info"><span class="info-icon">💡</span>陷阱：原文出现了某个词，就直接填那个词——但正确做法是找A-K里能替换原文词的选项词。有时原文词根本不在选项里（比如原文是rewarding，选项是satisfaction）。</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>专项练习：做完题后，写出「原文词→我选的选项词」的替换路径，确认自己理解了替换关系而不是靠猜。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-23</div>
+</div><div class="sub-section"><div class="sub-label">例题</div>
+<div class="example-block">
+  <div class="example-head">
+    <span class="ex-label">例题</span>
+    <span class="ex-passage">剑雅19 T2 P3 天才儿童（Gifted child）Q27-32</span>
+    <span class="ex-src">2026-03-23</span>
+  </div>
+  <p class="source">六道Summary填空匹配题，答案从A-K（包含appeal/devote/innovation/satisfaction等）中选。</p><table class="tbl"><thead><tr><th>题目</th><th>定位词</th><th>统一替换</th><th>答案</th><th>规律</th></tr></thead><tbody><tr><td>Q28: 数学对某人的___很少</td><td>转折but：but math wasn't her interest</td><td>interest/little interest → appeal（名词：吸引力）</td><td><strong>C appeal</strong> <span style="color:var(--faint);font-size:12px">(陷阱：容易选satisfaction；区别：appeal=吸引力（吸不吸引她），satisfaction=满足感（做完后爽不爽）)</span></td><td>二次匹配 / 转折定位</td></tr><tr><td>Q29: 某事使她着迷</td><td>末句：famous math problem from magazine that fascinated her / she was hooked</td><td>fascinated = hooked = attracted</td><td><strong>（对应fascination/appeal相关选项）</strong></td><td>二次匹配</td></tr><tr><td>Q30: 成人后展现___</td><td>下段首句：was curious, proved herself to be resilient in face of setbacks</td><td>resilient/determined → devote（投入、坚决）</td><td><strong>B devote（坚决投入）</strong> <span style="color:var(--faint);font-size:12px">(resilient + determined → devote 是本题核心替换)</span></td><td>二次匹配 / 统一替换</td></tr><tr><td>Q31: 最大的___来自发现的乐趣</td><td>most rewarding part is the aha moment... excitement and joy of discovery</td><td>rewarding = satisfaction（满足感）</td><td><strong>satisfaction</strong> <span style="color:var(--faint);font-size:12px">(rewarding（有回报的）→ satisfaction（满足感）是标准替换对)</span></td><td>二次匹配 / 统一替换</td></tr><tr><td>Q32: 研究路径通向original research</td><td>末句：led her to original research</td><td>original（有独创性的/首次的）→ innovation（创新）</td><td><strong>innovation（I）</strong> <span style="color:var(--faint);font-size:12px">(original的英文含义：existing since the beginning, not done by anyone else → innovative/创新)</span></td><td>二次匹配 / 统一替换</td></tr></tbody></table><div class="box box-amber"><div class="box-title">课堂实录</div>Q32学生选F（devote），老师说original对应的是innovation（创新/首次），因为original的英文释义是'existing since the beginning, not done by anyone else'，相当于innovative。</div>
+</div></div>
+    <div class="slot">▼ 新内容插入此处 — 章节：第8章</div>
+  </div>
+</div>
+</div>
+<div id="page-w" class="page">
+  <div class="page-hero">
+    <h1 style="color:var(--red)">Writing</h1>
+    <div class="tagline">教学手册 · 方法 → 例题 → 学生错误</div>
+  </div>
+  
+<div class="chapter" id="w-ch0">
+  <div class="ch-toggle" onclick="toggle(this)">
+    <span class="ch-badge" style="background:var(--red)20;color:var(--red)">基础层</span>
+    <span class="ch-title">第0章　通用方法（所有话题适用）</span>
+    <span class="ch-arrow">▶</span>
+  </div>
+  <div class="ch-body open">
+    
+<div class="mcard" id="w-ch0-m-001">
+  <div class="mcard-head" style="background:var(--b56bg)">
+    <span class="band-pill bp56">Band 5→6</span>
+    <span class="mcard-title">Introduction 两句法</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>句1：改写题目背景（不抄题，用同义词/句式变换）。<br>句2：表明立场 + 让步短语。<br>最简公式：[背景改写]. Despite [让步], I believe [立场].</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>让步三选一：<br>· despite causing some minor disruption to [X]<br>· while this trend carries certain drawbacks for [Y]<br>· although [反方一句话], [正方立场].</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>名词化改写背景：把题目动词改成名词短语做主语。「people reduce flights」→「A reduction in air travel」<br>高阶立场：primarily because [一句最强理由], outweighing the associated drawbacks.</p></div><div class="mcard-info"><span class="info-icon">💡</span>立场过于绝对（I totally agree）。加 despite/although 短语，立刻显示双边思维。</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>练习：给学生三道题，只写Introduction两句，批改只看：①背景有没有改写 ②立场有没有让步。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-16</div>
+</div>
+<div class="mcard" id="w-ch0-m-002">
+  <div class="mcard-head" style="background:var(--b56bg)">
+    <span class="band-pill bp56">Band 5→6</span>
+    <span class="mcard-title">三层逻辑链：行为 → 原因 → 结果</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>最常见问题：跳过「原因层」，从行为直接跳到结果，论证悬空。<br>模板：[行为] + because [中间机制] + , leading to/thereby + [结果]</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>扩展四层链：[行为] → [直接原因] → [直接结果] → [延伸结果]<br>例：减少飞行 → 航班减少 → 航空收入下滑 → 行业整体衰退</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>动名词主语版（Band 7+）：[动名词行为] has been shown to [结果], primarily because [深层机制], which in turn [社会延伸效果].</p></div><div class="mcard-info"><span class="info-icon">💡</span>写「飞行减少→环境好」直接跳步。追问：「怎么好的？哪个具体机制？」必须说出中间那一步。</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>自查清单：写完Body段，在每句旁标注「行为层/原因层/结果层」，连续两句同一层 = 需要补充另一层。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-16</div>
+</div>
+<div class="mcard" id="w-ch0-m-003">
+  <div class="mcard-head" style="background:var(--b67bg)">
+    <span class="band-pill bp67">Band 6→7</span>
+    <span class="mcard-title">三层统一替换体系</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>不是同义词替换，而是把同一概念升级成不同句法结构。<br>基础：reduce travel → harm the tourism industry</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>进阶：a decline in air travel → restrict individuals' access to opportunities（名词化+精确结果）</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>高阶：curtailing long-haul aviation → exacerbate socioeconomic disparities between urban and remote regions（动名词主语+学术词+城乡差距）</p></div><div class="mcard-info"><span class="info-icon">💡</span>只换词不改句型，升级后反而不自然。先改主语表达方式（动词→名词化），再改动词——两步分开做。</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>给学生5个核心动词（increase/improve/reduce/cause/affect），各写三个版本，不限话题，训练句法意识。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-16</div>
+</div>
+    <div class="slot">▼ 新内容插入此处 — 章节：第0章　通用方法（所有话题适用）</div>
+  </div>
+</div>
+<div class="chapter" id="w-ch1">
+  <div class="ch-toggle" onclick="toggle(this)">
+    <span class="ch-badge" style="background:var(--red)20;color:var(--red)">第1章</span>
+    <span class="ch-title">第1章　环保 / 出行</span>
+    <span class="ch-arrow">▶</span>
+  </div>
+  <div class="ch-body open">
+    
+<div class="mcard" id="w-ch1-m-001">
+  <div class="mcard-head" style="background:var(--b78bg)">
+    <span class="band-pill bp78">Band 7→8</span>
+    <span class="mcard-title">廉价航班→过度旅游→生态破坏（反直觉切入）</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>Cheap flights lead to too many tourists visiting popular places, which damages the environment.</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>Low-cost flights often encourage a growing number of tourists to visit popular destinations, contributing to over-tourism and the deterioration of local ecosystems.</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>A major concern is that iconic natural sites can be severely damaged by overcrowded tourism. Low-cost flights often encourage growing numbers of tourists to visit popular destinations, contributing to over-tourism and the gradual deterioration of local ecosystems. Consequently, reducing the number of flights could significantly ease the environmental pressure on these vulnerable locations.</p></div><div class="mcard-info"><span class="info-icon">💡</span>不管什么环保题都想用这个观点——但前提是廉价航班大量存在。商务飞行题目这个逻辑不成立，使用前确认题目场景。</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>让学生找其他「表面是好事，实际有隐患」的反直觉观点（更多大学→文凭贬值；更多药物→耐药性增加）。培养批判性思维。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-16</div>
+</div>
+    <div class="slot">▼ 新内容插入此处 — 章节：第1章　环保 / 出行</div>
+  </div>
+</div>
+</div>
+<div id="page-s" class="page">
+  <div class="page-hero">
+    <h1 style="color:var(--purple)">Speaking</h1>
+    <div class="tagline">教学手册 · 方法 → 例题 → 学生错误</div>
+  </div>
+  
+<div class="chapter" id="s-ch0">
+  <div class="ch-toggle" onclick="toggle(this)">
+    <span class="ch-badge" style="background:var(--purple)20;color:var(--purple)">基础层</span>
+    <span class="ch-title">第0章　通用技巧</span>
+    <span class="ch-arrow">▶</span>
+  </div>
+  <div class="ch-body open">
+    
+<div class="mcard" id="s-ch0-m-001">
+  <div class="mcard-head" style="background:var(--b56bg)">
+    <span class="band-pill bp56">Band 5→6</span>
+    <span class="mcard-title">Part 2 六部结构</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>①引入（人物/主题）→ ②核心特质 → ③具体事件 → ④细节深化（加转折/困难）→ ⑤正面感受 → ⑥对比/反思</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>结构模板：I'd like to talk about [主题]. [核心特质一句话]. [具体事件引入]. However, things did not always go smoothly — [转折/困难]. [解决过程]. Eventually, [结果]. I felt [感受] because [原因].</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>高阶版在「困难」部分加具体细节（数字/引用/行为细节），在「感受」部分说清楚为什么有这个感受——不是「I felt happy」，而是「I was proud because he embraced new technology at an age when most people of his generation were reluctant to change」。</p></div><div class="mcard-info"><span class="info-icon">💡</span>平铺直叙没有转折，听起来像背课文。追问：「后来有没有遇到什么挑战？」哪怕一个小转折也能让故事更真实。</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>结构训练：给学生一个话题，要求先用六个词（每部分一个词）列出提纲，然后展开。批改时只看六个部分是否都出现了。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-18</div>
+</div>
+<div class="mcard" id="s-ch0-m-002">
+  <div class="mcard-head" style="background:var(--b67bg)">
+    <span class="band-pill bp67">Band 6→7</span>
+    <span class="mcard-title">素材串联策略：一个素材覆盖多个话题</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>同一个人/事件，通过改变「切入角度」和「结尾感受」，可以回答完全不同的话题。准备好一个素材 = 同时准备好6–8个话题的答案。</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>操作步骤：①建立一个有故事性的核心素材（人物+事件+转折+结果）②列出这个素材能回答的所有话题 ③每个话题只改：切入角度（开头如何引入）+ 结尾感受。</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>串联示范（叔叔AI转型素材）：proud of family member / gave advice / person who encourages / piece of technology / used imagination / many people smiling——同一个事件，六个不同切入。</p></div><div class="mcard-info"><span class="info-icon">💡</span>学生为每个话题单独准备素材，效率极低。核心目标：让学生意识到「一个好素材 = 多个话题的答案」，每次备考只需准备3–4个高质量素材。</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>串联练习：给学生一个素材，列出它能回答的所有话题，分别写出切入角度（不改核心故事，只改第一句和最后一句感受）。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-18</div>
+</div><div class="sub-section"><div class="sub-label">例题</div>
+<div class="example-block">
+  <div class="example-head">
+    <span class="ex-label">例题</span>
+    <span class="ex-passage">叔叔 / 传统企业主引入AI转型</span>
+    <span class="ex-src">2026-03-18</span>
+  </div>
+  <p class="source">完整英文故事线，可直接背诵/改编</p><table class="tbl"><thead><tr><th>可覆盖 Part 2 话题</th></tr></thead><tbody><tr><td>Describe a time you felt proud of a family member</td></tr><tr><td>Describe a time you gave advice to others</td></tr><tr><td>Describe a person who encourages you to try new things</td></tr><tr><td>Describe a piece of technology</td></tr><tr><td>Describe a time you used your imagination / creativity</td></tr><tr><td>Describe a time many people were smiling</td></tr></tbody></table><div class="box box-dark"><div class="box-title">完整英文故事线（可直接背诵）</div><p>I'd like to talk about my uncle, who is a local businessman in our town. He has been working in the traditional textile industry for many years, mainly focusing on different types of clothing.<br><br>He gradually expanded his company and gained a certain market share. However, things did not always go smoothly. Due to the overall economic slowdown caused by the pandemic and the decline of traditional manufacturing industries, his business started to face serious challenges. In particular, the cost of acquiring new customers became extremely high, and it was no longer possible to sustain stable growth through traditional methods.<br><br>Since he often communicated with me about his business, I suggested he consider automating some management processes — or even hiring a professional AI team to improve efficiency. He took this advice seriously and introduced an AI-powered management system that streamlined his workflow and significantly reduced operational costs.<br><br>Eventually, at a family gathering, he shared the results — everyone was amazed that AI could make such a difference. I felt genuinely proud of him, because he embraced new technology at an age when most people of his generation were reluctant to change.</p></div>
+</div></div>
+<div class="mcard" id="s-ch0-m-f2g8">
+  <div class="mcard-head" style="background:var(--b67bg)">
+    <span class="band-pill bp67">Band 通用</span>
+    <span class="mcard-title">Part 3 答题长度：4-5句原则</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>Part 3 每道题回答 4-5 句话，和 Part 1 一样。考官会主动打断进入下一题，不需要说到 Part 2 那样的 2 分钟。</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>整个口语考试最多 15 分钟，考官需要在 Part 3 尽量多问几道题。每题控制在 4-5 句（约 40-60 秒），让考官有机会继续追问，展示你应对多样问题的能力。说太长反而让考官来不及多问，减少展示机会。</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>4-5 句推荐结构：① 立场/观点句 → ② 原因1 → ③ 原因2 或 例子 → ④ 让步/对比 → ⑤ 总结收尾。结尾时给考官一个自然停顿信号（如 'that's my view on it' / 'so I think...'），方便考官接话或追问。</p></div><div class="mcard-info"><span class="info-icon">💡</span>学生把 Part 3 当 Part 2 来说，每题超过一分钟，结果考官只来得及问 2-3 道题，无法全面展示回答能力。</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>计时训练：每道 Part 3 题限时 45 秒，在 4-5 句内把核心观点+理由说清楚。可以用剑雅 Part 3 题库随机抽题练习，录音回听检查是否自然结束。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-22</div>
+</div><div class="sub-section"><div class="sub-label">学生典型错误</div>
+<div class="mistake-block">
+  <div class="mistake-head">
+    <span class="mk-label">⚠ 典型错误</span>
+    <span class="mk-q">Why do people say they don't need [teachers/guidelines]?（Part 3 练习）</span>
+    <span class="ex-src">2026-03-22</span>
+  </div>
+  <div class="mistake-body">
+    <div class="mk-row"><span class="mk-tag wrong-tag">学生填了</span><span>学生说了远超 1 分钟的答案，涵盖多个角度但流于散漫</span></div>
+    <div class="mk-row"><span class="mk-tag reason-tag">错误原因</span><span>误以为 Part 3 和 Part 2 一样需要说满 2 分钟，实际上考官会打断</span></div>
+    <div class="mk-row"><span class="mk-tag fix-tag">正确做法</span><span>控制在 4-5 句，约 40-60 秒，结尾给出自然停顿让考官接话</span></div>
+  </div>
+</div></div>
+    <div class="slot">▼ 新内容插入此处 — 章节：第0章　通用技巧</div>
+  </div>
+</div>
+<div class="chapter" id="s-ch2">
+  <div class="ch-toggle" onclick="toggle(this)">
+    <span class="ch-badge" style="background:var(--purple)20;color:var(--purple)">第2章</span>
+    <span class="ch-title">Part 1 话题积累</span>
+    <span class="ch-arrow">▶</span>
+  </div>
+  <div class="ch-body open">
+    
+<div class="mcard" id="s-ch2-m-001">
+  <div class="mcard-head" style="background:var(--b56bg)">
+    <span class="band-pill bp56">Band 5→6</span>
+    <span class="mcard-title">住宿话题核心句型升级</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>I want to live in a studio apartment located in the city center, because I prefer a convenient lifestyle.</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>There is one subway station and one bus stop nearby my home. Almost all the destinations I need to go are accessible to me within thirty minutes.</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>Having everything I want within reach makes my daily life convenient, and I can greatly save my commuting time. Therefore, I don't have to prepare for distant travel in advance.<br>结构：动名词做主语 + makes + 结果 → 比 because 句型更正式。</p></div><div class="mcard-info"><span class="info-icon">💡</span>说完基础版（住市中心，因为方便）就停了。提示：「便利体现在什么方面？时间节省？不用提前计划？」至少说一个具体表现。</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>句型迁移：Having [X] makes my [Y] [effect]——迁移到所有Part 1话题。给学生5道不同的Part 1题目，要求每道都用一次这个结构。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-18</div>
+</div>
+    <div class="slot">▼ 新内容插入此处 — 章节：Part 1 话题积累</div>
+  </div>
+</div>
+</div>
+<div id="page-l" class="page">
+  <div class="page-hero">
+    <h1 style="color:var(--teal)">Listening</h1>
+    <div class="tagline">教学手册 · 方法 → 例题 → 学生错误</div>
+  </div>
+  
+<div class="chapter" id="l-ch1">
+  <div class="ch-toggle" onclick="toggle(this)">
+    <span class="ch-badge" style="background:var(--teal)20;color:var(--teal)">第1章</span>
+    <span class="ch-title">第1章</span>
+    <span class="ch-arrow">▶</span>
+  </div>
+  <div class="ch-body open">
+    
+<div class="mcard" id="l-ch1-m-b5f3">
+  <div class="mcard-head" style="background:var(--b56bg)">
+    <span class="band-pill bp56">Band 5→6</span>
+    <span class="mcard-title">听力填空题三步做题法</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>Step 1 预判词性：90% 填名词，少数填形容词（系动词 become/is/was 后预判形容词），极少填动词。默认先预判名词。<br>Step 2 找大定位：用专有名词/数字/时间在录音中锁定对应片段（顺序原则：题目顺序=录音顺序）。<br>Step 3 找统一替换：题干词≠录音词，必须找同义词对应，确认替换后再填答案——不能听到一个词就直接填。</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>数字考点：只写数字，不写单位词（填 321,000 不填 three hundred thousand）；approximately / about / around 均可替换 approximately；thousand=后三个零，million=后六个零。<br>细节词 &gt; 概括词原则：如果录音提供了更细的描述词，填细词（填 slaves 而非 workers，填 taxation 而非 method）。</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>转折强调词后大概率是答案：in fact / however / but / although 等表示强调或转折，考点往往紧跟其后。<br>系动词后接形容词：题干出现 become/is/was + 空格，预判填形容词，不要填名词。</p></div><div class="mcard-info"><span class="info-icon">💡</span>听到定位词就以为找到答案，但答案可能在定位词之后好几句之外。另一个常见错误：填太概括的词（workers 而非 slaves，method 而非 taxation）——要尽量填录音中出现的最细的对应词。</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>每题做完后对照录音，画出「题干词 → 原文词」的统一替换路径，不只是对答案。专门做 P4 填空题 10 道，重点练习数字题和词性预判。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-24</div>
+</div><div class="sub-section"><div class="sub-label">例题</div>
+<div class="example-block">
+  <div class="example-head">
+    <span class="ex-label">例题</span>
+    <span class="ex-passage">剑雅13 T3 P3/P4 History of Coffee</span>
+    <span class="ex-src">2026-03-24</span>
+  </div>
+  <p class="source">听力填空练习，重点考查统一替换和细节词选择</p><table class="tbl"><thead><tr><th>题目</th><th>定位词</th><th>统一替换</th><th>答案</th><th>规律</th></tr></thead><tbody><tr><td>Q31</td><td>1623 / demanded</td><td>ordered the ___ of all coffee houses → demanded the destruction of all the coffee houses</td><td><strong>destruction</strong> <span style="color:var(--faint);font-size:12px">(听到 demanded 才是关键词，ordered 是题干里的词，录音换成了 demanded)</span></td><td>大定位-时间数字 / 统一替换：ordered→demanded, ___→destruction</td></tr><tr><td>Q32</td><td>universities</td><td>coffee shops compared to ___ → performed a similar function to universities</td><td><strong>universities</strong> <span style="color:var(--faint);font-size:12px">(原词重现：universities 直接出现在录音中)</span></td><td>统一替换：compared to→performed a similar function to</td></tr><tr><td>Q33</td><td>social and ___</td><td>social and ___ changes → social movements and political developments</td><td><strong>political</strong> <span style="color:var(--faint);font-size:12px">(并列结构：social and ___，填与 social 并列的形容词)</span></td><td>并列结构 / 统一替换：changes→movements/developments</td></tr><tr><td>Q35</td><td>Brazil / Caribbean / plantations</td><td>workers → slaves（细节词&gt;概括词）</td><td><strong>slaves</strong> <span style="color:var(--faint);font-size:12px">(很多学生会填 workers，但录音明确说 the workers there were almost all slaves，应填更细的 slaves)</span></td><td>细节词&gt;概括词原则</td></tr><tr><td>Q36</td><td>Java / Dutch / peasant</td><td>used as a form of ___ → used as a means of taxation</td><td><strong>taxation</strong> <span style="color:var(--faint);font-size:12px">(关键词 taxation 在录音中直接出现)</span></td><td>统一替换：a form of→a means of</td></tr></tbody></table><div class="box box-amber"><div class="box-title">课堂实录</div>老师重点强调：Q35 很多同学填 workers，但要注意录音给了更细的词 slaves，P4 填空题要尽量细，不要填概括词。Q36 的 a form of / a means of 是常见替换对。</div>
+</div>
+<div class="example-block">
+  <div class="example-head">
+    <span class="ex-label">例题</span>
+    <span class="ex-passage">剑雅15 T1 P4 Eucalyptus（澳大利亚桉树）</span>
+    <span class="ex-src">2026-03-24</span>
+  </div>
+  <p class="source">听力填空练习，重点考查名词预判和统一替换</p><table class="tbl"><thead><tr><th>题目</th><th>定位词</th><th>统一替换</th><th>答案</th><th>规律</th></tr></thead><tbody><tr><td>Q35</td><td>bell minor / disease / disease-related die back</td><td>gives ___ to creatures → gives shelter to creatures like earthworms and bats</td><td><strong>shelter</strong> <span style="color:var(--faint);font-size:12px">(shelter 在录音中直接出现，需要从 S 开头识别正确拼写)</span></td><td>大定位-专有名词 / 统一替换</td></tr></tbody></table>
+</div></div>
+<div class="mcard" id="l-ch1-r-c7d2">
+  <div class="mcard-head" style="background:var(--b67bg)">
+    <span class="band-pill bp67">Band 6→7</span>
+    <span class="mcard-title">并列结构锚定法</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>当题干中出现已知词（如 web browser），在听力中一旦听到该已知词，随后出现的 and / then / also 等并列连词之后的词就是答案。不需要理解整句话，直接锁定并列连词后面的词。</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>双答案在同一句：相邻两题的答案有时会在录音的同一句话里连续出现（如 Q36 和 Q37 的答案紧跟在并列句中），听到第一个答案后不能放松，要继续听下一个答案。</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>举例并列变体：有时并列不用 and，而是用 for example / such as 引出，此时已知词出现后紧跟举例连词，然后列举出答案（题干有 X and ___ → 录音说 such as X and ___，直接填 ___ 后的词）。</p></div><div class="mcard-info"><span class="info-icon">💡</span>只盯着当前一道空，听到一个词就停下来记录，错过了紧跟着的下一个并列答案。</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>练习时，专门用一张纸记录「题干已知词 → 听到的并列连词 → 答案」路径，感受锚点效果。注意区分并列锚定（and/also/then）和举例锚定（such as/for example）。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-24</div>
+</div><div class="sub-section"><div class="sub-label">例题</div>
+<div class="example-block">
+  <div class="example-head">
+    <span class="ex-label">例题</span>
+    <span class="ex-passage">剑雅17 T2 P4 Digital Technology（冰岛语与数字技术）</span>
+    <span class="ex-src">2026-03-24</span>
+  </div>
+  <p class="source">并列结构锚定练习 + 数字考点</p><table class="tbl"><thead><tr><th>题目</th><th>定位词</th><th>统一替换</th><th>答案</th><th>规律</th></tr></thead><tbody><tr><td>Q31</td><td>approximately / three hundred and twenty one thousand</td><td>approximately ___ speakers → spoken by around three hundred and twenty one thousand people</td><td><strong>321,000</strong> <span style="color:var(--faint);font-size:12px">(数字题特别注意：thousand 后面跟三个零，million 后跟六个零；只写 321,000 不写 three hundred thousand)</span></td><td>数字考点：只写数字不写单位词 / 统一替换：approximately→around</td></tr><tr><td>Q32</td><td>vocabulary / in fact</td><td>vocabulary is ___ → in fact, the vocabulary of Icelandic is continually increasing</td><td><strong>increasing</strong> <span style="color:var(--faint);font-size:12px">(in fact 是提示词，表示强调——后面大概率是答案)</span></td><td>转折强调词 in fact 后是答案 / 统一替换</td></tr><tr><td>Q33</td><td>web browser（已知词）</td><td>web browser and ___ → the word for web browser... then there's the word for podcast</td><td><strong>podcast</strong> <span style="color:var(--faint);font-size:12px">(老师说：这是并列结构锚定法——web browser 是已知词，听到 then 之后直接锁定下一个词就是答案)</span></td><td>并列结构锚定法：听到已知词 web browser，then 后面即为答案</td></tr></tbody></table><div class="box box-amber"><div class="box-title">课堂实录</div>老师明确指出：「这是一个新的方法——并列结构的锚定法。在班课上会多说，但实训课这里先提一句：当你听到题干里已有的词（web browser），紧接着的 and/then/also 后面就是答案，直接锁定。」</div>
+</div></div>
+    <div class="slot">▼ 新内容插入此处 — 章节：第1章</div>
+  </div>
+</div>
+<div class="chapter" id="l-ch2">
+  <div class="ch-toggle" onclick="toggle(this)">
+    <span class="ch-badge" style="background:var(--teal)20;color:var(--teal)">第2章</span>
+    <span class="ch-title">第2章</span>
+    <span class="ch-arrow">▶</span>
+  </div>
+  <div class="ch-body open">
+    
+<div class="mcard" id="l-ch2-m-a3f7">
+  <div class="mcard-head" style="background:var(--b67bg)">
+    <span class="band-pill bp67">Band 6→7</span>
+    <span class="mcard-title">听力选择题：时间顺序词定位法</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>听到 initially / first / next / then / already / now 等时序词时，立刻判断该信息处于哪个时间段（过去/当前/将来），再匹配题目的时间限定（如 do next = 下一步 = 听 next/then/after 之后的内容）。</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>题目若问 'do next'，答案一定在原文出现时序词之后的信息。原文说 'initially...X' 则 X 是过去/第一步行为，若题问 next 则必须排除。序数词（first/second）和状态副词（already=已完成、still=尚未结束）同样起定位作用。</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>考场实操三步：①先圈题目的时间限定词（next/before/first/already）→ ②在原文中匹配同义时序词 → ③判断该时序词后面的动作是否与选项匹配。时序词误用是最常见丢分点——题目问 next 却选了 initially 后面的内容。</p></div><div class="mcard-info"><span class="info-icon">💡</span>题目问 do next，学生却选了最先提到的内容，原因是没注意时序词 initially，把第一步行为当成下一步行为。</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>训练时主动圈出所有时序词，再反推题目问的时间段，确认匹配后再选。推荐用剑雅 Section 3 对话题型练习（有多个说话者转换 + 时序关系）。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-16</div>
+</div><div class="sub-section"><div class="sub-label">例题</div>
+<div class="example-block">
+  <div class="example-head">
+    <span class="ex-label">例题</span>
+    <span class="ex-passage">剑雅13 T3 S3 纳米技术演讲辅导（Q25）</span>
+    <span class="ex-src">2026-03-16</span>
+  </div>
+  <p class="source">题目问 what should the student do INITIALLY（第一步），原文用 initially 明确标注第一步是 ignore all notes and write one summarizing sentence。学生需要听到 initially 才能锁定答案位置。</p><table class="tbl"><thead><tr><th>题目</th><th>定位词</th><th>统一替换</th><th>答案</th><th>规律</th></tr></thead><tbody><tr><td>Q25 - What does the tutor advise the student to do first when planning the presentation?</td><td>initially（时序词）</td><td>first → initially in recording</td><td><strong>E（write a single sentence summarizing the main point）</strong> <span style="color:var(--faint);font-size:12px">(原文：'Initially I think you should ignore all the notes you made.' → 用 initially 锁定第一步建议)</span></td><td>时序词 initially 标记第一步 / 题目 first = 原文 initially</td></tr></tbody></table>
+</div></div>
+<div class="mcard" id="l-ch2-r-b9c1">
+  <div class="mcard-head" style="background:var(--b67bg)">
+    <span class="band-pill bp67">Band 6→7</span>
+    <span class="mcard-title">听力选择题：原词复现陷阱（负面评价=干扰项）</span>
+  </div>
+  <div class="mcard-level"><div class="level-lbl">基础讲法（Band 5–6）</div><p>在听力选择题中，当某个选项的关键词在原文中出现时，不能直接选——必须继续听说话者的态度。如果说话者对该词给出了负面评价或否定语气，该选项就是陷阱，不是答案。</p></div><div class="mcard-level"><div class="level-lbl">进阶讲法（Band 6–7）</div><p>原词复现是听力最常见的干扰手段。判断步骤：① 听到选项关键词出现 → ② 继续听，判断说话者态度（正面/负面/中立）→ ③ 负面或否定语气 → 排除该选项。常见负面标志：refuse / can't do anything with / eats into / rubbish / found it difficult / wasn't working 等。</p></div><div class="mcard-level"><div class="level-lbl">高阶讲法（Band 7–8+）</div><p>双维判断法：把选项分为「原文有提到 + 正面」「原文有提到 + 负面（陷阱）」「原文未提到（可能是正确/无中生有）」三类。考场中大多数错误来自只判断了「原文是否提到」而忽略了「说话者态度」这第二维度。</p></div><div class="mcard-info"><span class="info-icon">💡</span>听到选项原词就直接选，没有继续听说话者对该选项的评价，导致选了负面评价的选项（典型陷阱）。</div><div class="mcard-info"><span class="info-icon" style="color:var(--green)">🔭</span>训练时：选题前先回忆听到该词时说话者的语气，用一秒钟判断正面/负面，再做选择。配合做题后回放原文，确认自己是否忽略了态度词。</div><div class="mcard-info"><span class="info-icon" style="color:var(--faint)">📍</span>2026-03-16</div>
+</div><div class="sub-section"><div class="sub-label">例题</div>
+<div class="example-block">
+  <div class="example-head">
+    <span class="ex-label">例题</span>
+    <span class="ex-passage">剑雅13 T3 S3 纳米技术演讲辅导（Q23）</span>
+    <span class="ex-src">2026-03-16</span>
+  </div>
+  <p class="source">Q23 某选项关键词 fine slides 在原文中出现，但说话者随后给出负面评价（批评 fine slides 的做法），因此该选项是陷阱应排除。</p><table class="tbl"><thead><tr><th>题目</th><th>定位词</th><th>统一替换</th><th>答案</th><th>规律</th></tr></thead><tbody><tr><td>Q23（具体题目见剑雅13 T3 S3）</td><td>fine slides（选项关键词原词出现）</td><td>原词 fine slides 出现 → 但说话者语气为负面评价</td><td><strong>排除该选项（非答案）</strong> <span style="color:var(--faint);font-size:12px">(原词出现但说话者否定/批评该做法 → 陷阱题，排除)</span></td><td>原词复现≠正确答案 / 需判断说话者态度</td></tr></tbody></table>
+</div></div>
+    <div class="slot">▼ 新内容插入此处 — 章节：第2章</div>
+  </div>
+</div>
+</div>
+
+<div id="page-log" class="page">
+  <div class="page-hero"><h1>更新记录</h1></div>
+  <table class="tbl">
+    <thead><tr><th>日期</th><th>科目</th><th>内容</th></tr></thead>
+    <tbody><tr><td>2026-03-28</td><td></td><td></td></tr><tr><td>2026-03-26</td><td></td><td></td></tr><tr><td>2026-03-23</td><td></td><td></td></tr><tr><td>2026-03-23</td><td>Reading</td><td>r-ch2-m-001 追加例题 Q40（灵长类攻击性/NO型题目）：failed to reveal vs shown repeatedly</td></tr><tr><td>2026-03-21</td><td>全系统</td><td>v2.0重构：改为方法挂例题的分层结构，例题和错误记录嵌套在对应方法内</td></tr><tr><td>2026-03-18</td><td>Speaking</td><td>Part2六部结构 + 叔叔AI转型素材（含完整故事线和6话题串联）+ 住宿话题句型升级</td></tr><tr><td>2026-03-18</td><td>Reading</td><td>补充剑雅19湿地例题（Q18-22/Q23-26），新增学生错误记录3条</td></tr><tr><td>2026-03-17</td><td>Writing</td><td>通用方法层（Introduction/逻辑链/统一替换）+ 环保话题反直觉观点</td></tr><tr><td>2026-03-17</td><td>Reading</td><td>建立Reading全部5章方法 + 定位词基础层 + 剑桥P1伦敦地铁例题</td></tr></tbody>
+  </table>
+</div>
+
+</main>
+<script>
+var pages = document.querySelectorAll('.page');
+var items = document.querySelectorAll('.sb-item');
+
+function show(id) {
+  pages.forEach(p => p.classList.remove('active'));
+  items.forEach(a => a.classList.remove('active'));
+  var pg = document.getElementById('page-' + id);
+  if (!pg) {
+    // 尝试跳转到章节并滚动
+    var ch = document.getElementById(id);
+    if (ch) {
+      // 找到父级 page
+      var parent = ch.closest('.page');
+      if (parent) {
+        parent.classList.add('active');
+        var pid = parent.id.replace('page-','');
+        items.forEach(a => { if(a.getAttribute('onclick')==="show('"+pid+"')") a.classList.add('active'); });
+        setTimeout(() => { ch.scrollIntoView({behavior:'smooth',block:'start'}); }, 80);
+        // 确保章节展开
+        var body = ch.querySelector('.ch-body');
+        var arrow = ch.querySelector('.ch-arrow');
+        if (body && !body.classList.contains('open')) { body.classList.add('open'); arrow && arrow.classList.add('open'); }
+      }
+    }
+    return;
+  }
+  pg.classList.add('active');
+  items.forEach(a => { if(a.getAttribute('onclick')==="show('"+id+"')") a.classList.add('active'); });
+  window.scrollTo(0,0);
+  if (window.innerWidth <= 768) closeSb();
+  clearSearch();
+}
+
+function toggle(h) {
+  var b = h.nextElementSibling;
+  var a = h.querySelector('.ch-arrow');
+  var open = b.classList.contains('open');
+  b.classList.toggle('open', !open);
+  a && a.classList.toggle('open', !open);
+}
+
+function openSb(){ document.getElementById('sb').classList.add('open'); document.getElementById('ov').style.display='block'; }
+function closeSb(){ document.getElementById('sb').classList.remove('open'); document.getElementById('ov').style.display='none'; }
+
+var st;
+function doSearch(q) { clearTimeout(st); st = setTimeout(()=>runSearch(q.trim()), 220); }
+
+function clearSearch() {
+  var inp = document.getElementById('search-input');
+  if (inp) inp.value = '';
+  document.querySelectorAll('.hl').forEach(el => {
+    el.parentNode.replaceChild(document.createTextNode(el.textContent), el);
+    el.parentNode.normalize();
+  });
+}
+
+function runSearch(q) {
+  document.querySelectorAll('.hl').forEach(el => {
+    el.parentNode.replaceChild(document.createTextNode(el.textContent), el);
+    el.parentNode.normalize();
+  });
+  if (!q || q.length < 2) return;
+  var found = null;
+  document.querySelectorAll('.page').forEach(p => {
+    if (p.textContent.toLowerCase().includes(q.toLowerCase()) && !found) found = p.id.replace('page-','');
+  });
+  if (!found) return;
+  show(found);
+  setTimeout(() => {
+    var pg = document.querySelector('.page.active');
+    if (pg) { hlNode(pg, q); var first = pg.querySelector('.hl'); if(first) first.scrollIntoView({behavior:'smooth',block:'center'}); }
+  }, 60);
+}
+
+function hlNode(node, q) {
+  if (node.nodeType === 3) {
+    var idx = node.textContent.toLowerCase().indexOf(q.toLowerCase());
+    if (idx >= 0) { var sp = document.createElement('span'); sp.className='hl'; var r = document.createRange(); r.setStart(node,idx); r.setEnd(node,idx+q.length); r.surroundContents(sp); }
+  } else if (node.nodeType===1 && !['SCRIPT','STYLE','INPUT'].includes(node.tagName)) {
+    Array.from(node.childNodes).forEach(c => hlNode(c, q));
+  }
+}
+</script>
+</body>
+</html>
